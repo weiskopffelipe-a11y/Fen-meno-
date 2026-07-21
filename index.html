@@ -374,7 +374,30 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 /* >>> COMO ADICIONAR LOGOS DOS TIMES <<<
    Nome EXATO do time : link da imagem. Sem logo => iniciais automáticas. */
 const LOGOS = {
-  // "Flamengo": "https://.../flamengo.png",
+  "Chelsea": "https://upload.wikimedia.org/wikipedia/pt/c/cc/Chelsea_FC.svg",
+  "Cruzeiro": "https://escudosfc.com.br/images/cruzeiro.png",
+  "Atlético-MG": "https://escudosfc.com.br/images/atletico.png",
+  "Bahia": "https://escudosfc.com.br/images/bahia.png",
+  "Flamengo": "https://escudosfc.com.br/images/fla.png",
+  "Fluminense": "https://escudosfc.com.br/images/fluminense.png",
+  "Grêmio": "https://escudosfc.com.br/images/gremio.png",
+  "Internacional": "https://escudosfc.com.br/images/interrs.png",
+  "Mirassol": "https://escudosfc.com.br/images/mirassol.jpg",
+  "Bragantino": "https://escudosfc.com.br/images/bragantino.png",
+  "Palmeiras": "https://escudosfc.com.br/images/palmeiras.png",
+  "Remo": "https://escudosfc.com.br/images/remo.png",
+  "Santos": "https://escudosfc.com.br/images/santos.png",
+  "São Paulo": "https://escudosfc.com.br/images/saopaulo.png",
+  "Vasco": "https://escudosfc.com.br/images/vasco.png",
+  "Vitória": "https://escudosfc.com.br/images/vitoria.png",
+  "Sport": "https://escudosfc.com.br/images/sport.png",
+  "Fortaleza": "https://escudosfc.com.br/images/fortaleza.png",
+  "América-MG": "https://escudosfc.com.br/images/ammg.png",
+  "Arsenal": "https://escudosfc.com.br/images/arsenal_crest.png",
+  "Aston Villa": "https://escudosfc.com.br/images/aston.png",
+  "Man City": "https://escudosfc.com.br/images/man_city.png",
+  "Bournemouth": "https://escudosfc.com.br/images/bournemouth.png",
+  "Brentford": "https://escudosfc.com.br/images/brentford.png",
 };
 
 /* ---------- COUNTRIES ---------- */
@@ -480,84 +503,118 @@ const STATE_LEAGUE={
 /* ---------- COACHES (overalls piorados + mais técnicos) ---------- */
 /* L T M R F D = notas 1-99 ; W = estrelas 1-5 */
 const COACH_POOL=[
+ /* --- ativos nas 5 grandes ligas (Premier League, LaLiga, Serie A, Bundesliga, Ligue 1) --- */
  {n:"Pep Guardiola",e:"🎩",m:"Man City · Espanha",L:85,T:93,M:83,R:87,F:89,D:87,W:4},
- {n:"Carlo Ancelotti",e:"🧣",m:"Brasil · Itália",L:88,T:86,M:90,R:92,F:82,D:84,W:5},
- {n:"José Mourinho",e:"🕶️",m:"Benfica · Portugal",L:90,T:83,M:91,R:77,F:85,D:82,W:2},
- {n:"Jürgen Klopp",e:"🧢",m:"Ex-Liverpool · Alemanha",L:92,T:83,M:88,R:86,F:90,D:86,W:5},
  {n:"Diego Simeone",e:"🔥",m:"Atlético · Argentina",L:88,T:80,M:89,R:78,F:90,D:91,W:3},
  {n:"Xabi Alonso",e:"📘",m:"Real Madrid · Espanha",L:83,T:87,M:82,R:84,F:85,D:84,W:4},
- {n:"Abel Ferreira",e:"⚙️",m:"Palmeiras · Portugal",L:82,T:86,M:83,R:77,F:85,D:88,W:3},
  {n:"Luis Enrique",e:"⚡",m:"PSG · Espanha",L:83,T:84,M:82,R:78,F:81,D:83,W:3},
  {n:"Antonio Conte",e:"💢",m:"Napoli · Itália",L:87,T:84,M:82,R:76,F:88,D:90,W:2},
  {n:"Hansi Flick",e:"📗",m:"Barcelona · Alemanha",L:82,T:87,M:81,R:83,F:84,D:83,W:4},
  {n:"Mikel Arteta",e:"🧠",m:"Arsenal · Espanha",L:84,T:87,M:82,R:81,F:88,D:89,W:4},
- {n:"Fernando Diniz",e:"🎨",m:"Ex-Fluminense · Brasil",L:77,T:83,M:75,R:73,F:79,D:81,W:3},
- {n:"Dorival Júnior",e:"📋",m:"Brasil · Brasil",L:79,T:77,M:78,R:80,F:77,D:79,W:3},
- {n:"Tite",e:"🎓",m:"Ex-Corinthians · Brasil",L:85,T:81,M:83,R:85,F:82,D:84,W:4},
- {n:"Marcelo Gallardo",e:"🐎",m:"River Plate · Argentina",L:86,T:82,M:84,R:82,F:84,D:86,W:3},
- {n:"Thomas Tuchel",e:"🧩",m:"Inglaterra · Alemanha",L:79,T:84,M:78,R:75,F:81,D:80,W:2},
  {n:"Roberto De Zerbi",e:"🎭",m:"Marseille · Itália",L:76,T:85,M:74,R:73,F:79,D:80,W:3},
- {n:"Simone Inzaghi",e:"🗝️",m:"Al-Hilal · Itália",L:83,T:86,M:83,R:81,F:84,D:84,W:3},
  {n:"Arne Slot",e:"🌷",m:"Liverpool · Holanda",L:82,T:86,M:81,R:82,F:84,D:84,W:4},
  {n:"Unai Emery",e:"📓",m:"Aston Villa · Espanha",L:80,T:85,M:81,R:79,F:86,D:87,W:3},
  {n:"Rúben Amorim",e:"🎯",m:"Man Utd · Portugal",L:81,T:82,M:77,R:76,F:81,D:81,W:3},
  {n:"Enzo Maresca",e:"📐",m:"Chelsea · Itália",L:76,T:82,M:75,R:74,F:79,D:80,W:3},
  {n:"Vincent Kompany",e:"🛡️",m:"Bayern · Bélgica",L:78,T:77,M:75,R:76,F:76,D:77,W:3},
- {n:"Filipe Luís",e:"🚩",m:"Flamengo · Brasil",L:79,T:78,M:77,R:76,F:79,D:80,W:3},
- {n:"Renato Gaúcho",e:"🎩",m:"Ex-Grêmio · Brasil",L:80,T:74,M:78,R:77,F:74,D:74,W:3},
- {n:"Cuca",e:"🧤",m:"Brasil · Brasil",L:77,T:76,M:75,R:71,F:76,D:77,W:2},
- {n:"Ramón Díaz",e:"📗",m:"Corinthians · Argentina",L:76,T:74,M:76,R:73,F:74,D:75,W:2},
- {n:"Roger Machado",e:"📘",m:"Brasil · Brasil",L:74,T:75,M:73,R:73,F:74,D:75,W:3},
- {n:"Zé Ricardo",e:"📙",m:"Brasil · Brasil",L:72,T:73,M:72,R:72,F:73,D:74,W:3},
- {n:"Lucho González",e:"🎽",m:"Argentina · Argentina",L:72,T:73,M:72,R:71,F:73,D:74,W:2},
  {n:"Paulo Fonseca",e:"🧭",m:"Lyon · Portugal",L:77,T:80,M:76,R:75,F:78,D:79,W:3},
  {n:"Sérgio Conceição",e:"⚔️",m:"Milan · Portugal",L:79,T:77,M:77,R:72,F:80,D:81,W:2},
- {n:"Marcelo Bielsa",e:"🃏",m:"Uruguai · Argentina",L:83,T:89,M:79,R:81,F:87,D:93,W:3},
  {n:"Gian Piero Gasperini",e:"🧨",m:"Roma · Itália",L:78,T:85,M:77,R:75,F:83,D:86,W:3},
- {n:"Ange Postecoglou",e:"🦘",m:"Livre · Austrália",L:77,T:79,M:75,R:76,F:78,D:79,W:3},
- {n:"Julen Lopetegui",e:"📕",m:"Livre · Espanha",L:75,T:78,M:74,R:73,F:77,D:78,W:2}
+ /* --- técnicos históricos / lendários do futebol mundial --- */
+ {n:"Carlo Ancelotti",e:"🧣",m:"Seleção Brasileira · Itália",L:88,T:86,M:90,R:92,F:82,D:84,W:5},
+ {n:"José Mourinho",e:"🕶️",m:"Benfica · Portugal",L:90,T:83,M:91,R:77,F:85,D:82,W:2},
+ {n:"Jürgen Klopp",e:"🧢",m:"Aposentado · Alemanha",L:92,T:83,M:88,R:86,F:90,D:86,W:5},
+ {n:"Thomas Tuchel",e:"🧩",m:"Seleção Inglesa · Alemanha",L:79,T:84,M:78,R:75,F:81,D:80,W:2},
+ {n:"Marcelo Bielsa",e:"🃏",m:"Seleção Uruguaia · Argentina",L:83,T:89,M:79,R:81,F:87,D:93,W:3},
+ {n:"Zinedine Zidane",e:"👑",m:"Aposentado · França",L:88,T:85,M:87,R:90,F:83,D:85,W:4},
+ {n:"Sir Alex Ferguson",e:"🏆",m:"Aposentado · Escócia",L:95,T:88,M:92,R:93,F:87,D:90,W:5},
+ {n:"Arrigo Sacchi",e:"🔬",m:"Aposentado · Itália",L:83,T:94,M:80,R:85,F:82,D:86,W:3},
+ {n:"Louis van Gaal",e:"🦁",m:"Aposentado · Holanda",L:87,T:89,M:82,R:80,F:84,D:85,W:3},
+ {n:"Fabio Capello",e:"🎖️",m:"Aposentado · Itália",L:86,T:85,M:84,R:82,F:85,D:87,W:3},
+ {n:"Vicente del Bosque",e:"🕊️",m:"Aposentado · Espanha",L:85,T:80,M:88,R:92,F:78,D:82,W:5},
+ {n:"Johan Cruyff",e:"🌀",m:"Lenda do futebol · Holanda",L:90,T:93,M:85,R:91,F:80,D:83,W:4}
 ];
 
 /* ---------- PLAYERS (reais, com idade) por clube ---------- */
 const PLAYERS_RAW={
- "Real Madrid":[["Mbappé",91,26],["Vinícius Jr",90,25],["Bellingham",89,22],["Valverde",87,27],["Rodrygo",85,24],["Courtois",88,33],["Militão",84,28],["Endrick",78,19],["Rüdiger",84,32],["Camavinga",84,23]],
- "Barcelona":[["Lamine Yamal",88,18],["Raphinha",86,29],["Pedri",86,23],["Lewandowski",85,37],["De Jong",84,28],["Ter Stegen",85,33],["Cubarsí",81,18],["Balde",80,22],["Olmo",83,27]],
- "Man City":[["Haaland",91,25],["Rodri",89,29],["Foden",86,25],["Bernardo Silva",85,31],["Rúben Dias",85,28],["Gvardiol",83,23],["Savinho",79,21],["Ederson",85,32]],
- "Arsenal":[["Saka",87,24],["Ødegaard",86,27],["Rice",86,27],["Saliba",85,24],["Gabriel Magalhães",84,28],["Havertz",83,26],["Martinelli",82,24],["Raya",83,30]],
- "Liverpool":[["Salah",88,33],["Van Dijk",86,34],["Wirtz",87,22],["Mac Allister",84,27],["Szoboszlai",83,25],["Alisson",87,33],["Konaté",83,26]],
- "Chelsea":[["Palmer",87,23],["Caicedo",84,24],["Enzo Fernández",83,25],["Nkunku",81,28],["Cucurella",81,27],["Estêvão",79,18],["Neto",80,26]],
- "Man Utd":[["Bruno Fernandes",86,31],["Martínez",82,28],["Onana",82,30],["Garnacho",80,21],["Mainoo",80,20],["Højlund",79,23]],
- "Tottenham":[["Son",84,33],["Romero",84,28],["Maddison",83,29],["Van de Ven",81,24],["Vicario",82,29],["Bissouma",79,29]],
- "Newcastle":[["Isak",85,26],["Bruno Guimarães",84,28],["Tonali",82,25],["Gordon",81,24],["Trippier",81,35]],
- "Bayern":[["Kane",89,32],["Musiala",87,22],["Kimmich",86,30],["Olise",83,24],["Sané",83,30],["Davies",83,25],["Upamecano",83,27],["Neuer",84,39]],
- "Leverkusen":[["Frimpong",82,25],["Grimaldo",83,30],["Xhaka",82,33],["Boniface",80,24],["Hincapié",80,23]],
- "Dortmund":[["Guirassy",82,29],["Brandt",81,29],["Schlotterbeck",82,26],["Adeyemi",80,24],["Gittens",79,21]],
- "PSG":[["Dembélé",85,28],["Kvaratskhelia",86,25],["Vitinha",84,26],["Hakimi",84,27],["Marquinhos",84,31],["Donnarumma",86,27],["João Neves",83,21],["Barcola",82,23]],
- "Inter":[["Lautaro Martínez",87,28],["Barella",85,29],["Thuram",84,28],["Çalhanoğlu",84,32],["Bastoni",84,26],["Dumfries",81,30]],
- "Milan":[["Leão",84,26],["Theo Hernández",84,28],["Maignan",85,30],["Pulisic",83,27],["Reijnders",82,27]],
- "Napoli":[["Lukaku",82,32],["McTominay",81,29],["Anguissa",81,30],["Di Lorenzo",82,32],["Lobotka",82,31]],
- "Juventus":[["Vlahović",82,26],["Bremer",83,28],["Yıldız",80,20],["Koopmeiners",82,28],["Di Gregorio",81,28]],
- "Atlético Madrid":[["Julián Álvarez",85,25],["Griezmann",84,34],["Oblak",85,33],["Sørloth",81,30],["Koke",80,34]],
- "Atalanta":[["Lookman",83,28],["Retegui",82,26],["De Ketelaere",81,24],["Éderson",81,26]],
- "Al-Hilal":[["Mitrović",81,31],["Milinković-Savić",83,31],["Rúben Neves",82,29],["Koulibaly",81,35],["Malcom",80,29]],
- "Al-Nassr":[["Cristiano Ronaldo",85,41],["Mané",81,34],["Brozović",81,33]],
- "Al-Ittihad":[["Benzema",83,38],["Kanté",82,35],["Fabinho",80,32]],
- "Galatasaray":[["Osimhen",85,27],["Icardi",81,32],["Mertens",78,38]],
- "Fenerbahçe":[["Talisca",80,32],["En-Nesyri",80,29],["Tadić",79,37]],
- "Flamengo":[["Arrascaeta",83,31],["De la Cruz",82,28],["Pedro",80,28],["Gerson",80,28],["Léo Ortiz",78,29],["Alex Sandro",77,35]],
- "Palmeiras":[["Vitor Roque",80,20],["Raphael Veiga",79,30],["Richard Ríos",79,25],["Gustavo Gómez",80,32],["Weverton",78,38]],
- "Botafogo":[["Almada",80,24],["Igor Jesus",78,24],["Savarino",78,28],["Gregore",76,31],["John",77,25]],
- "Santos":[["Neymar",82,34],["Guilherme",76,26],["João Schmidt",74,32]],
- "Corinthians":[["Memphis Depay",81,32],["Yuri Alberto",78,24],["Rodrigo Garro",78,27],["Hugo Souza",77,26]],
- "São Paulo":[["Lucas Moura",79,33],["Oscar",78,34],["Calleri",78,32],["Rafael",77,36]],
- "Cruzeiro":[["Matheus Pereira",79,29],["Gabigol",79,29],["Cássio",77,38]],
- "Atlético-MG":[["Hulk",79,39],["Bernard",76,33],["Everson",76,35]],
- "River Plate":[["Driussi",78,29],["Colidio",76,25],["Acuña",78,34],["Franco Armani",77,39]],
- "Boca Juniors":[["Cavani",78,39],["Merentiel",76,29],["Advíncula",75,35]],
- "Inter Miami":[["Messi",88,38],["Alba",76,36],["Busquets",77,37],["Suárez",76,39]],
- "América":[["Henry Martín",76,32],["Álvaro Fidalgo",75,28]],
- "Al Ahly":[["Trézéguet",74,30],["Wessam Abou Ali",72,26]]
+ "Real Madrid":[["Mbappé",96,26],["Vinícius Jr",94,25],["Bellingham",92,22],["Valverde",92,27],["Rodrygo",87,24],["Courtois",93,33],["Militão",87,28],["Endrick",80,19],["Rüdiger",89,32],["Camavinga",87,23]],
+ "Barcelona":[["Lamine Yamal",92,18],["Raphinha",91,29],["Pedri",88,23],["Lewandowski",87,37],["De Jong",89,28],["Ter Stegen",88,33],["Cubarsí",86,18],["Balde",82,22],["Olmo",85,27]],
+ "Man City":[["Haaland",95,25],["Rodri",91,29],["Foden",89,25],["Bernardo Silva",88,31],["Rúben Dias",89,28],["Gvardiol",85,23],["Savinho",84,21],["Ederson",88,32]],
+ "Arsenal":[["Saka",92,24],["Ødegaard",91,27],["Rice",89,27],["Saliba",90,24],["Gabriel Magalhães",88,28],["Havertz",88,26],["Martinelli",85,24],["Raya",85,30]],
+ "Liverpool":[["Salah",93,33],["Van Dijk",91,34],["Wirtz",89,22],["Mac Allister",88,27],["Szoboszlai",85,25],["Alisson",90,33],["Konaté",85,26]],
+ "Chelsea":[["Palmer",90,23],["Caicedo",88,24],["Enzo Fernández",88,25],["Nkunku",84,28],["Cucurella",84,27],["Estêvão",82,18],["Neto",82,26]],
+ "Man Utd":[["Bruno Fernandes",90,31],["Martínez",86,28],["Onana",85,30],["Garnacho",82,21],["Mainoo",84,20],["Højlund",83,23]],
+ "Tottenham":[["Son",87,33],["Romero",88,28],["Maddison",85,29],["Van de Ven",85,24],["Vicario",87,29],["Bissouma",83,29]],
+ "Newcastle":[["Isak",88,26],["Bruno Guimarães",89,28],["Tonali",85,25],["Gordon",83,24],["Trippier",84,35]],
+ "Bayern":[["Kane",91,32],["Musiala",92,22],["Kimmich",89,30],["Olise",86,24],["Sané",85,30],["Davies",87,25],["Upamecano",86,27],["Neuer",89,39]],
+ "Leverkusen":[["Frimpong",85,25],["Grimaldo",88,30],["Xhaka",84,33],["Boniface",84,24],["Hincapié",85,23]],
+ "Dortmund":[["Guirassy",87,29],["Brandt",86,29],["Schlotterbeck",85,26],["Adeyemi",82,24],["Gittens",83,21]],
+ "PSG":[["Dembélé",89,28],["Kvaratskhelia",89,25],["Vitinha",88,26],["Hakimi",86,27],["Marquinhos",87,31],["Donnarumma",90,27],["João Neves",86,21],["Barcola",86,23]],
+ "Inter":[["Lautaro Martínez",92,28],["Barella",90,29],["Thuram",88,28],["Çalhanoğlu",88,32],["Bastoni",86,26],["Dumfries",84,30]],
+ "Milan":[["Leão",86,26],["Theo Hernández",88,28],["Maignan",90,30],["Pulisic",86,27],["Reijnders",84,27]],
+ "Napoli":[["Lukaku",85,32],["McTominay",86,29],["Anguissa",85,30],["Di Lorenzo",87,32],["Lobotka",86,31]],
+ "Juventus":[["Vlahović",85,26],["Bremer",88,28],["Yıldız",84,20],["Koopmeiners",84,28],["Di Gregorio",85,28]],
+ "Atlético Madrid":[["Julián Álvarez",87,25],["Griezmann",86,34],["Oblak",87,33],["Sørloth",83,30],["Koke",83,34]],
+ "Atalanta":[["Lookman",88,28],["Retegui",87,26],["De Ketelaere",84,24],["Éderson",83,26]],
+ "Al-Hilal":[["Mitrović",85,31],["Milinković-Savić",85,31],["Rúben Neves",87,29],["Koulibaly",84,35],["Malcom",84,29]],
+ "Al-Nassr":[["Cristiano Ronaldo",87,41],["Mané",84,34],["Brozović",84,33]],
+ "Al-Ittihad":[["Benzema",86,38],["Kanté",86,35],["Fabinho",83,32]],
+ "Galatasaray":[["Osimhen",89,27],["Icardi",85,32],["Mertens",80,38]],
+ "Fenerbahçe":[["Talisca",82,32],["En-Nesyri",85,29],["Tadić",83,37]],
+ "Flamengo":[["Arrascaeta",87,31],["De la Cruz",86,28],["Pedro",82,28],["Gerson",84,28],["Léo Ortiz",82,29],["Alex Sandro",81,35]],
+ "Palmeiras":[["Vitor Roque",84,20],["Raphael Veiga",84,30],["Richard Ríos",84,25],["Gustavo Gómez",83,32],["Weverton",81,38]],
+ "Botafogo":[["Almada",84,24],["Igor Jesus",81,24],["Savarino",83,28],["Gregore",78,31],["John",82,25]],
+ "Santos":[["Neymar",87,34],["Guilherme",80,26],["João Schmidt",77,32]],
+ "Corinthians":[["Memphis Depay",84,32],["Yuri Alberto",80,24],["Rodrigo Garro",83,27],["Hugo Souza",82,26]],
+ "São Paulo":[["Lucas Moura",83,33],["Oscar",80,34],["Calleri",80,32],["Rafael",80,36]],
+ "Cruzeiro":[["Matheus Pereira",82,29],["Gabigol",84,29],["Cássio",82,38]],
+ "Atlético-MG":[["Hulk",83,39],["Bernard",79,33],["Everson",80,35]],
+ "River Plate":[["Driussi",82,29],["Colidio",78,25],["Acuña",82,34],["Franco Armani",81,39]],
+ "Boca Juniors":[["Cavani",83,39],["Merentiel",80,29],["Advíncula",77,35]],
+ "Inter Miami":[["Messi",90,38],["Alba",81,36],["Busquets",82,37],["Suárez",80,39]],
+ "América":[["Henry Martín",79,32],["Álvaro Fidalgo",77,28]],
+ "Al Ahly":[["Trézéguet",78,30],["Wessam Abou Ali",74,26]]
 };
+
+/* ---------- SELEÇÕES NACIONAIS (propostas ocasionais de treinar seleção) ---------- */
+const NATIONAL_TEAMS=[
+ {name:"Seleção Brasileira",flag:"🇧🇷",rating:85,confed:"CONMEBOL"},
+ {name:"Argentina",flag:"🇦🇷",rating:87,confed:"CONMEBOL"},
+ {name:"Uruguai",flag:"🇺🇾",rating:78,confed:"CONMEBOL"},
+ {name:"Colômbia",flag:"🇨🇴",rating:76,confed:"CONMEBOL"},
+ {name:"Chile",flag:"🇨🇱",rating:70,confed:"CONMEBOL"},
+ {name:"Equador",flag:"🇪🇨",rating:71,confed:"CONMEBOL"},
+ {name:"Peru",flag:"🇵🇪",rating:66,confed:"CONMEBOL"},
+ {name:"Paraguai",flag:"🇵🇾",rating:65,confed:"CONMEBOL"},
+ {name:"França",flag:"🇫🇷",rating:87,confed:"UEFA"},
+ {name:"Inglaterra",flag:"🏴",rating:85,confed:"UEFA"},
+ {name:"Espanha",flag:"🇪🇸",rating:86,confed:"UEFA"},
+ {name:"Alemanha",flag:"🇩🇪",rating:83,confed:"UEFA"},
+ {name:"Itália",flag:"🇮🇹",rating:81,confed:"UEFA"},
+ {name:"Portugal",flag:"🇵🇹",rating:82,confed:"UEFA"},
+ {name:"Holanda",flag:"🇳🇱",rating:82,confed:"UEFA"},
+ {name:"Bélgica",flag:"🇧🇪",rating:78,confed:"UEFA"},
+ {name:"Croácia",flag:"🇭🇷",rating:77,confed:"UEFA"},
+ {name:"Dinamarca",flag:"🇩🇰",rating:74,confed:"UEFA"},
+ {name:"Suíça",flag:"🇨🇭",rating:72,confed:"UEFA"},
+ {name:"Polônia",flag:"🇵🇱",rating:70,confed:"UEFA"},
+ {name:"Turquia",flag:"🇹🇷",rating:71,confed:"UEFA"},
+ {name:"México",flag:"🇲🇽",rating:71,confed:"CONCACAF"},
+ {name:"Estados Unidos",flag:"🇺🇸",rating:73,confed:"CONCACAF"},
+ {name:"Canadá",flag:"🇨🇦",rating:68,confed:"CONCACAF"},
+ {name:"Marrocos",flag:"🇲🇦",rating:76,confed:"CAF"},
+ {name:"Senegal",flag:"🇸🇳",rating:74,confed:"CAF"},
+ {name:"Nigéria",flag:"🇳🇬",rating:71,confed:"CAF"},
+ {name:"Gana",flag:"🇬🇭",rating:67,confed:"CAF"},
+ {name:"Egito",flag:"🇪🇬",rating:69,confed:"CAF"},
+ {name:"Japão",flag:"🇯🇵",rating:75,confed:"AFC"},
+ {name:"Coreia do Sul",flag:"🇰🇷",rating:71,confed:"AFC"},
+ {name:"Arábia Saudita",flag:"🇸🇦",rating:66,confed:"AFC"},
+ {name:"Catar",flag:"🇶🇦",rating:60,confed:"AFC"},
+ {name:"Austrália",flag:"🇦🇺",rating:65,confed:"AFC"}
+];
+function ntByName(name){return NATIONAL_TEAMS.find(t=>t.name===name)||null;}
+function ntTournamentName(confed){return {CONMEBOL:"Copa América",UEFA:"Eurocopa",CONCACAF:"Copa Ouro",CAF:"Copa Africana de Nações",AFC:"Copa da Ásia"}[confed]||"Torneio Continental";}
 
 /* ---------- build ALL_CLUBS (para propostas/mercado reais) ---------- */
 const ALL_CLUBS=[];
@@ -583,12 +640,14 @@ const S={
  attrs:{L:0,T:0,M:0,R:0,F:0,D:0,W:0},overall:0,overallCap:0,rep:0,
  stealIdx:0,coaches:[],filled:{},
  club:null,clubRating:0,clubCountry:"BRA",division:"d1",leagueName:"",
+ isNationalTeam:false,ntConfed:null,isFiredThisSeason:false,
  season:2026,startAge:38,seasonsPlayed:0,retireAt:27,seasonsSinceProposal:0,
  formation:"4-3-3",style:"Equilíbrio",
  careerTitles:0,careerFinals:0,careerGames:0,careerAwards:0,clubTitles:0,clubsCoached:[],
  seasonTitles:0,seasonPos:"—",seasonRating:6.6,seasonGames:0,seasonWins:0,
  totalGames:38,gamesPerBeat:6,
  paused:true,speed:1,standings:[],queue:[],timer:null,
+ milestonesHit:{},
  _promoted:false,_relegated:false
 };
 
@@ -754,7 +813,11 @@ function updateClubCard(){
  $("tile-titles").textContent=S.clubTitles;$("tile-finals").textContent=S.careerFinals;
  $("tile-rating").textContent=S.seasonRating.toFixed(1);$("tile-games").textContent=S.seasonGames;
  const b=$("hero-badges");b.innerHTML="";const posN=parseInt(S.seasonPos)||99;const n=S.standings.length;
- if(S.division==="d1"){
+ if(S.isNationalTeam){
+   b.innerHTML+=`<span class="badge grey">🏳️ Seleção Nacional</span>`;
+   if(posN<=Math.ceil(n*0.6))b.innerHTML+=`<span class="badge green">✈️ Classificado</span>`;
+   else b.innerHTML+=`<span class="badge red">Fora da zona de classificação</span>`;
+ }else if(S.division==="d1"){
    if(posN===1)b.innerHTML+=`<span class="badge green">🏆 Líder / Campeão</span>`;
    else if(posN<=4)b.innerHTML+=`<span class="badge gold">▲ Zona de destaque</span>`;
    else if(posN>=n-2)b.innerHTML+=`<span class="badge red">▼ Zona de rebaixamento</span>`;
@@ -785,6 +848,15 @@ function feedItem(text,kind){
    ============================================================ */
 function coachTeamBonus(){return Math.round(((S.attrs.T+S.attrs.M+S.attrs.L)/3-70)/4);}
 function buildStandings(){
+ if(S.isNationalTeam){
+   const rivals=NATIONAL_TEAMS.filter(t=>t.confed===S.ntConfed&&t.name!==S.club);
+   const pool=[...rivals].sort(()=>Math.random()-.5).slice(0,6);
+   const teams=pool.map(t=>({name:t.name,rating:t.rating,pts:0,games:0,gf:0,ga:0}));
+   teams.push({name:S.club,rating:S.clubRating,pts:0,games:0,gf:0,ga:0});
+   S.standings=teams;
+   S.totalGames=8;S.gamesPerBeat=4;S.seasonPos="—";
+   renderStandings();return;
+ }
  const gl=getLeague(S.clubCountry,S.division);
  const teams=gl.league.teams.map(t=>({name:t[0],rating:t[1],pts:0,games:0,gf:0,ga:0}));
  if(!teams.find(t=>t.name===S.club))teams.push({name:S.club,rating:S.clubRating,pts:0,games:0,gf:0,ga:0});
@@ -796,8 +868,8 @@ function buildStandings(){
 }
 function leagueAvgRating(){const a=S.standings;return a.reduce((s,t)=>s+t.rating,0)/a.length;}
 function expPointsResult(myR,oppR){
- const pWin=1/(1+Math.pow(10,(oppR-myR)/11));
- const draw=0.26;const win=pWin*(1-draw);
+ const pWin=clamp(1/(1+Math.pow(10,(oppR-myR)/11))+0.045,0.05,0.95);
+ const draw=0.25;const win=pWin*(1-draw);
  const r=Math.random();
  if(r<win)return 3;if(r<win+draw)return 1;return 0;
 }
@@ -828,6 +900,25 @@ function startSeason(){
  runNext();
 }
 function buildSeasonQueue(){
+ if(S.isNationalTeam){
+   const q=[];
+   for(let i=0;i<2;i++)q.push({type:"leaguebeat"});
+   if(Math.random()<0.5)q.push({type:"penalty_single",interactive:true,defense:Math.random()<0.4});
+   // Nations League — só seleções europeias, competição à parte
+   if(S.ntConfed==="UEFA"&&Math.random()<0.35){
+     q.push({type:"final",interactive:true,comp:"UEFA Nations League",scope:"nations_league"});
+   }
+   // Copa do Mundo (rara, todas as confederações) OU o torneio continental (Eurocopa/Copa América/etc)
+   const worldCupChance=clamp(0.12+(S.clubRating-70)/150,0.06,0.25);
+   if(Math.random()<worldCupChance){
+     q.push({type:"final",interactive:true,comp:"Copa do Mundo FIFA",scope:"world_cup"});
+   }else if(Math.random()<contiChanceNT()){
+     q.push({type:"final",interactive:true,comp:ntTournamentName(S.ntConfed),scope:"nt_final"});
+   }
+   q.push({type:"league_result"});
+   q.push({type:"awards_check"});
+   S.queue=q;return;
+ }
  const q=[];const cid=S.clubCountry;const cont=continentalComps(cid);const cups=domesticCups(cid);
  // estadual (Brasil) logo no início
  if(cid==="BRA"&&STATE_LEAGUE[S.club]){
@@ -838,7 +929,11 @@ function buildSeasonQueue(){
  cups.forEach(cup=>{if(reachFinalChance())q.push({type:"final",interactive:true,comp:cup,scope:"domestic"});});
  if(S.division==="d1"&&S.clubRating>=72&&Math.random()<contiChance()){
    const which=(S.clubRating>=80&&Math.random()<0.55)?cont.top:(Math.random()<0.5?cont.top:cont.sec);
-   q.push({type:"final",interactive:true,comp:which,scope:"conti"});
+   q.push({type:"final",interactive:true,comp:which,scope:"conti",_isTop:which===cont.top});
+ }
+ // Mundial de Clubes FIFA — raro, só pros times fortes da elite
+ if(S.division==="d1"&&S.clubRating>=76&&Math.random()<clamp(0.06+(S.clubRating-76)/150,0.03,0.16)){
+   q.push({type:"final",interactive:true,comp:"Mundial de Clubes FIFA",scope:"world_club"});
  }
  q.push({type:"league_result"});
  q.push({type:"awards_check"});
@@ -846,6 +941,7 @@ function buildSeasonQueue(){
 }
 function reachFinalChance(){return Math.random()<clamp(0.10+(S.clubRating-70)/140+coachTeamBonus()/50,0.04,0.42);}
 function contiChance(){return clamp(0.20+(S.clubRating-74)/70,0.08,0.5);}
+function contiChanceNT(){return clamp(0.35+(S.clubRating-70)/120,0.2,0.6);}
 function domesticCups(cid){const m={BRA:["Copa do Brasil"],ENG:["FA Cup","EFL Cup"],ESP:["Copa del Rey"],ITA:["Coppa Italia"],GER:["DFB-Pokal"],FRA:["Coupe de France"],POR:["Taça de Portugal"],NED:["KNVB Beker"],ARG:["Copa Argentina"],KSA:["King's Cup"],TUR:["Türkiye Kupası"],RUS:["Copa da Rússia"],EGY:["Copa do Egito"],QAT:["Emir Cup"],MEX:["Copa MX"],USA:["US Open Cup"]};return m[cid]||["Copa Nacional"];}
 function continentalComps(cid){
  if(["BRA","ARG"].includes(cid))return{top:"Copa Libertadores",sec:"Copa Sul-Americana"};
@@ -854,6 +950,9 @@ function continentalComps(cid){
  if(["MEX","USA"].includes(cid))return{top:"Concacaf Champions Cup",sec:"Leagues Cup"};
  return{top:"Champions Continental",sec:"Copa Continental"};
 }
+// Confederação de cada país — usada para o adversário continental vir da região certa
+// (ex: a Sul-Americana não pode sortear time da Europa)
+const CONFED_OF={BRA:"CONMEBOL",ARG:"CONMEBOL",ENG:"UEFA",ESP:"UEFA",ITA:"UEFA",GER:"UEFA",FRA:"UEFA",POR:"UEFA",NED:"UEFA",RUS:"UEFA",TUR:"UEFA",KSA:"AFC",QAT:"AFC",EGY:"CAF",MEX:"CONCACAF",USA:"CONCACAF"};
 
 function runNext(){
  if(S.paused)return;
@@ -862,7 +961,7 @@ function runNext(){
  const ev=S.queue[0];
  if(ev.interactive){handleInteractive(ev);return;}
  S.queue.shift();applyEvent(ev);
- S.timer=setTimeout(runNext,1250/S.speed);
+ S.timer=setTimeout(runNext,420/S.speed);
 }
 function applyEvent(ev){
  switch(ev.type){
@@ -878,7 +977,7 @@ function applyEvent(ev){
 function leagueBeat(){
  const g=S.gamesPerBeat;const oppAvg=leagueAvgRating();
  let w=0,d=0,l=0,gf=0,ga=0;
- const myEff=S.clubRating+coachTeamBonus();
+ const myEff=S.clubRating+coachTeamBonus()+2; // pequeno favor pro seu time — título um pouco mais alcançável
  for(let i=0;i<g;i++){
    const oppR=clamp(oppAvg+rint(-7,7),50,95);
    const r=simMatch(myEff,oppR);gf+=r.a;ga+=r.b;
@@ -894,9 +993,16 @@ function leagueBeat(){
  S.seasonRating=clamp(S.seasonRating*0.7+(5.3+perf*4)*0.3,4.3,9.5);
  renderStandings();updateClubCard();updateSeasonCard();updateYouCard();
  feedItem(pick([`Sequência na liga: <b>${w}V ${d}E ${l}D</b> (${gf}-${ga}). ${S.club} em ${S.seasonPos}.`,`${S.club}: ${w} vitórias no período. Torcida ${perf>0.6?'empolgada':'cobrando'}.`,`Fase ${perf>0.6?'boa':(perf<0.35?'ruim':'irregular')} do ${S.club} (${w}V ${d}E ${l}D).`]),perf>0.6?"green":(perf<0.35?"red":""));
+ checkMilestones();
+ checkSackRisk();
 }
 function leagueResult(){
  const pos=parseInt(S.seasonPos);const n=S.standings.length;
+ if(S.isNationalTeam){
+   if(pos<=Math.ceil(n*0.6)){feedItem(`✅ ${S.club} avança nas eliminatórias rumo ao ${ntTournamentName(S.ntConfed)}.`,"green");addRep(1);}
+   else{feedItem(`❌ ${S.club} não avançou nas eliminatórias. Cobrança da torcida.`,"red");addRep(-3);}
+   updateYouCard();checkSackRisk();return;
+ }
  if(S.division==="d1"){
    if(pos===1){S.seasonTitles++;S.clubTitles++;S.careerTitles++;feedItem(`🏆 <b>CAMPEÃO!</b> ${S.club} conquista a ${S.leagueName}!`,"gold");addRep(4);}
    else if(pos>=n-2){feedItem(`▼ ${S.club} foi <b>rebaixado</b> na ${S.leagueName}.`,"red");addRep(-6);S._relegated=true;}
@@ -907,16 +1013,75 @@ function leagueResult(){
    else{feedItem(`${S.club} terminou em <b>${pos}º</b> na ${S.leagueName}.`,"");addRep(-1);}
  }
  updateYouCard();
+ checkSackRisk();
 }
 
-/* ---- match sim (jogador levemente prejudicado, adversário melhor) ---- */
+/* ---------- DEMISSÃO — time indo mal pode dispensar o técnico ---------- */
+function checkSackRisk(){
+ if(S.isFiredThisSeason)return;
+ const idx=S.standings.findIndex(t=>t.name===S.club);
+ if(idx<0)return;
+ const pos=idx+1;const n=S.standings.length;
+ const progress=S.seasonGames/Math.max(1,S.totalGames);
+ if(progress<0.35)return;
+ const zoneBad=S.isNationalTeam?pos>Math.ceil(n*0.6):pos>=n-2;
+ let chance=0;
+ if(S._relegated)chance=0.40;
+ else if(zoneBad)chance=0.07+Math.max(0,6.0-S.seasonRating)*0.05;
+ else if(S.seasonRating<5.0)chance=0.03;
+ if(Math.random()<chance)fireCoach();
+}
+function fireCoach(){
+ S.isFiredThisSeason=true;
+ if(S.timer){clearTimeout(S.timer);S.timer=null;}
+ S.queue=[];
+ S.paused=true;$("btn-play").textContent="▶";
+ feedItem(`🔴 <b>VOCÊ FOI DEMITIDO</b> do ${S.club} após maus resultados.`,"red");
+ addRep(-4);
+ toast("Você foi demitido. Propostas de times menores a caminho...");
+ setTimeout(()=>{openTransferProposals(()=>{finishFiredSeason();},{forced:true});},900);
+}
+function finishFiredSeason(){
+ S.isFiredThisSeason=false;
+ S.seasonsPlayed++;S.age++;
+ const perfDelta=-1.0+rnd(-0.3,0.2);
+ S.overall=clamp(Math.round(S.overall+perfDelta*0.6),35,S.overallCap);
+ offseasonMarket();
+ updateYouCard();
+ if(S.seasonsPlayed>=S.retireAt){showRetirement();return;}
+ advanceToNextSeason();
+}
+
+/* ---- match sim (jogador ainda um pouco em desvantagem, mas menos que antes) ---- */
 function simMatch(myR,oppR){
- const myXG=clamp(1.12*Math.pow(myR/oppR,1.25)*0.84,0.12,3.1);
- const opXG=clamp(1.12*Math.pow(oppR/myR,1.25)*1.10,0.12,3.4);
+ const myXG=clamp(1.12*Math.pow(myR/oppR,1.25)*0.90,0.12,3.2);
+ const opXG=clamp(1.12*Math.pow(oppR/myR,1.25)*1.05,0.12,3.4);
  return{a:poisson(myXG),b:poisson(opXG)};
 }
 function poisson(l){const Lk=Math.exp(-l);let k=0,p=1;do{k++;p*=Math.random();}while(p>Lk);return k-1;}
 function addRep(n){S.rep=clamp(S.rep+n,30,99);}
+
+/* ---------- MARCAS / MILESTONES — notícias de conquistas na imprensa ---------- */
+const MILESTONE_GAMES=[100,250,500,750,1000,1500,2000];
+const MILESTONE_TITLES=[3,5,10,15,20,25,30];
+const MILESTONE_AWARDS=[1,3,5,8];
+function checkMilestones(){
+ MILESTONE_GAMES.forEach(n=>{
+   const key="g"+n;
+   if(S.careerGames>=n&&!S.milestonesHit[key]){S.milestonesHit[key]=true;feedItem(`🎉 <b>MARCA!</b> ${S.name} chega a <b>${n} jogos</b> como treinador profissional!`,"gold");}
+ });
+ MILESTONE_TITLES.forEach(n=>{
+   const key="t"+n;
+   if(S.careerTitles>=n&&!S.milestonesHit[key]){S.milestonesHit[key]=true;feedItem(`🏆 <b>MARCA!</b> ${n}º título da carreira de ${S.name}!`,"gold");}
+ });
+ MILESTONE_AWARDS.forEach(n=>{
+   const key="a"+n;
+   if(S.careerAwards>=n&&!S.milestonesHit[key]){S.milestonesHit[key]=true;feedItem(n===1?`🌟 <b>MARCA!</b> Primeiro prêmio individual da carreira de ${S.name}!`:`🌟 <b>MARCA!</b> ${n}º prêmio individual da carreira!`,"gold");}
+ });
+ const clubCount=S.clubsCoached.length;
+ if(clubCount>=3&&!S.milestonesHit["c3"]){S.milestonesHit["c3"]=true;feedItem(`📌 <b>MARCA!</b> ${S.name} já comandou <b>3 equipes diferentes</b> na carreira.`,"gold");}
+ if(clubCount>=6&&!S.milestonesHit["c6"]){S.milestonesHit["c6"]=true;feedItem(`📌 <b>MARCA!</b> ${S.name} já comandou <b>6 equipes diferentes</b> na carreira.`,"gold");}
+}
 
 /* ============================================================
    6) FINALS (interativas) + JOGO MINUTO A MINUTO
@@ -929,9 +1094,44 @@ function handleInteractive(ev){
 function opponentFor(ev){
  let name,baseR;
  if(ev.scope==="conti"){
-   const pool=ALL_CLUBS.filter(c=>c.name!==S.club&&c.rating>=S.clubRating-2).sort((a,b)=>b.rating-a.rating);
+   const myConfed=CONFED_OF[S.clubCountry];
+   let pool=ALL_CLUBS.filter(c=>c.name!==S.club&&CONFED_OF[c.cid]===myConfed&&c.rating>=S.clubRating-2).sort((a,b)=>b.rating-a.rating);
+   if(!pool.length)pool=ALL_CLUBS.filter(c=>c.name!==S.club&&CONFED_OF[c.cid]===myConfed).sort((a,b)=>b.rating-a.rating);
+   if(!pool.length)pool=ALL_CLUBS.filter(c=>c.name!==S.club&&c.rating>=S.clubRating-2).sort((a,b)=>b.rating-a.rating);
    const near=pool.filter(c=>Math.abs(c.rating-S.clubRating)<=7);
    const t=pick(near.length?near.slice(0,10):pool.slice(0,12));name=t.name;baseR=t.rating;
+ }else if(ev.scope==="nt_final"){
+   let rivals=NATIONAL_TEAMS.filter(t=>t.name!==S.club&&t.confed===S.ntConfed);
+   if(!rivals.length)rivals=NATIONAL_TEAMS.filter(t=>t.name!==S.club);
+   const near=rivals.filter(t=>Math.abs(t.rating-S.clubRating)<=10);
+   const t=pick(near.length?near:rivals);name=t.name;baseR=t.rating;
+ }else if(ev.scope==="world_cup"){
+   // Copa do Mundo — adversário pode vir de qualquer confederação
+   const rivals=NATIONAL_TEAMS.filter(t=>t.name!==S.club);
+   const near=rivals.filter(t=>Math.abs(t.rating-S.clubRating)<=9);
+   const t=pick(near.length?near:rivals);name=t.name;baseR=t.rating;
+ }else if(ev.scope==="nations_league"){
+   // Nations League — só seleções europeias
+   let rivals=NATIONAL_TEAMS.filter(t=>t.name!==S.club&&t.confed==="UEFA");
+   const near=rivals.filter(t=>Math.abs(t.rating-S.clubRating)<=8);
+   const t=pick(near.length?near:rivals);name=t.name;baseR=t.rating;
+ }else if(ev.scope==="finalissima"){
+   // Finalíssima — campeão europeu x campeão sul-americano
+   const otherConfed=S.ntConfed==="UEFA"?"CONMEBOL":"UEFA";
+   const rivals=NATIONAL_TEAMS.filter(t=>t.confed===otherConfed).sort((a,b)=>b.rating-a.rating);
+   const top=rivals.slice(0,Math.max(3,Math.ceil(rivals.length/2)));
+   const t=pick(top.length?top:rivals);name=t.name;baseR=t.rating;
+ }else if(ev.scope==="world_club"){
+   // Mundial de Clubes FIFA — adversário forte de qualquer confederação
+   const pool=ALL_CLUBS.filter(c=>c.name!==S.club&&c.rating>=S.clubRating-3).sort((a,b)=>b.rating-a.rating);
+   const near=pool.filter(c=>Math.abs(c.rating-S.clubRating)<=8);
+   const t=pick(near.length?near.slice(0,12):pool.slice(0,15));name=t.name;baseR=t.rating;
+ }else if(ev.scope==="intercontinental"){
+   // Copa Intercontinental — o campeão de outra confederação
+   const myConfed=CONFED_OF[S.clubCountry];
+   let pool=ALL_CLUBS.filter(c=>c.name!==S.club&&CONFED_OF[c.cid]!==myConfed).sort((a,b)=>b.rating-a.rating);
+   const top=pool.slice(0,Math.max(5,Math.ceil(pool.length*0.1)));
+   const t=pick(top.length?top:pool);name=t.name;baseR=t.rating;
  }else if(ev.scope==="state"){
    const rivals=(LEAGUES.BRA.d1.teams.concat(LEAGUES.BRA.d2.teams)).filter(t=>t[0]!==S.club&&STATE_LEAGUE[t[0]]===STATE_LEAGUE[S.club]).sort((a,b)=>b[1]-a[1]);
    const top=rivals.slice(0,Math.max(3,Math.ceil(rivals.length/2)));
@@ -1034,15 +1234,28 @@ function autoFinal(ev){
  if(a===b){won=Math.random()<(S.attrs.M/220+0.38);a+=won?1:0;b+=won?0:1;}else won=a>b;
  recordFinal(ev,opp,a,b,won,"simulada");
 }
+const REP_BY_SCOPE={conti:6,state:1,domestic:3,world_cup:10,world_club:7,intercontinental:7,nations_league:4,finalissima:5,nt_final:5};
 function recordFinal(ev,opp,a,b,won,how){
+ S.careerGames++;
  if(won){
    S.seasonTitles++;S.careerTitles++;
    if(ev.scope!=="state")S.clubTitles++;
-   addRep(ev.scope==="conti"?6:(ev.scope==="state"?1:3));
+   addRep(REP_BY_SCOPE[ev.scope]??3);
    feedItem(`🏆 <b>${S.club} CAMPEÃO da ${ev.comp}!</b> ${a}-${b} sobre ${opp.name} (${how}).`,"gold");
+   // Ganhou a Eurocopa ou a Copa América -> disputa a Finalíssima contra o campeão do outro continente
+   if(ev.scope==="nt_final"&&(S.ntConfed==="UEFA"||S.ntConfed==="CONMEBOL")){
+     S.queue.splice(1,0,{type:"final",interactive:true,comp:"Finalíssima",scope:"finalissima"});
+     feedItem(`📜 Como campeão continental, ${S.club} disputará a <b>Finalíssima</b>!`,"gold");
+   }
+   // Ganhou a Champions/Libertadores (a principal) -> chance de Copa Intercontinental
+   if(ev.scope==="conti"&&ev._isTop&&Math.random()<0.5){
+     S.queue.splice(1,0,{type:"final",interactive:true,comp:"Copa Intercontinental",scope:"intercontinental"});
+     feedItem(`🌍 ${S.club} garantiu vaga na <b>Copa Intercontinental</b>!`,"gold");
+   }
  }else{addRep(1);feedItem(`🥈 Vice na ${ev.comp}: ${S.club} ${a}-${b} ${opp.name} (${how}).`,"");}
  S.seasonRating=clamp(S.seasonRating+(won?0.3:-0.1),4.3,9.8);
  updateYouCard();updateClubCard();updateSeasonCard();
+ checkMilestones();
 }
 function showResult(ev,opp,a,b,won,how){
  $("res-eyebrow").textContent=won?"TÍTULO CONQUISTADO":"VICE-CAMPEÃO";
@@ -1170,14 +1383,15 @@ function endShootout(){
  $("pk-result").innerHTML=won?`<span class="green">CAMPEÃO NOS PÊNALTIS! ${SO.my}-${SO.op}</span>`:`<span class="red">Vice nos pênaltis (${SO.my}-${SO.op})</span>`;
  setTimeout(()=>{$("ov-pk").classList.remove("show");recordFinal(SO.ev,SO.opp,a,b,won,`pênaltis ${SO.my}-${SO.op}`);S.queue.shift();SO=null;resumeAfterInteraction();},1600);
 }
-function resumeAfterInteraction(){S.paused=false;$("btn-play").textContent="❚❚";S.timer=setTimeout(runNext,650/S.speed);}
+function resumeAfterInteraction(){S.paused=false;$("btn-play").textContent="❚❚";S.timer=setTimeout(runNext,220/S.speed);}
 
 /* ============================================================
    8) PRÊMIOS (difíceis, com card de indicação)
    ============================================================ */
-const OTHER_COACHES=["Pep Guardiola","Carlo Ancelotti","Xabi Alonso","Luis Enrique","Mikel Arteta","D. Simeone","Abel Ferreira","M. Gallardo","Hansi Flick","A. Conte","Arne Slot","Unai Emery"];
+const OTHER_COACHES=["Pep Guardiola","Carlo Ancelotti","Xabi Alonso","Luis Enrique","Mikel Arteta","D. Simeone","R. Amorim","S. Conceição","Hansi Flick","A. Conte","Arne Slot","Unai Emery"];
 function awardsFor(cid){
  const base=[{n:"The Best FIFA — Melhor Técnico",g:"🌍"},{n:"IFFHS — Melhor Técnico do Mundo",g:"🌐"}];
+ if(S.isNationalTeam)base.push({n:"Melhor Técnico de Seleções do Ano",g:"🏳️"});
  const league={BRA:{n:"Prêmio Craque do Brasileirão — Melhor Técnico",g:"🇧🇷"},ENG:{n:"Premier League — Manager da Temporada",g:"🏴"},ESP:{n:"LaLiga — Melhor Técnico",g:"🇪🇸"},ITA:{n:"Serie A — Panchina d'Oro",g:"🇮🇹"},GER:{n:"Bundesliga — Técnico do Ano",g:"🇩🇪"},FRA:{n:"Ligue 1 — Melhor Técnico",g:"🇫🇷"},POR:{n:"Primeira Liga — Melhor Técnico",g:"🇵🇹"},NED:{n:"Eredivisie — Técnico do Ano",g:"🇳🇱"},ARG:{n:"Liga Argentina — Melhor Técnico",g:"🇦🇷"}}[cid];
  return{base,league,champ:{n:"Champions — Melhor Técnico da Edição",g:"⭐"}};
 }
@@ -1214,6 +1428,7 @@ function revealAward(ev,nominees){
  $("btn-aw-nominees").style.display="none";$("btn-aw-reveal").style.display="none";$("btn-aw-close").style.display="block";
  if(youWon){S.careerAwards++;addRep(3);feedItem(`🏆 Você venceu o prêmio <b>${ev.award.n}</b>!`,"gold");}else feedItem(`Indicado ao <b>${ev.award.n}</b>, mas ${winner.name} levou.`,"");
  updateYouCard();
+ checkMilestones();
  $("btn-aw-close").onclick=()=>{$("ov-award").classList.remove("show");S.queue.shift();resumeAfterInteraction();};
 }
 
@@ -1225,7 +1440,7 @@ function endSeason(){
  S.seasonsPlayed++;S.age++;
  const perfDelta=S.seasonTitles*1.0+(parseInt(S.seasonPos)<=3?0.5:0)-(S._relegated?1.2:0)+rnd(-0.3,0.3);
  S.overall=clamp(Math.round(S.overall+perfDelta*0.6),35,S.overallCap); // nunca passa do teto
- handlePyramidMove();
+ if(!S.isNationalTeam)handlePyramidMove();
  offseasonMarket();
  updateYouCard();
  if(S.seasonsPlayed>=S.retireAt){showRetirement();return;}
@@ -1255,7 +1470,7 @@ function offseasonMarket(){
      if(retire){if(p.ov>=82)notable.push({t:"ret",club,name:p.n,ov:p.ov});arr[i]={n:genName(),ov:clamp(p.ov+rint(-2,1),55,89),age:rint(18,21)};}
    }
  });
- const moves=rint(2,4);
+ const moves=rint(4,7);
  for(let m=0;m<moves;m++){
    const src=pick(clubs);const arr=PLAYERS[src];if(!arr.length)continue;
    const p=pick(arr);
@@ -1264,44 +1479,104 @@ function offseasonMarket(){
    dests.sort((a,b)=>b.r-a.r);
    const dest=pick(dests.slice(0,Math.max(1,Math.ceil(dests.length/2)))).c;
    arr.splice(arr.indexOf(p),1);PLAYERS[dest].push(p);
-   if(p.ov>=80&&notable.filter(x=>x.t==="mov").length<2)notable.push({t:"mov",name:p.n,ov:p.ov,from:src,to:dest});
+   if(p.ov>=79&&notable.filter(x=>x.t==="mov").length<3)notable.push({t:"mov",name:p.n,ov:p.ov,from:src,to:dest});
  }
- notable.slice(0,3).forEach(nb=>{if(nb.t==="ret")feedItem(`👋 ${nb.name} (${nb.ov}) se aposentou; ${nb.club} busca reposição.`,"");else feedItem(`✍️ Mercado: <b>${nb.name}</b> (${nb.ov}) saiu do ${nb.from} para o ${nb.to}.`,"");});
+ notable.slice(0,4).forEach(nb=>{if(nb.t==="ret")feedItem(`👋 ${nb.name} (${nb.ov}) se aposentou; ${nb.club} busca reposição.`,"");else feedItem(`✍️ Mercado: <b>${nb.name}</b> (${nb.ov}) saiu do ${nb.from} para o ${nb.to}.`,"");});
  updateClubCard();
 }
 
 /* ---------- PROPOSTAS (manuais) — difícil chegar a time grande ---------- */
 let trChoice=null;
-function buildProposalPool(){
+function buildProposalPool(opts){
+ opts=opts||{};
  const rep=S.rep;let bands;
- if(rep>=90)bands=[[83,99,0.40],[78,82,1.0],[74,77,0.6]];
+ if(opts.weaker){
+   bands=[[Math.max(35,S.clubRating-24),S.clubRating-3,1.0]];
+ }else if(rep>=90)bands=[[83,99,0.40],[78,82,1.0],[74,77,0.6]];
  else if(rep>=82)bands=[[83,99,0.12],[77,82,0.7],[72,76,1.0]];
  else if(rep>=74)bands=[[76,82,0.22],[70,75,1.0],[66,69,0.8]];
  else if(rep>=66)bands=[[70,75,0.14],[64,69,1.0],[58,63,0.8]];
  else bands=[[64,69,0.18],[52,63,1.0]];
- const cands=[];
- ALL_CLUBS.forEach(c=>{if(c.name===S.club)return;for(const b of bands){if(c.rating>=b[0]&&c.rating<=b[1]){if(Math.random()<b[2])cands.push(c);break;}}});
- return cands;
+ const clubs=[];
+ ALL_CLUBS.forEach(c=>{if(c.name===S.club)return;for(const b of bands){if(c.rating>=b[0]&&c.rating<=b[1]){if(Math.random()<b[2])clubs.push({...c,isNT:false});break;}}});
+ // seleções nacionais — só em alguns casos, mas quando sorteada, entra garantida entre as opções
+ let nt=null;
+ const ntChance=opts.weaker?0.38:clamp((rep-60)/70,0.08,0.30);
+ if(Math.random()<ntChance){
+   let ntPool=opts.weaker
+     ?NATIONAL_TEAMS.filter(t=>t.name!==S.club)
+     :NATIONAL_TEAMS.filter(t=>t.name!==S.club&&Math.abs(t.rating-rep)<=14);
+   if(ntPool.length){
+     let choice;
+     if(opts.weaker){
+       const sorted=[...ntPool].sort((a,b)=>a.rating-b.rating);
+       choice=pick(sorted.slice(0,Math.max(3,Math.ceil(sorted.length*0.5))));
+     }else choice=pick(ntPool);
+     nt={...choice,cid:null,div:null,isNT:true};
+   }
+ }
+ return{clubs,nt};
 }
-function openTransferProposals(done){
+function openTransferProposals(done,opts){
+ opts=opts||{};
  trChoice=null;
- let pool=buildProposalPool();
- if(pool.length<3)pool=pool.concat(ALL_CLUBS.filter(c=>c.name!==S.club&&Math.abs(c.rating-S.rep)<12));
+ const built=buildProposalPool(opts);
+ let clubPool=built.clubs;
+ if(clubPool.length<3){
+   const fb=opts.weaker
+     ?ALL_CLUBS.filter(c=>c.name!==S.club&&c.rating<S.clubRating-3)
+     :ALL_CLUBS.filter(c=>c.name!==S.club&&Math.abs(c.rating-S.rep)<12);
+   clubPool=clubPool.concat(fb.map(c=>({...c,isNT:false})));
+ }
  const seen=new Set();const options=[];
- pool.sort(()=>Math.random()-.5);
- for(const c of pool){if(options.length>=3)break;if(seen.has(c.name))continue;seen.add(c.name);options.push(c);}
- $("tr-sub").textContent=S.rep>=88?"Clubes grandes te sondaram (é raro!). Escolha um destino ou fique.":(S.rep>=74?"Clubes de peso te procuraram.":"Alguns clubes apareceram. Avalie.");
+ if(built.nt){options.push(built.nt);seen.add(built.nt.name);} // seleção sorteada entra garantida
+ clubPool.sort(()=>Math.random()-.5);
+ for(const c of clubPool){if(options.length>=3)break;if(seen.has(c.name))continue;seen.add(c.name);options.push(c);}
+ options.sort(()=>Math.random()-.5); // embaralha a ordem de exibição
+ $("tr-sub").textContent=opts.forced?"Você foi demitido. Só times e seleções menores topam te contratar agora.":(S.rep>=88?"Clubes grandes te sondaram (é raro!). Escolha um destino ou fique.":(S.rep>=74?"Clubes de peso te procuraram.":"Alguns clubes apareceram. Avalie."));
  $("tr-stay-name").textContent="Continuar no "+S.club;
  const list=$("tr-list");list.innerHTML="";
- options.forEach(o=>{const el=document.createElement("div");el.className="prop";el.innerHTML=`<div class="club-badge">${badgeHTML(o.name)}</div><div class="pinfo"><div class="pn">${o.name} ${CFLAG[o.cid]||''}</div><div class="pm">${LEAGUES[o.cid][o.div].name}</div></div><div class="pr"><div class="lbl">Força</div><div class="prv mono-num">${o.rating}</div></div>`;el.onclick=()=>selectProp(el,{name:o.name});list.appendChild(el);});
- const stay=$("tr-stay");stay.onclick=()=>selectProp(stay,{stay:true});
- [...list.children,stay].forEach(x=>x.classList.remove("sel"));
+ options.forEach(o=>{
+   const el=document.createElement("div");el.className="prop";
+   const subtitle=o.isNT?`Seleção Nacional · ${o.confed}`:LEAGUES[o.cid][o.div].name;
+   const badge=o.isNT?o.flag:badgeHTML(o.name);
+   const flagTxt=o.isNT?"":(CFLAG[o.cid]||"");
+   el.innerHTML=`<div class="club-badge">${badge}</div><div class="pinfo"><div class="pn">${o.name} ${flagTxt}</div><div class="pm">${subtitle}</div></div><div class="pr"><div class="lbl">Força</div><div class="prv mono-num">${o.rating}</div></div>`;
+   el.onclick=()=>selectProp(el,o);
+   list.appendChild(el);
+ });
+ const stay=$("tr-stay");
+ stay.style.display=opts.forced?"none":"";
+ stay.onclick=opts.forced?null:(()=>selectProp(stay,{stay:true}));
+ [...list.children].forEach(x=>x.classList.remove("sel"));stay.classList.remove("sel");
  $("btn-tr-confirm").disabled=true;
- $("btn-tr-confirm").onclick=()=>{$("ov-transfer").classList.remove("show");if(trChoice&&!trChoice.stay){moveToClub(trChoice.name);feedItem(`✍️ Você assinou com o <b>${S.club}</b> ${CFLAG[S.clubCountry]||''}.`,"gold");}else{feedItem(`Você decidiu <b>ficar no ${S.club}</b>. Lealdade valorizada.`,"green");addRep(1);}S.seasonsSinceProposal=0;done();};
+ $("btn-tr-confirm").onclick=()=>{
+   $("ov-transfer").classList.remove("show");
+   if(trChoice&&!trChoice.stay){
+     moveToDestination(trChoice);
+     feedItem(trChoice.isNT?`✍️ Você assumiu o comando da <b>${S.club}</b> ${trChoice.flag||""}!`:`✍️ Você assinou com o <b>${S.club}</b> ${CFLAG[S.clubCountry]||""}.`,"gold");
+   }else{
+     feedItem(`Você decidiu <b>ficar no ${S.club}</b>. Lealdade valorizada.`,"green");addRep(1);
+   }
+   S.seasonsSinceProposal=0;done();
+ };
  $("ov-transfer").classList.add("show");
 }
 function selectProp(el,choice){document.querySelectorAll("#tr-list .prop, #tr-stay").forEach(x=>x.classList.remove("sel"));el.classList.add("sel");trChoice=choice;$("btn-tr-confirm").disabled=false;}
-function moveToClub(name){const c=clubInfo(name);if(!c)return;S.club=name;S.clubRating=c.rating;S.clubCountry=c.cid;S.division=c.div;S.leagueName=LEAGUES[c.cid][c.div].name;S.clubTitles=0;if(!S.clubsCoached.includes(name))S.clubsCoached.push(name);}
+function moveToDestination(dest){
+ if(dest.isNT){
+   S.isNationalTeam=true;S.ntConfed=dest.confed;
+   S.club=dest.name;S.clubRating=dest.rating;S.clubCountry=null;S.division=null;
+   S.leagueName="Eliminatórias · "+dest.confed;S.clubTitles=0;
+   if(!S.clubsCoached.includes(dest.name))S.clubsCoached.push(dest.name);
+ }else{
+   S.isNationalTeam=false;S.ntConfed=null;
+   S.club=dest.name;S.clubRating=dest.rating;S.clubCountry=dest.cid;S.division=dest.div;
+   S.leagueName=LEAGUES[dest.cid][dest.div].name;S.clubTitles=0;
+   if(!S.clubsCoached.includes(dest.name))S.clubsCoached.push(dest.name);
+ }
+}
+
 
 /* ============================================================
    10) APOSENTADORIA
