@@ -695,6 +695,23 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
   <button class="btn ghost" id="btn-mp-close" style="margin-top:10px">Fechar</button>
 </div></div>
 
+<!-- SEASON SUMMARY -->
+<div class="overlay" id="ov-season-summary"><div class="modal" style="max-width:620px">
+  <div class="modal-eyebrow gold">FIM DE TEMPORADA</div>
+  <div class="modal-title" id="ssum-title">—</div>
+  <div class="modal-sub" id="ssum-sub">—</div>
+  <div class="cprop-stats" style="margin:16px 0">
+    <div class="cprop-stat"><div class="cs-l">✅ Vitórias</div><div class="cs-v" id="ssum-wins">—</div></div>
+    <div class="cprop-stat"><div class="cs-l">➖ Empates</div><div class="cs-v" id="ssum-draws">—</div></div>
+    <div class="cprop-stat"><div class="cs-l">❌ Derrotas</div><div class="cs-v" id="ssum-losses">—</div></div>
+    <div class="cprop-stat"><div class="cs-l">📊 Posição</div><div class="cs-v" id="ssum-position">—</div></div>
+  </div>
+  <div id="ssum-titles" style="margin:14px 0"></div>
+  <div class="lbl" style="margin:16px 0 8px">CALENDÁRIO DA TEMPORADA</div>
+  <div class="ccard" style="padding:0;max-height:320px;overflow-y:auto" id="ssum-calendar"></div>
+  <button class="btn" id="btn-ssum-continue" style="margin-top:16px">Continuar para a próxima temporada</button>
+</div></div>
+
 <div class="toast" id="toast"></div>
 <script>
 "use strict";
@@ -822,7 +839,47 @@ const LOGOS = {
   "Twente": "https://escudosfc.com.br/images/twente.gif",
   "Utrecht": "https://escudosfc.com.br/images/utrecht.png",
   "Willem II": "https://escudosfc.com.br/images/willemii.png",
+  "Botafogo": "https://escudosfc.com.br/images/botafogo.gif",
+  "Corinthians": "https://escudosfc.com.br/images/corinthians.png",
+  "Ceará": "https://escudosfc.com.br/images/ceara.png",
+  "Juventude": "https://escudosfc.com.br/images/juventude.png",
+  "Avaí": "https://escudosfc.com.br/images/avai.gif",
+  "Botafogo-SP": "https://escudosfc.com.br/images/botasp.png",
+  "Chapecoense": "https://escudosfc.com.br/images/chapeco.png",
+  "Coritiba": "https://escudosfc.com.br/images/coritiba.png",
+  "Criciúma": "https://escudosfc.com.br/images/criciuma.png",
+  "Goiás": "https://escudosfc.com.br/images/goias.png",
+  "Novorizontino": "https://escudosfc.com.br/images/novorizontino_novo.jpg",
+  "Operário-PR": "https://escudosfc.com.br/images/operario_pr.png",
+  "Ponte Preta": "https://escudosfc.com.br/images/pontepreta.gif",
+  "Vila Nova": "https://escudosfc.com.br/images/vilanova.png",
+  "Londrina": "https://escudosfc.com.br/images/londrina_pr.png",
+  "ABC": "https://escudosfc.com.br/images/abc.jpg",
+  "CSA": "https://escudosfc.com.br/images/csa.png",
+  "Náutico": "https://escudosfc.com.br/images/nautico.png",
+  "São Bernardo": "https://escudosfc.com.br/images/sao_bernarndo_sp.png",
+  "Tombense": "https://escudosfc.com.br/images/tombense_mg.png",
+  "São José RS": "https://escudosfc.com.br/images/saojose_rs.png",
+  "Trem AP": "https://escudosfc.com.br/images/trem_ap.jpg",
 };
+
+/* Logos das competições (não dos times) */
+const COMP_LOGOS = {
+  "Brasileirão Série A": "https://upload.wikimedia.org/wikipedia/pt/thumb/e/e1/Campeonato_Brasileiro_S%C3%A9rie_A_logo_%282024%29.svg/200px-Campeonato_Brasileiro_S%C3%A9rie_A_logo_%282024%29.svg.png",
+  "Brasileirão Série B": "https://upload.wikimedia.org/wikipedia/pt/d/d6/Campeonato_Brasileiro_de_Futebol_S%C3%A9rie_B.png",
+  "Brasileirão Série C": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Campeonato_Brasileiro_de_Futebol_de_2026_-_S%C3%A9rie_C.png",
+  "Brasileirão Série D": "https://upload.wikimedia.org/wikipedia/pt/thumb/6/6e/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_D.png/200px-Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_D.png",
+  "Copa Do Brasil": "https://upload.wikimedia.org/wikipedia/pt/9/96/CopaDoBrasil.png",
+  "Copa do Brasil": "https://upload.wikimedia.org/wikipedia/pt/9/96/CopaDoBrasil.png",
+  "Copa Libertadores": "https://upload.wikimedia.org/wikipedia/pt/9/95/Conmebol_Libertadores_logo.svg",
+  "Copa Sul-Americana": "https://upload.wikimedia.org/wikipedia/pt/e/e4/Conmebol_Sudamericana_logo.png",
+};
+function compLogoHTML(compName){
+  if(!compName)return "";
+  let key=Object.keys(COMP_LOGOS).find(k=>compName.indexOf(k)===0||compName===k);
+  if(!key)return "";
+  return `<img src="${COMP_LOGOS[key]}" alt="" style="height:20px;vertical-align:middle;margin-right:6px" onerror="this.style.display='none'">`;
+}
 
 /* ---------- COUNTRIES ---------- */
 const COUNTRIES = [
@@ -914,16 +971,37 @@ const LEAGUES={
 /* ---------- ESTADUAIS (Brasil) ---------- */
 const STATE_LEAGUE={
  "Flamengo":"Carioca","Fluminense":"Carioca","Botafogo":"Carioca","Vasco":"Carioca","Volta Redonda":"Carioca",
- "Palmeiras":"Paulista","Corinthians":"Paulista","São Paulo":"Paulista","Santos":"Paulista","Bragantino":"Paulista","Ponte Preta":"Paulista","Guarani":"Paulista","Ituano":"Paulista","Novorizontino":"Paulista","São Bernardo":"Paulista","Mirassol":"Paulista","Ferroviária":"Paulista",
+ "Palmeiras":"Paulista","Corinthians":"Paulista","São Paulo":"Paulista","Santos":"Paulista","Bragantino":"Paulista","Ponte Preta":"Paulista","Guarani":"Paulista","Ituano":"Paulista","Novorizontino":"Paulista","São Bernardo":"Paulista","Mirassol":"Paulista","Ferroviária":"Paulista","Inter de Limeira":"Paulista",
  "Cruzeiro":"Mineiro","Atlético-MG":"Mineiro","América-MG":"Mineiro","Tombense":"Mineiro","Athletic-MG":"Mineiro",
- "Grêmio":"Gaúcho","Internacional":"Gaúcho","Juventude":"Gaúcho","Ypiranga":"Gaúcho",
- "Bahia":"Baiano","Vitória":"Baiano","Confiança":"Sergipano",
- "Fortaleza":"Cearense","Ceará":"Cearense",
- "Sport":"Pernambucano","Náutico":"Pernambucano",
- "Coritiba":"Paranaense","Londrina":"Paranaense","Operário-PR":"Paranaense",
- "Figueirense":"Catarinense","Avaí":"Catarinense","Chapecoense":"Catarinense","Brusque":"Catarinense","Criciúma":"Catarinense",
- "Goiás":"Goiano","Vila Nova":"Goiano","Remo":"Paraense","Paysandu":"Paraense","Amazonas":"Amazonense","CRB":"Alagoano","CSA":"Alagoano","ABC":"Potiguar","São Raimundo-RR":"Roraimense","Botafogo-PB":"Paraibano","Botafogo-SP":"Paulista"
+ "Grêmio":"Gaúcho","Internacional":"Gaúcho","Juventude":"Gaúcho","Ypiranga":"Gaúcho","Caxias":"Gaúcho","São José RS":"Gaúcho",
+ "Bahia":"Baiano","Vitória":"Baiano","Confiança":"Sergipano","Itabaiana":"Sergipano",
+ "Fortaleza":"Cearense","Ceará":"Cearense","Floresta":"Cearense",
+ "Sport":"Pernambucano","Náutico":"Pernambucano","Santa Cruz":"Pernambucano",
+ "Coritiba":"Paranaense","Londrina":"Paranaense","Operário-PR":"Paranaense","Grêmio Maringá":"Paranaense",
+ "Figueirense":"Catarinense","Avaí":"Catarinense","Chapecoense":"Catarinense","Brusque":"Catarinense","Criciúma":"Catarinense","Juventus SC":"Catarinense","Barra SC":"Catarinense",
+ "Goiás":"Goiano","Vila Nova":"Goiano","Aparecidense":"Goiano","Anápolis":"Goiano","Inhumas":"Goiano",
+ "Remo":"Paraense","Paysandu":"Paraense",
+ "Amazonas":"Amazonense","Manauara":"Amazonense","Manaus FC":"Amazonense","Nacional AM":"Amazonense","Rio Negro AM":"Amazonense","Princesa do Solimões":"Amazonense",
+ "CRB":"Alagoano","CSA":"Alagoano",
+ "ABC":"Potiguar",
+ "São Raimundo-RR":"Roraimense","Monte Roraima":"Roraimense","GAS-RR":"Roraimense",
+ "Botafogo-PB":"Paraibano",
+ "Botafogo-SP":"Paulista",
+ "Maranhão":"Maranhense",
+ "Araguaína":"Tocantinense",
+ "Guaporé":"Rondoniense","Porto Velho":"Rondoniense",
+ "Independência":"Acreano","Galvez":"Acreano","Humaitá AC":"Acreano",
+ "Uverdense-MT":"Matogrossense","Primavera":"Matogrossense",
+ "Trem AP":"Amapaense",
+ "Gama":"Candango","Real Brasília":"Candango","Brasiliense":"Candango","Capital-DF":"Candango","Ceilândia":"Candango"
 };
+/* Cidade/estado real de cada clube — usado nas propostas pra não misturar região errada */
+const CLUB_CITY={
+ "Remo":"Belém, Pará","ABC":"Natal, Rio Grande do Norte","Londrina":"Londrina, Paraná","Náutico":"Recife, Pernambuco","Figueirense":"Florianópolis, Santa Catarina","Santa Cruz":"Recife, Pernambuco","Ferroviária":"Araraquara, São Paulo","São Raimundo-RR":"Boa Vista, Roraima","Ituano":"Itu, São Paulo","Brusque":"Brusque, Santa Catarina","São Bernardo":"São Bernardo do Campo, São Paulo","CSA":"Maceió, Alagoas","Grêmio Maringá":"Maringá, Paraná","Volta Redonda":"Volta Redonda, Rio de Janeiro","Ypiranga":"Erechim, Rio Grande do Sul","Tombense":"Tombos, Minas Gerais","Inter de Limeira":"Limeira, São Paulo","Confiança":"Aracaju, Sergipe","Botafogo-PB":"João Pessoa, Paraíba","Barra SC":"Barra Velha, Santa Catarina","Floresta":"Fortaleza, Ceará","Itabaiana":"Itabaiana, Sergipe","Maranhão":"São Luís, Maranhão",
+ "Gama":"Brasília, Distrito Federal","Real Brasília":"Brasília, Distrito Federal","Monte Roraima":"Boa Vista, Roraima","Nacional AM":"Manaus, Amazonas","Manauara":"Manaus, Amazonas","Manaus FC":"Manaus, Amazonas","Rio Negro AM":"Manaus, Amazonas","Trem AP":"Macapá, Amapá","Galvez":"Rio Branco, Acre","Humaitá AC":"Porto Velho, Rondônia","Princesa do Solimões":"Manacapuru, Amazonas","Caxias":"Caxias do Sul, Rio Grande do Sul","São José RS":"São José, Rio Grande do Sul","Juventus SC":"Criciúma, Santa Catarina","Aparecidense":"Aparecida de Goiânia, Goiás","Brasiliense":"Taguatinga, Distrito Federal","Anápolis":"Anápolis, Goiás","GAS-RR":"Boa Vista, Roraima","Araguaína":"Araguaína, Tocantins","Guaporé":"Guajará-Mirim, Rondônia","Independência":"Rio Branco, Acre","Porto Velho":"Porto Velho, Rondônia","Inhumas":"Inhumas, Goiás","Uverdense-MT":"Lucas do Rio Verde, Mato Grosso","Primavera":"Primavera do Leste, Mato Grosso","Capital-DF":"Brasília, Distrito Federal","Ceilândia":"Ceilândia, Distrito Federal",
+ "Goiás":"Goiânia, Goiás","Coritiba":"Curitiba, Paraná","América-MG":"Belo Horizonte, Minas Gerais","Novorizontino":"Novo Horizonte, São Paulo","Guarani":"Campinas, São Paulo","Ponte Preta":"Campinas, São Paulo","Chapecoense":"Chapecó, Santa Catarina","Avaí":"Florianópolis, Santa Catarina","CRB":"Maceió, Alagoas","Vila Nova":"Goiânia, Goiás","Operário-PR":"Ponta Grossa, Paraná","Paysandu":"Belém, Pará","Botafogo-SP":"Ribeirão Preto, São Paulo","Amazonas":"Manaus, Amazonas","Criciúma":"Criciúma, Santa Catarina"
+};
+function proposalCity(clubName){return CLUB_CITY[clubName]||"Brasil";}
 
 /* ---------- COACHES (overalls piorados + mais técnicos) ---------- */
 /* L T M R F D = notas 1-99 ; W = estrelas 1-5 */
@@ -2174,6 +2252,7 @@ const CS={
  name:"",country:"BRA",age:32,startAge:32,
  attrs:{},potentialCap:0,overall:0,rep:45,
  club:null,clubRating:0,clubCountry:"BRA",division:"d4",leagueName:"",
+ isNationalTeam:false,ntConfed:null,
  squad:[],youth:[],
  season:2026,seasonsPlayed:0,retireAt:27,
  budget:0,wageBudget:0,ticketRevenue:0,sponsorRevenue:0,
@@ -2182,6 +2261,7 @@ const CS={
  formation:"4-3-3",style:"Equilíbrio",lineup:{},bench:[],
  calendar:[],fixtureIdx:0,standingsByComp:{},
  messages:[],careerTitles:0,careerGames:0,clubsCoached:[],
+ seasonsSinceProposal:0,_nextProposalIn:0,titlesThisSeason:[],
  currentSubview:null,
  seasonStats:{}
 };
@@ -2197,17 +2277,17 @@ function budgetForRating(rating){
  if(rating<=85)return rint(85,200)*1000000;
  return rint(200,1000)*1000000;
 }
-function genProposal(){
- const div=pick(["d4","d4","d3"]);
- const gl=getLeague("BRA",div);
- const teams=gl.league.teams.filter(t=>t[1]<=62);
- const t=pick(teams.length?teams:gl.league.teams);
- const rating=t[1];
+function genProposal(minR,maxR){
+ minR=minR??20;maxR=maxR??62;
+ const pool=ALL_CLUBS.filter(c=>c.cid==="BRA"&&c.rating>=minR&&c.rating<=maxR);
+ const t=pool.length?pick(pool):pick(ALL_CLUBS.filter(c=>c.cid==="BRA"));
+ const rating=t.rating;
+ const gl=LEAGUES[t.cid][t.div];
  const compat=rint(74,93);
  const quotes=["A direção considera sua liderança ideal para recuperar a confiança do elenco.","O clube busca um treinador com fome de crescer junto com o projeto.","A comissão técnica viu no seu perfil a chance de reconstruir a equipe.","A diretoria quer alguém disposto a valorizar a base e crescer aos poucos."];
  return{
-   name:t[0],rating,div,leagueName:gl.league.name,
-   city:pick(["São Paulo, São Paulo","Brasília, Distrito Federal","Manaus, Amazonas","Porto Velho, Rondônia","Boa Vista, Roraima","Belém, Pará","Macapá, Amapá","Cuiabá, Mato Grosso"]),
+   name:t.name,rating,div:t.div,leagueName:gl.name,
+   city:proposalCity(t.name),
    founded:rint(1912,1998),
    compat,quote:pick(quotes),
    contractYears:rint(1,3),
@@ -2216,24 +2296,51 @@ function genProposal(){
    squadStrength:rating,
    crowdPressure:pick(["Baixa","Média","Alta"]),
    boardPatience:pick(["Baixa","Média","Alta"]),
-   objectives:[...PROJECT_OBJ_POOL].sort(()=>Math.random()-.5).slice(0,3)
+   objectives:[...PROJECT_OBJ_POOL].sort(()=>Math.random()-.5).slice(0,3),
+   isNT:false
+ };
+}
+function genNTProposal(){
+ const nt=pick(NATIONAL_TEAMS);
+ return{
+   name:nt.name,rating:nt.rating,leagueName:"Seleção Nacional · "+nt.confed,
+   city:nt.flag+" "+nt.confed,founded:null,
+   compat:rint(70,90),
+   quote:"A federação acredita que você pode elevar o nível da seleção.",
+   contractYears:rint(2,4),
+   salary:Math.round(rint(30,90)*(nt.rating/70)*1000),
+   budget:budgetForRating(nt.rating),
+   squadStrength:nt.rating,
+   crowdPressure:"Alta",
+   boardPatience:pick(["Média","Alta"]),
+   objectives:["Classificar para a Copa do Mundo","Chegar às quartas de final","Construir uma nova geração"],
+   isNT:true,confed:nt.confed,flag:nt.flag
  };
 }
 function startCareerMode(){
  CS.name=S.name;CS.country=S.country;CS.age=S.age;CS.startAge=S.startAge;CS.retireAt=S.retireAt;
  CS.rep=clamp(CS.overall-8,20,60);
- CS._proposals=[genProposal(),genProposal(),genProposal()];
- renderCareerProposals();
+ renderCareerProposals([genProposal(),genProposal(),genProposal()],{allowStay:false,onAccept:acceptCareerProposal});
 }
-function renderCareerProposals(){
+function renderCareerProposals(proposals,opts){
+ opts=opts||{};
  showScreen("scr-career-proposals");
  const wrap=$("cprop-list");wrap.innerHTML="";
- CS._proposals.forEach((p,i)=>{
+ if(opts.allowStay){
+   const stayCard=document.createElement("div");stayCard.className="cprop-card";
+   stayCard.innerHTML=`<div class="cprop-top"><span class="cprop-idx">OPÇÃO ATUAL</span></div><div class="cprop-club"><div class="club-badge">${badgeHTML(CS.club)}</div><div><div class="cprop-name">Continuar no ${CS.club}</div><div class="cprop-loc">Sua equipe atual conta com você</div></div></div>`;
+   const stayBtn=document.createElement("button");stayBtn.className="btn green";stayBtn.style.width="100%";stayBtn.style.marginTop="14px";stayBtn.textContent="Ficar no clube";
+   stayBtn.onclick=()=>{if(opts.onStay)opts.onStay();};
+   stayCard.appendChild(stayBtn);
+   wrap.appendChild(stayCard);
+ }
+ proposals.forEach((p,i)=>{
    const card=document.createElement("div");card.className="cprop-card";
+   const badgeHtml=p.isNT?`<div class="club-badge" style="font-size:28px">${p.flag}</div>`:`<div class="club-badge">${badgeHTML(p.name)}</div>`;
    card.innerHTML=`
-     <div class="cprop-top"><span class="cprop-idx">PROPOSTA ${String(i+1).padStart(2,"0")}</span><span class="cprop-match">${p.compat}% compatível</span></div>
-     <div class="cprop-league">${FLAG("BRA")} ${p.leagueName}</div>
-     <div class="cprop-club"><div class="club-badge">${badgeHTML(p.name)}</div><div><div class="cprop-name">${p.name}</div><div class="cprop-loc">${p.city} · Fundado em ${p.founded}</div></div></div>
+     <div class="cprop-top"><span class="cprop-idx">${p.isNT?"CONVITE DE SELEÇÃO":"PROPOSTA "+String(i+1).padStart(2,"0")}</span><span class="cprop-match">${p.compat}% compatível</span></div>
+     <div class="cprop-league">${p.isNT?"🏳️":FLAG("BRA")} ${p.leagueName}</div>
+     <div class="cprop-club">${badgeHtml}<div><div class="cprop-name">${p.name}</div><div class="cprop-loc">${p.city}${p.founded?" · Fundado em "+p.founded:""}</div></div></div>
      <div class="cprop-quote">💬 ${p.quote}</div>
      <div class="cprop-stats">
        <div class="cprop-stat"><div class="cs-l">📅 Contrato</div><div class="cs-v">${p.contractYears} ano${p.contractYears>1?"s":""}</div></div>
@@ -2248,7 +2355,7 @@ function renderCareerProposals(){
    const btnRow=document.createElement("div");btnRow.className="cprop-btns";
    const btnReject=document.createElement("button");btnReject.className="btn ghost";btnReject.style.flex="1";btnReject.textContent="Recusar";
    const btnAccept=document.createElement("button");btnAccept.className="btn";btnAccept.style.flex="2";btnAccept.textContent="Aceitar proposta →";
-   btnAccept.onclick=()=>acceptCareerProposal(p);
+   btnAccept.onclick=()=>{if(opts.onAccept)opts.onAccept(p);};
    btnReject.onclick=()=>{card.style.opacity=.35;card.style.pointerEvents="none";};
    btnRow.appendChild(btnReject);btnRow.appendChild(btnAccept);
    card.appendChild(btnRow);
@@ -2263,11 +2370,60 @@ function acceptCareerProposal(p){
  CS.youth=genYouthPlayers(p.rating,rint(11,15));
  CS.clubsCoached=[p.name];CS.season=2026;CS.seasonsPlayed=0;
  CS.staff={};CS.messages=[];CS.careerTitles=0;CS.careerGames=0;
+ CS.isNationalTeam=false;CS.ntConfed=null;CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(2,3);
  pickBestLineup();
  buildCareerCalendar();
  renderCareerMessage(`Bem-vindo ao ${p.name}! A diretoria espera por você.`,"gold");
  showScreen("scr-career-dash");
  renderCareerDash();
+}
+/* ---------- TROCA DE CLUBE / SELEÇÃO NO MEIO DA CARREIRA (mantém histórico) ---------- */
+function switchCareerClub(p){
+ CS.isNationalTeam=false;CS.ntConfed=null;
+ CS.club=p.name;CS.clubRating=p.rating;CS.division=p.div;CS.leagueName=p.leagueName;
+ CS.budget=p.budget;CS.wageBudget=Math.round(p.budget*0.35);CS.boardConfidence=62;
+ CS.objectives=p.objectives.map(o=>({text:o,done:false}));
+ CS.squad=genCareerSquad(p.rating);
+ CS.youth=genYouthPlayers(p.rating,rint(11,15));
+ if(!CS.clubsCoached.includes(p.name))CS.clubsCoached.push(p.name);
+ CS.staff={};
+ pickBestLineup();
+ buildCareerCalendar();
+ renderCareerMessage(`✍️ Você assinou com o <b>${p.name}</b>! A diretoria espera por você.`,"gold");
+ showScreen("scr-career-dash");
+ renderCareerDash();
+}
+function switchCareerNT(p){
+ CS.isNationalTeam=true;CS.ntConfed=p.confed;
+ CS.club=p.name;CS.clubRating=p.rating;CS.division=null;CS.leagueName=p.leagueName;
+ CS.budget=p.budget;CS.wageBudget=Math.round(p.budget*0.35);CS.boardConfidence=62;
+ CS.objectives=p.objectives.map(o=>({text:o,done:false}));
+ CS.squad=genCareerSquad(p.rating);
+ if(!CS.clubsCoached.includes(p.name))CS.clubsCoached.push(p.name);
+ CS.staff={};
+ pickBestLineup();
+ buildCareerCalendar();
+ renderCareerMessage(`🏳️ Você assumiu o comando da <b>${p.name}</b>!`,"gold");
+ showScreen("scr-career-dash");
+ renderCareerDash();
+}
+function openPeriodicCareerProposals(){
+ const boost=CS.careerTitles*3;
+ const minR=clamp(CS.clubRating-8,35,95);
+ const maxR=clamp(CS.clubRating+12+boost,minR+6,97);
+ const offers=[genProposal(minR,maxR)];
+ if(Math.random()<0.35)offers.push(genNTProposal());
+ if(offers.length<2||Math.random()<0.3)offers.push(genProposal(minR,maxR));
+ renderCareerProposals(offers,{
+   allowStay:true,
+   onStay:()=>{
+     renderCareerMessage(`Você decidiu continuar no ${CS.club}. Lealdade valorizada.`,"green");
+     CS.boardConfidence=clamp(CS.boardConfidence+5,5,98);
+     buildCareerCalendar();
+     showScreen("scr-career-dash");renderCareerDash();
+   },
+   onAccept:(p)=>{if(p.isNT)switchCareerNT(p);else switchCareerClub(p);}
+ });
 }
 
 /* ---------- MENSAGENS / FEED ---------- */
@@ -2315,7 +2471,7 @@ function renderNextFixtureCards(){
  if(!fx){$("cnb-title").textContent="Temporada concluída";$("cnc-comp").textContent="—";$("btn-c-advance").disabled=true;$("btn-c-prepare").disabled=true;return;}
  $("btn-c-advance").disabled=false;$("btn-c-prepare").disabled=false;
  $("cnb-title").textContent=`${fx.opponent} · ${fx.dateLabel}`;
- $("cnc-comp").textContent=fx.comp+(fx.round?" · "+fx.round:"");
+ $("cnc-comp").innerHTML=compLogoHTML(fx.comp)+fx.comp+(fx.round?" · "+fx.round:"");
  const home=fx.home;
  setBadge($("cnc-home-badge"),home?CS.club:fx.opponent);$("cnc-home-name").textContent=home?CS.club:fx.opponent;
  setBadge($("cnc-away-badge"),home?fx.opponent:CS.club);$("cnc-away-name").textContent=home?fx.opponent:CS.club;
@@ -2337,7 +2493,7 @@ function updateFutureRowState(){
  const seasonOver=!nextFixture();
  const endRow=$("cfut-endseason");
  endRow.classList.toggle("disabled",!seasonOver);
- endRow.onclick=seasonOver?()=>{}:null;
+ endRow.onclick=seasonOver?()=>{endCareerSeason(false);}:null;
  $("cfut-endcareer").onclick=()=>{if(confirm("Simular o resto da carreira até a aposentadoria?"))skipCareerToEnd();};
  $("cfut-retire").onclick=()=>{if(confirm("Encerrar a carreira agora e ir para o Hall da Fama?"))showCareerRetirement();};
 }
@@ -2570,7 +2726,8 @@ function renderSubClassificacao(){
  let selComp=comps.find(c=>CS.standingsByComp[c])||comps[0];
  function draw(){
    const body=$("csub-body");
-   body.innerHTML='<div class="cfilter-row" id="cls-filters"></div><div class="ccard" style="padding:0" id="cls-table"></div>';
+   body.innerHTML='<div class="cfilter-row" id="cls-filters"></div><div style="margin:10px 0" id="cls-comp-logo"></div><div class="ccard" style="padding:0" id="cls-table"></div>';
+   $("cls-comp-logo").innerHTML=compLogoHTML(selComp)+`<span style="color:var(--mut);font-size:13px;vertical-align:middle">${selComp||""}</span>`;
    const fWrap=$("cls-filters");fWrap.innerHTML="";
    comps.forEach(c=>{
      const f=document.createElement("div");f.className="cfilter"+(c===selComp?" sel":"");f.textContent=c;
@@ -2934,15 +3091,58 @@ function fmtCareerDate(d){
    monthLabel:MONTHS[d.getMonth()].toUpperCase()+" "+d.getFullYear(),
    weekday:WEEKDAYS[d.getDay()]};
 }
+const CUP_ROUND_NAMES=["1/32-avos","1/16-avos","Oitavas de final","Quartas de final","Semifinal","Final"];
+function cupOpponentForRound(roundIdx){
+ const oppPool=ALL_CLUBS.filter(c=>c.cid==="BRA"&&c.name!==CS.club).sort((a,b)=>b.rating-a.rating);
+ const eliteN=clamp(Math.ceil(oppPool.length*(0.16-roundIdx*0.02)),3,10);
+ return pick(oppPool.slice(0,eliteN));
+}
 function buildCareerCalendar(){
+ if(CS.isNationalTeam){
+   let rivals=NATIONAL_TEAMS.filter(t=>t.name!==CS.club&&t.confed===CS.ntConfed);
+   if(!rivals.length)rivals=NATIONAL_TEAMS.filter(t=>t.name!==CS.club);
+   const ntOpponents=[...rivals].sort(()=>Math.random()-.5).slice(0,6);
+   const compName="Eliminatórias · "+CS.ntConfed;
+   CS.standingsByComp={};
+   CS.standingsByComp[compName]=[{name:CS.club,rating:CS.clubRating,pts:0,gf:0,ga:0,games:0},...ntOpponents.map(o=>({name:o.name,rating:o.rating,pts:0,gf:0,ga:0,games:0}))];
+   const fixtures=[];let cur=new Date(CS.season,1,rint(3,10));
+   ntOpponents.forEach(o=>{
+     const info=fmtCareerDate(cur);
+     fixtures.push({opponent:o.name,oppRating:o.rating,home:Math.random()<0.5,comp:compName,round:null,
+       date:new Date(cur),time:"20:00",played:false,result:null,...info});
+     cur=new Date(cur.getTime()+14*86400000);
+   });
+   fixtures.sort((a,b)=>a.date-b.date);
+   CS.calendar=fixtures;CS.fixtureIdx=0;
+   return;
+ }
  const gl=getLeague("BRA",CS.division);
  const rivals=gl.league.teams.filter(t=>t[0]!==CS.club);
  const opponents=[...rivals].sort(()=>Math.random()-.5).slice(0,7);
  CS.standingsByComp={};
  const leagueTeams=[CS.club,...opponents.map(o=>o[0])];
  CS.standingsByComp[gl.league.name]=leagueTeams.map(n=>({name:n,rating:n===CS.club?CS.clubRating:opponents.find(o=>o[0]===n)[1],pts:0,gf:0,ga:0,games:0}));
- let cur=new Date(CS.season,1,rint(3,10));
+
  const fixtures=[];
+ let cur=new Date(CS.season,1,rint(3,10));
+
+ // Estadual — times do mesmo estado, no comecinho da temporada
+ const stateName=STATE_LEAGUE[CS.club];
+ if(stateName){
+   const stateRivals=ALL_CLUBS.filter(c=>c.cid==="BRA"&&c.name!==CS.club&&STATE_LEAGUE[c.name]===stateName);
+   const stOpponents=[...stateRivals].sort(()=>Math.random()-.5).slice(0,5);
+   if(stOpponents.length){
+     CS.standingsByComp["Campeonato "+stateName]=[{name:CS.club,rating:CS.clubRating,pts:0,gf:0,ga:0,games:0},...stOpponents.map(o=>({name:o.name,rating:o.rating,pts:0,gf:0,ga:0,games:0}))];
+     stOpponents.forEach(o=>{
+       const info=fmtCareerDate(cur);
+       fixtures.push({opponent:o.name,oppRating:o.rating,home:Math.random()<0.5,comp:"Campeonato "+stateName,round:null,
+         date:new Date(cur),time:pick(["16:00","19:00"]),played:false,result:null,...info});
+       cur=new Date(cur.getTime()+7*86400000);
+     });
+   }
+ }
+
+ // Liga nacional (Série C/D ou onde o clube estiver)
  const rounds=[];
  opponents.forEach(o=>{rounds.push({opp:o,home:true});rounds.push({opp:o,home:false});});
  rounds.sort(()=>Math.random()-.5);
@@ -2952,18 +3152,14 @@ function buildCareerCalendar(){
      date:new Date(cur),time:pick(["16:00","18:00","19:30","20:00"]),played:false,result:null,...info});
    cur=new Date(cur.getTime()+7*86400000);
  });
- // Copa do Brasil — mata-mata com 3 fases
- const cupRoundNames=["1/32-avos","Oitavas de final","Quartas de final"];
- let cupDate=new Date(CS.season,1,rint(11,17));
- cupRoundNames.forEach((rn,i)=>{
-   const oppPool=ALL_CLUBS.filter(c=>c.cid==="BRA"&&c.name!==CS.club).sort((a,b)=>b.rating-a.rating);
-   const eliteN=clamp(Math.ceil(oppPool.length*0.15),4,10);
-   const opp=pick(oppPool.slice(0,eliteN));
-   const info=fmtCareerDate(cupDate);
-   fixtures.push({opponent:opp.name,oppRating:opp.rating,home:Math.random()<0.5,comp:"Copa Do Brasil",round:rn,
-     date:new Date(cupDate),time:"20:00",played:false,result:null,...info,_cupRound:i});
-   cupDate=new Date(cupDate.getTime()+21*86400000);
- });
+
+ // Copa do Brasil — mata-mata de verdade: só a 1ª fase entra na agenda. Perdeu, tá fora; ganhou, a próxima fase é agendada na hora.
+ const cupDate=new Date(CS.season,1,rint(11,17));
+ const cupOpp=cupOpponentForRound(0);
+ const cupInfo=fmtCareerDate(cupDate);
+ fixtures.push({opponent:cupOpp.name,oppRating:cupOpp.rating,home:Math.random()<0.5,comp:"Copa Do Brasil",round:CUP_ROUND_NAMES[0],
+   date:cupDate,time:"20:00",played:false,result:null,...cupInfo,_cupRoundIdx:0});
+
  fixtures.sort((a,b)=>a.date-b.date);
  CS.calendar=fixtures;CS.fixtureIdx=0;
 }
@@ -3138,6 +3334,33 @@ function afterCareerMatch(){
 function applyCareerMatchOutcome(fx,myGoals,oppGoals){
  fx.played=true;fx.result=`${myGoals}-${oppGoals}`;CS.fixtureIdx++;CS.careerGames++;
  const won=myGoals>oppGoals,draw=myGoals===oppGoals;
+ // Copa do Brasil — mata-mata de verdade: perdeu tá fora, ganhou a próxima fase entra na agenda na hora
+ if(fx.comp==="Copa Do Brasil"&&typeof fx._cupRoundIdx==="number"){
+   let advanced=won,how="";
+   if(draw){
+     advanced=Math.random()<clamp(0.5+(CS.clubRating-fx.oppRating)/200,0.15,0.85);
+     how=" (decidido nos pênaltis)";
+   }
+   if(advanced){
+     const nextIdx=fx._cupRoundIdx+1;
+     if(nextIdx>=CUP_ROUND_NAMES.length){
+       CS.careerTitles++;
+       CS.titlesThisSeason=CS.titlesThisSeason||[];CS.titlesThisSeason.push("Copa Do Brasil");
+       renderCareerMessage(`🏆 <b>CAMPEÃO!</b> ${CS.club} conquistou a Copa Do Brasil${how}!`,"gold");
+       CS.boardConfidence=clamp(CS.boardConfidence+20,5,98);
+     }else{
+       const nextOpp=cupOpponentForRound(nextIdx);
+       const nextDate=new Date(fx.date.getTime()+14*86400000);
+       const nextInfo=fmtCareerDate(nextDate);
+       const nextFx={opponent:nextOpp.name,oppRating:nextOpp.rating,home:Math.random()<0.5,comp:"Copa Do Brasil",round:CUP_ROUND_NAMES[nextIdx],
+         date:nextDate,time:"20:00",played:false,result:null,...nextInfo,_cupRoundIdx:nextIdx};
+       CS.calendar.splice(CS.fixtureIdx,0,nextFx);
+       renderCareerMessage(`✅ ${CS.club} avançou${how} na Copa Do Brasil! Próxima fase: ${CUP_ROUND_NAMES[nextIdx]}.`,"green");
+     }
+   }else{
+     renderCareerMessage(`❌ ${CS.club} foi eliminado${how} da Copa Do Brasil na fase ${fx.round}.`,"red");
+   }
+ }
  // padrão de tabela
  const st=CS.standingsByComp[fx.comp];
  if(st){
@@ -3183,8 +3406,10 @@ function fireCareerCoach(){
  renderCareerMessage(`🔴 <b>VOCÊ FOI DEMITIDO</b> do ${CS.club}. A diretoria perdeu a confiança no projeto.`,"red");
  toast("Você foi demitido! Novas propostas a caminho...");
  setTimeout(()=>{
-   CS._proposals=[genProposal(),genProposal(),genProposal()].map(p=>({...p,rating:clamp(p.rating-6,40,99)}));
-   renderCareerProposals();
+   const minR=clamp(CS.clubRating-20,20,80);
+   const maxR=clamp(CS.clubRating-4,minR+4,90);
+   const weakerProposals=[genProposal(minR,maxR),genProposal(minR,maxR),genProposal(minR,maxR)];
+   renderCareerProposals(weakerProposals,{allowStay:false,onAccept:switchCareerClub});
  },900);
 }
 
@@ -3204,18 +3429,93 @@ function skipCareerToEnd(){
  }
  showCareerRetirement();
 }
+function computeSeasonSummary(){
+ let wins=0,draws=0,losses=0;
+ CS.calendar.forEach(fx=>{
+   if(!fx.played||!fx.result)return;
+   const parts=fx.result.split("-").map(Number);
+   if(parts[0]>parts[1])wins++;else if(parts[0]===parts[1])draws++;else losses++;
+ });
+ const st=CS.standingsByComp[CS.leagueName];
+ let position=null,totalTeams=0;
+ if(st){position=st.findIndex(t=>t.name===CS.club)+1;totalTeams=st.length;}
+ return{season:CS.season,club:CS.club,wins,draws,losses,position,totalTeams,
+   calendar:[...CS.calendar],titles:[...(CS.titlesThisSeason||[])]};
+}
+function checkEstadualTitle(){
+ Object.keys(CS.standingsByComp).forEach(comp=>{
+   if(comp.indexOf("Campeonato ")===0){
+     const st=CS.standingsByComp[comp];
+     if(st&&st.length&&st[0].name===CS.club){
+       CS.careerTitles++;
+       CS.titlesThisSeason=CS.titlesThisSeason||[];CS.titlesThisSeason.push(comp);
+       renderCareerMessage(`🏆 <b>CAMPEÃO!</b> ${CS.club} conquistou o ${comp}!`,"gold");
+       CS.boardConfidence=clamp(CS.boardConfidence+8,5,98);
+     }
+   }
+ });
+}
+function showSeasonSummary(summary,onContinue){
+ $("ssum-title").textContent=`Temporada ${seasonStr(summary.season)}`;
+ $("ssum-sub").textContent=`${summary.club} · ${summary.wins+summary.draws+summary.losses} jogos disputados`;
+ $("ssum-wins").textContent=summary.wins;
+ $("ssum-draws").textContent=summary.draws;
+ $("ssum-losses").textContent=summary.losses;
+ $("ssum-position").textContent=summary.position?summary.position+"º de "+summary.totalTeams:"—";
+ const titlesWrap=$("ssum-titles");
+ if(summary.titles.length){
+   titlesWrap.innerHTML=`<div class="lbl" style="margin-bottom:8px">TÍTULOS CONQUISTADOS</div>`+summary.titles.map(t=>`<div class="co-row">🏆 ${t}</div>`).join("");
+ }else{
+   titlesWrap.innerHTML=`<div style="color:var(--mut);font-size:13px">Nenhum título conquistado nesta temporada.</div>`;
+ }
+ const calWrap=$("ssum-calendar");calWrap.innerHTML="";
+ summary.calendar.forEach(fx=>{
+   const row=document.createElement("div");row.className="cagenda-row";
+   const resTxt=fx.played?fx.result:"—";
+   row.innerHTML=`<div class="ar-date">${fx.dateLabel}</div><div class="club-badge">${badgeHTML(fx.opponent)}</div><div style="flex:1">${fx.home?"vs":"@"} ${fx.opponent}</div><div class="mono-num" style="font-weight:800">${resTxt}</div><div class="ar-comp">${fx.comp}</div>`;
+   calWrap.appendChild(row);
+ });
+ $("btn-ssum-continue").onclick=()=>{
+   $("ov-season-summary").classList.remove("show");
+   onContinue();
+ };
+ $("ov-season-summary").classList.add("show");
+}
 function endCareerSeason(silent){
  const st=CS.standingsByComp[CS.leagueName];
  if(st&&st.length&&st[0].name===CS.club){
    CS.careerTitles++;
+   CS.titlesThisSeason=CS.titlesThisSeason||[];CS.titlesThisSeason.push(CS.leagueName);
    renderCareerMessage(`🏆 <b>CAMPEÃO!</b> ${CS.club} conquistou a ${CS.leagueName} na temporada ${seasonStr(CS.season)}!`,"gold");
    CS.boardConfidence=clamp(CS.boardConfidence+15,5,98);
  }
+ checkEstadualTitle();
+ const summary=!silent?computeSeasonSummary():null;
+ CS.titlesThisSeason=[];
  CS.seasonsPlayed++;CS.season++;
  CS.squad.forEach(p=>{p.ovStart=p.ov;p.fitness=clamp(p.fitness+20,0,100);});
  CS.youth.forEach(p=>{if(p.age<23)p.age++;});
  if(!silent)renderCareerMessage(`📅 Fim da temporada ${CS.season-1}. Preparando ${seasonStr(CS.season)}.`,"gold");
- if(CS.seasonsPlayed<CS.retireAt){buildCareerCalendar();}
+ const retiring=CS.seasonsPlayed>=CS.retireAt;
+ if(!CS._nextProposalIn)CS._nextProposalIn=rint(2,3);
+ CS.seasonsSinceProposal=(CS.seasonsSinceProposal||0)+1;
+ const needsProposal=CS.seasonsSinceProposal>=CS._nextProposalIn&&!CS.isNationalTeam&&!retiring;
+ if(silent){
+   if(retiring)return;
+   if(needsProposal){CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(2,3);}
+   buildCareerCalendar();
+   return;
+ }
+ showSeasonSummary(summary,()=>{
+   if(retiring){showCareerRetirement();return;}
+   if(needsProposal){
+     CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(2,3);
+     openPeriodicCareerProposals();
+   }else{
+     buildCareerCalendar();
+     showScreen("scr-career-dash");renderCareerDash();
+   }
+ });
 }
 function showCareerRetirement(){
  if(CLIVE&&CLIVE.timer)clearTimeout(CLIVE.timer);
