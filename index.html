@@ -193,12 +193,160 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 .retire-stat{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
 .retire-stat .k{color:var(--mut)}.retire-stat .v{font-weight:800}.retire-stat .v.gold{color:var(--gold)}
 @media(max-width:1100px){.dash{grid-template-columns:1fr}.col.right{order:3}}
-@media(max-width:560px){.wrap{padding:16px}.attr-grid{grid-template-columns:1fr}.stat-tiles{grid-template-columns:1fr 1fr}.row2{grid-template-columns:1fr}.mytab{grid-template-columns:repeat(2,1fr)}.club-hero-name .nm{font-size:30px}.pk-zone{width:54px;height:54px}.keeper{width:78px;height:112px}}
+/* ============================================================
+   MODO CARREIRA — CSS
+   ============================================================ */
+.mode-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 22px;margin-bottom:16px;cursor:pointer;transition:border-color .12s,transform .06s}
+.mode-card:hover{border-color:var(--gold)}.mode-card:active{transform:scale(.99)}
+.mode-card .mc-ic{font-size:32px;margin-bottom:10px}
+.mode-card .mc-t{font-size:20px;font-weight:900}
+.mode-card .mc-d{color:var(--mut);font-size:13px;margin-top:6px;line-height:1.5}
+.mode-card .mc-tag{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:800}
+
+.cprop-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
+.cprop-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.cprop-idx{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:800}
+.cprop-match{background:#1a2e12;color:var(--green);border:1px solid var(--green-line);border-radius:999px;padding:5px 12px;font-size:11px;font-weight:800}
+.cprop-club{display:flex;align-items:center;gap:14px;margin-bottom:4px}
+.cprop-club .club-badge{width:56px;height:56px;font-size:16px}
+.cprop-league{color:var(--gold);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:800}
+.cprop-name{font-size:22px;font-weight:900;margin-top:2px}
+.cprop-loc{color:var(--mut);font-size:12px;margin-top:2px}
+.cprop-quote{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--white);margin:14px 0;display:flex;gap:10px;align-items:flex-start}
+.cprop-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.cprop-stat{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.cprop-stat .cs-l{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut2);display:flex;align-items:center;gap:6px}
+.cprop-stat .cs-v{font-weight:800;font-size:15px;margin-top:3px}
+.cprop-obj{margin:12px 0}
+.cprop-obj .co-row{display:flex;align-items:center;gap:8px;font-size:13px;padding:4px 0;color:var(--white)}
+.cprop-btns{display:flex;gap:10px;margin-top:14px}
+
+/* dashboard */
+.cdash{max-width:1400px;margin:0 auto;padding:16px}
+.cnext-bar{background:linear-gradient(90deg,#1a1a05,#0e0e0e);border:1px solid var(--gold-dim);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.cnext-bar .nb-l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:800}
+.cnext-bar .nb-v{font-size:16px;font-weight:800;margin-top:2px}
+.cgrid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+.ccol{display:flex;flex-direction:column;gap:14px}
+.ccard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.ccard-t{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.ccard-t a{color:var(--mut);font-size:11px;font-weight:700;text-transform:none;letter-spacing:0}
+.cfixture{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:10px 0}
+.cfixture .cf-side{display:flex;flex-direction:column;align-items:center;gap:6px;width:96px}
+.cfixture .cf-side .club-badge{width:48px;height:48px;font-size:13px}
+.cfixture .cf-side .nm{font-size:12px;font-weight:800;text-align:center;line-height:1.15}
+.cfixture .cf-mid{text-align:center}
+.cbar-row{margin:10px 0}
+.cbar-row .cb-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.cbar-row .cb-top .cbv{font-weight:800}
+.cbar{height:8px;background:var(--panel2);border-radius:4px;overflow:hidden}
+.cbar .cbf{height:100%;border-radius:4px}
+.cagenda-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #191919;font-size:13px}
+.cagenda-row:last-child{border-bottom:none}
+.cagenda-row .ar-date{width:58px;color:var(--mut);font-size:11px;font-weight:700}
+.cagenda-row .club-badge{width:26px;height:26px;font-size:9px}
+.cagenda-row .ar-comp{margin-left:auto;color:var(--mut2);font-size:10px;text-transform:uppercase}
+.cnav-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cnav-btn{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px 10px;text-align:center;transition:border-color .1s,transform .06s}
+.cnav-btn:active{transform:scale(.97)}
+.cnav-btn:hover{border-color:var(--gold)}
+.cnav-btn .cnb-ic{font-size:20px}
+.cnav-btn .cnb-t{font-size:12px;font-weight:700;margin-top:6px}
+.cfuture-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-top:14px}
+.cfuture-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1c1c1c;cursor:pointer}
+.cfuture-row:last-child{border-bottom:none}
+.cfuture-row .fr-ic{font-size:18px}
+.cfuture-row .fr-t{font-weight:700;font-size:14px}
+.cfuture-row .fr-d{color:var(--mut);font-size:11px;margin-top:2px}
+.cfuture-row.disabled{opacity:.35;pointer-events:none}
+
+/* subview shell */
+.csub-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.csub-back{background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:9px 14px;font-weight:700;font-size:13px}
+.csub-title{font-size:22px;font-weight:900}
+.ctable-row{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid #191919;font-size:13px}
+.ctable-row:hover{background:#111}
+.ctable-row .club-badge{width:22px;height:22px;font-size:9px}
+.cplayer-row{display:grid;grid-template-columns:34px 1fr 46px 40px 60px;gap:10px;align-items:center;padding:11px 14px;border-bottom:1px solid #191919;font-size:13px}
+.cplayer-row .cp-pos{background:var(--panel2);border-radius:6px;text-align:center;padding:4px 0;font-size:10px;font-weight:800;color:var(--gold)}
+.cplayer-row .cp-name{font-weight:700}
+.cplayer-row .cp-sub{color:var(--mut2);font-size:11px}
+.cplayer-row .cp-ov{font-weight:900;text-align:center;font-variant-numeric:tabular-nums}
+.cfilter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.cfilter{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:700;color:var(--mut)}
+.cfilter.sel{border-color:var(--gold);color:var(--gold)}
+
+/* pitch / tactics */
+.cpitch{background:linear-gradient(180deg,#0f3d24,#0a2e1b);border:1px solid var(--line2);border-radius:16px;padding:16px;position:relative;min-height:520px}
+.cpitch::before{content:"";position:absolute;inset:16px;border:1px solid rgba(255,255,255,.18);border-radius:8px}
+.cpitch::after{content:"";position:absolute;left:50%;top:50%;width:110px;height:110px;border:1px solid rgba(255,255,255,.18);border-radius:50%;transform:translate(-50%,-50%)}
+.cpitch-player{position:absolute;transform:translate(-50%,-50%);width:84px;text-align:center;cursor:pointer}
+.cpitch-player .pp-badge{width:44px;height:44px;border-radius:10px;background:#0c1f14;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--white);margin:0 auto 4px;font-size:13px}
+.cpitch-player.injured .pp-badge{border-color:var(--red)}
+.cpitch-player .pp-name{font-size:10px;font-weight:800;color:#fff;text-shadow:0 1px 3px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cpitch-player .pp-ov{font-size:9px;color:var(--gold);font-weight:800}
+.cbench-chip{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:6px;cursor:pointer}
+.cbench-chip:hover{border-color:var(--gold)}
+.cbench-chip .bc-pos{font-size:10px;font-weight:800;color:var(--gold);width:28px}
+.cbench-chip .bc-name{flex:1;font-size:13px;font-weight:700}
+.cbench-chip .bc-ov{font-weight:900;font-size:13px}
+
+/* calendar */
+.ccal-toggle{display:flex;gap:8px;margin-bottom:14px}
+.ccal-month{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:800;margin:16px 0 8px}
+
+/* live match / stats */
+.cstat-row{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:13px}
+.cstat-row .csr-v{width:34px;text-align:center;font-weight:800;font-variant-numeric:tabular-nums}
+.cstat-row .csr-bar{flex:1;height:7px;background:var(--panel2);border-radius:4px;overflow:hidden;display:flex}
+.cstat-row .csr-bar .csr-a{background:var(--gold)}
+.cstat-row .csr-bar .csr-b{background:var(--mut2)}
+.cstat-row .csr-l{width:110px;text-align:center;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.chalf-opt{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;transition:border-color .1s}
+.chalf-opt:hover{border-color:var(--gold)}
+.chalf-opt .ho-ic{font-size:20px;margin-bottom:6px}
+.chalf-opt .ho-t{font-weight:800;font-size:15px}
+.chalf-opt .ho-d{color:var(--mut);font-size:12px;margin-top:3px}
+
+/* finance / staff */
+.cfin-tile{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.cfin-tile .ft-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.cfin-tile .ft-v{font-size:20px;font-weight:900;margin-top:6px;font-variant-numeric:tabular-nums}
+.cstaff-card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:10px}
+.cstaff-top{display:flex;justify-content:space-between;align-items:center}
+.cstaff-top .st-t{font-weight:800;font-size:15px}
+.cstaff-top .st-cost{color:var(--gold);font-weight:800;font-size:13px}
+.cstaff-d{color:var(--mut);font-size:12px;margin:6px 0 10px}
+
+/* board confidence */
+.cconf-ring{width:180px;height:180px;margin:20px auto;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+.cconf-ring .cr-num{font-size:44px;font-weight:900}
+.training-opt{display:flex;justify-content:space-between;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:8px;cursor:pointer}
+.training-opt.sel{border-color:var(--gold);background:#1f1b05}
+@media(max-width:900px){.cgrid{grid-template-columns:1fr}.cnav-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
+<!-- MODE SELECT -->
+<section id="scr-mode" class="screen active"><div class="wrap">
+  <div class="brandbar"><div class="brand"><div class="goat">🐐</div><h1>THEFENOMENO<span class="dot">.COM</span></h1></div><div class="socials">ESCOLHA O MODO</div></div>
+  <div class="center-card" style="max-width:600px">
+    <div class="hero-title" style="font-size:clamp(30px,7vw,52px);margin:4vh 0 6px">ESCOLHA<br><span class="fx">SEU CAMINHO</span></div>
+    <div class="mode-card" id="mode-quick">
+      <div class="mc-ic">⚡</div><div class="mc-t">Modo Rápido</div>
+      <div class="mc-d">Temporadas simuladas em blocos rápidos, com finais e pênaltis interativos. Vá direto para os grandes momentos da carreira.</div>
+      <div class="mc-tag">JÁ TESTADO · CARREIRA CLÁSSICA</div>
+    </div>
+    <div class="mode-card" id="mode-career">
+      <div class="mc-ic">📋</div><div class="mc-t">Modo Carreira</div>
+      <div class="mc-d">Jogo por jogo, começando de baixo (Série C/D). Escalação, tática, mercado, finanças, base, comissão técnica e muito mais.</div>
+      <div class="mc-tag">NOVO · GESTÃO COMPLETA</div>
+    </div>
+  </div>
+</div></section>
+
 <!-- CREATION -->
-<section id="scr-create" class="screen active"><div class="wrap">
+<section id="scr-create" class="screen"><div class="wrap">
   <div class="brandbar"><div class="brand"><div class="goat">🐐</div><h1>THEFENOMENO<span class="dot">.COM</span></h1></div><div class="socials">MODO CARREIRA · TÉCNICO</div></div>
   <div class="center-card">
     <div class="hero-title">DESCUBRA SE VOCÊ É<br><span class="fx">O FENÔMENO</span></div>
@@ -221,7 +369,7 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
     <div class="coach-top"><div class="coach-avatar" id="coach-emoji">🧢</div><div><div class="coach-name" id="coach-name">—</div><div class="coach-meta" id="coach-meta">—</div></div></div>
     <div class="attr-grid" id="coach-attrs"></div>
   </div>
-  <p class="steal-hint">Toque no atributo que quer <b>roubar</b>. Cada técnico te dá <b>uma</b> habilidade. A média das 6 notas (Trab. em equipe conta só um pouco) vira seu overall máximo.</p>
+  <p class="steal-hint" id="steal-hint-text">Toque no atributo que quer <b>roubar</b>. Cada técnico te dá <b>uma</b> habilidade. A média das 6 notas (Trab. em equipe conta só um pouco) vira seu overall máximo.</p>
   <div class="mytab" id="my-attrs"></div>
 </div></section>
 
@@ -236,6 +384,66 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
   </div>
   <div class="fade-seq" style="animation-delay:1.5s;margin-top:30px"><button class="btn" id="btn-begin" style="max-width:360px;margin:0 auto">INICIAR TEMPORADA</button></div>
 </div></div></section>
+
+<!-- CAREER: PROPOSALS -->
+<section id="scr-career-proposals" class="screen"><div class="wrap" style="max-width:640px">
+  <div class="brandbar"><div class="brand"><div class="goat">🐐</div><h1>THEFENOMENO<span class="dot">.COM</span></h1></div><div class="socials">PROPOSTAS RECEBIDAS</div></div>
+  <div class="hero-title" style="font-size:clamp(26px,6vw,38px);text-align:left;margin:0 0 6px">SEU PRIMEIRO<br><span class="fx">DESAFIO</span></div>
+  <p class="hero-sub" style="text-align:left;margin:0 0 24px">Três clubes acreditam no seu potencial. Analise cada proposta e escolha onde começar sua carreira.</p>
+  <div id="cprop-list"></div>
+</div></section>
+
+<!-- CAREER: MAIN DASHBOARD -->
+<section id="scr-career-dash" class="screen"><div class="cdash">
+  <div class="brandbar"><div class="brand"><div class="goat">🐐</div><h1>THEFENOMENO<span class="dot">.COM</span></h1></div>
+    <div style="display:flex;gap:10px;align-items:center"><span class="socials" id="cdash-season">TEMPORADA</span><button class="ctl-btn" id="btn-c-restart" style="padding:8px 12px;font-size:11px">REINICIAR</button></div></div>
+
+  <div id="cdash-home">
+    <div class="cnext-bar">
+      <div><div class="nb-l">Próximo jogo</div><div class="nb-v" id="cnb-title">—</div></div>
+      <button class="btn" id="btn-c-advance" style="width:auto;padding:12px 22px">Avançar até o jogo »</button>
+    </div>
+    <div class="cgrid">
+      <div class="ccol">
+        <div class="ccard">
+          <div class="ccard-t">Próximo compromisso</div>
+          <div id="cnc-comp" style="color:var(--mut);font-size:12px;margin-bottom:10px">—</div>
+          <div class="cfixture">
+            <div class="cf-side"><div class="club-badge" id="cnc-home-badge">?</div><div class="nm" id="cnc-home-name">—</div></div>
+            <div class="cf-mid"><div style="font-size:20px;font-weight:900;color:var(--mut2)">×</div><div style="font-size:12px;color:var(--mut);margin-top:4px" id="cnc-date">—</div></div>
+            <div class="cf-side"><div class="club-badge" id="cnc-away-badge">?</div><div class="nm" id="cnc-away-name">—</div></div>
+          </div>
+          <button class="btn" id="btn-c-prepare" style="margin-top:14px">Preparar equipe →</button>
+        </div>
+        <div class="ccard">
+          <div class="ccard-t">Vestiário <a id="lnk-c-elenco">Ver elenco ›</a></div>
+          <div class="cbar-row"><div class="cb-top"><span>Condição física</span><span class="cbv" id="cv-fit">—</span></div><div class="cbar"><div class="cbf" id="cv-fit-bar" style="background:var(--green)"></div></div></div>
+          <div class="cbar-row"><div class="cb-top"><span>Moral</span><span class="cbv" id="cv-mor">—</span></div><div class="cbar"><div class="cbf" id="cv-mor-bar" style="background:#4f8cff"></div></div></div>
+          <div class="cbar-row"><div class="cb-top"><span>Ritmo de jogo</span><span class="cbv" id="cv-rit">—</span></div><div class="cbar"><div class="cbf" id="cv-rit-bar" style="background:#ff9f43"></div></div></div>
+          <div style="margin-top:10px;font-size:12px;color:var(--mut)" id="cv-injuries">Nenhum desfalque registrado.</div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-t">Agenda <a id="lnk-c-calendario">Calendário ›</a></div>
+          <div id="cagenda-list"></div>
+        </div>
+      </div>
+      <div class="ccol">
+        <div class="ccard"><div class="cnav-grid" id="cnav-grid"></div></div>
+        <div class="cfuture-card">
+          <div class="ccard-t" style="margin-bottom:6px">Futuro da carreira</div>
+          <div class="cfuture-row" id="cfut-endseason"><div class="fr-ic">⏭️</div><div><div class="fr-t">Ir ao fim da temporada</div><div class="fr-d">Disponível após o último compromisso</div></div></div>
+          <div class="cfuture-row" id="cfut-endcareer"><div class="fr-ic">🏛️</div><div><div class="fr-t">Pular para o fim da carreira</div><div class="fr-d">Simule o legado até a aposentadoria</div></div></div>
+          <div class="cfuture-row" id="cfut-retire"><div class="fr-ic">🏆</div><div><div class="fr-t">Aposentar treinador</div><div class="fr-d">Encerre agora e entre no Hall da Fama</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cdash-subview" style="display:none">
+    <div class="csub-head"><button class="csub-back" id="btn-csub-back">‹ Voltar</button><div class="csub-title" id="csub-title">—</div></div>
+    <div id="csub-body"></div>
+  </div>
+</div></section>
 
 <!-- DASHBOARD -->
 <section id="scr-dash" class="screen"><div class="wrap">
@@ -358,10 +566,133 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 <div class="overlay" id="ov-retire"><div class="modal" style="text-align:center">
   <div class="modal-eyebrow gold">FIM DE CARREIRA</div>
   <div class="trophy" id="ret-emoji">🎉</div>
+
   <div class="modal-title" id="ret-verdict">—</div>
   <div class="modal-sub" id="ret-sub">—</div>
   <div style="text-align:left;margin:10px 0 18px" id="ret-stats"></div>
   <button class="btn" id="btn-ret-new">NOVA CARREIRA</button>
+</div></div>
+
+<!-- CAREER: LINEUP PREP -->
+<div class="overlay" id="ov-c-lineup"><div class="modal" style="max-width:720px">
+  <div class="modal-eyebrow gold" id="cl-comp">PRÓXIMO JOGO</div>
+  <div class="vs" style="margin-bottom:6px">
+    <div class="side"><div class="club-badge" id="cl-home-badge">?</div><div class="nm" id="cl-home-name">—</div></div>
+    <div class="x">×</div>
+    <div class="side"><div class="club-badge" id="cl-away-badge">?</div><div class="nm" id="cl-away-name">—</div></div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div class="setup-block" style="margin:0"><div class="lbl">Formação</div><div class="opt-row" id="cl-formations"></div></div>
+    <button class="btn ghost" id="btn-cl-best" style="width:auto;padding:10px 16px;font-size:12px">Escalar melhor time</button>
+  </div>
+  <div class="cpitch" id="cl-pitch" style="min-height:440px"></div>
+  <div class="lbl" style="margin:16px 0 8px">RESERVAS</div>
+  <div id="cl-bench" style="max-height:180px;overflow-y:auto"></div>
+  <div class="setup-block" style="margin-top:14px"><div class="lbl">Estilo de jogo</div><div class="opt-row" id="cl-styles"></div></div>
+  <button class="btn" id="btn-cl-confirm" style="margin-top:8px">CONFIRMAR PREPARAÇÃO</button>
+</div></div>
+
+<!-- CAREER: SUBSTITUTE PICKER -->
+<div class="overlay" id="ov-c-swap"><div class="modal" style="max-width:480px">
+  <div class="modal-eyebrow gold">SUBSTITUIR JOGADOR</div>
+  <div class="modal-title" id="csw-out-name" style="font-size:20px">—</div>
+  <div class="modal-sub">Escolha quem entra no lugar</div>
+  <div id="csw-list" style="margin-top:14px"></div>
+  <button class="btn ghost" id="btn-csw-cancel" style="margin-top:10px">CANCELAR</button>
+</div></div>
+
+<!-- CAREER: LIVE MATCH -->
+<div class="overlay" id="ov-c-live"><div class="modal" style="max-width:640px">
+  <div class="live-comp" id="cliv-comp">JOGO</div>
+  <div class="live-score">
+    <div class="side"><div class="club-badge" id="cliv-home-badge">?</div><div class="nm" id="cliv-home-name">—</div></div>
+    <div class="sc mono-num" id="cliv-sc">0 - 0</div>
+    <div class="side"><div class="club-badge" id="cliv-away-badge">?</div><div class="nm" id="cliv-away-name">—</div></div>
+  </div>
+  <div class="live-clock mono-num" id="cliv-clock">0'</div>
+  <div class="live-bar"><div class="fill" id="cliv-fill"></div></div>
+  <div class="live-events" id="cliv-events" style="min-height:70px;max-height:120px"></div>
+  <div class="lbl" style="margin:14px 0 8px">ESTATÍSTICAS DA PARTIDA</div>
+  <div id="cliv-stats"></div>
+  <button class="btn ghost" id="btn-cliv-skip" style="margin-top:14px">PULAR PARA O FIM</button>
+</div></div>
+
+<!-- CAREER: HALFTIME -->
+<div class="overlay" id="ov-c-half"><div class="modal" style="max-width:520px;text-align:center">
+  <div style="font-size:26px;color:var(--gold)">⏸</div>
+  <div class="modal-eyebrow gold" style="margin-top:6px">INTERVALO</div>
+  <div style="font-size:44px;font-weight:900;margin:6px 0" class="mono-num" id="chalf-score">0 — 0</div>
+  <div class="modal-sub">Escolha a mensagem para o segundo tempo.</div>
+  <div style="margin-top:16px">
+    <div class="chalf-opt" id="chalf-keep"><div class="ho-ic">🛡️</div><div class="ho-t">Manter o plano</div><div class="ho-d">Confiança e equilíbrio.</div></div>
+    <div class="chalf-opt" id="chalf-press"><div class="ho-ic">⚔️</div><div class="ho-t">Cobrar intensidade</div><div class="ho-d">Mais risco e pressão.</div></div>
+    <div class="chalf-opt" id="chalf-protect"><div class="ho-ic">✅</div><div class="ho-t">Proteger o resultado</div><div class="ho-d">Compactar e controlar.</div></div>
+  </div>
+</div></div>
+
+<!-- CAREER: RESULT -->
+<div class="overlay" id="ov-c-result"><div class="modal" style="text-align:center">
+  <div class="modal-eyebrow" id="cres-eyebrow">RESULTADO FINAL</div><div class="modal-title" id="cres-comp">—</div>
+  <div class="vs">
+    <div class="side"><div class="club-badge" id="cres-home-badge">?</div><div class="nm" id="cres-home-name">—</div></div>
+    <div style="font-size:44px;font-weight:900" class="mono-num" id="cres-score">0 - 0</div>
+    <div class="side"><div class="club-badge" id="cres-away-badge">?</div><div class="nm" id="cres-away-name">—</div></div>
+  </div>
+  <div class="modal-sub" id="cres-detail" style="font-size:15px;font-weight:700;margin:6px 0 16px"></div>
+  <button class="btn" id="btn-cres-close">CONTINUAR</button>
+</div></div>
+
+<!-- SCOUT PLAYER: BUY / LOAN -->
+<div class="overlay" id="ov-scout-player"><div class="modal" style="max-width:480px;text-align:center">
+  <div class="modal-eyebrow gold">JOGADOR OBSERVADO</div>
+  <div class="modal-title" id="sp-name">—</div>
+  <div class="modal-sub" id="sp-sub">—</div>
+
+  <div id="sp-step-choice" style="margin-top:16px">
+    <button class="btn" id="btn-sp-buy" style="margin-bottom:10px">💰 Comprar</button>
+    <button class="btn ghost" id="btn-sp-loan">🔄 Pedir empréstimo</button>
+  </div>
+
+  <div id="sp-step-buy" style="display:none;margin-top:14px">
+    <div class="cfin-tile"><div class="ft-l">Valor pedido pelo clube</div><div class="ft-v" id="sp-buy-value" style="color:var(--gold)">—</div></div>
+    <button class="btn" id="btn-sp-buy-send" style="margin-top:14px">Enviar proposta ao clube</button>
+    <div class="pk-scoreline" id="sp-buy-result"></div>
+  </div>
+
+  <div id="sp-step-buy-terms" style="display:none;margin-top:14px">
+    <div class="cfin-tile"><div class="ft-l">Salário pedido pelo jogador</div><div class="ft-v" id="sp-terms-wage" style="color:var(--gold)">—</div></div>
+    <button class="btn green" id="btn-sp-terms-close" style="margin-top:14px">Fechar acordo com o jogador</button>
+  </div>
+
+  <div id="sp-step-loan" style="display:none;margin-top:10px">
+    <div class="lbl" style="text-align:left;margin-bottom:8px">PROPOSTAS DE EMPRÉSTIMO</div>
+    <div id="sp-loan-opts"></div>
+    <div class="pk-scoreline" id="sp-loan-result"></div>
+  </div>
+
+  <button class="btn ghost" id="btn-sp-cancel" style="margin-top:14px">Fechar</button>
+</div></div>
+
+<!-- MY PLAYER: TRAIN / RENEW / RELEASE -->
+<div class="overlay" id="ov-myplayer"><div class="modal" style="max-width:440px;text-align:center">
+  <div class="modal-eyebrow gold">SEU JOGADOR</div>
+  <div class="modal-title" id="mp-name">—</div>
+  <div class="modal-sub" id="mp-sub">—</div>
+  <div id="mp-step-menu" style="margin-top:16px">
+    <div class="chalf-opt" id="mp-train"><div class="ho-ic">🎯</div><div class="ho-t">Treino individual</div><div class="ho-d">Defina um ritmo e um foco só para esse jogador.</div></div>
+    <div class="chalf-opt" id="mp-renew"><div class="ho-ic">✍️</div><div class="ho-t">Renovar contrato</div><div class="ho-d">Aumenta salário um pouco, mas melhora a moral e o vínculo.</div></div>
+    <div class="chalf-opt" id="mp-release"><div class="ho-ic">🚪</div><div class="ho-t">Demitir</div><div class="ho-d">Rescinde o contrato e libera o jogador do elenco.</div></div>
+  </div>
+  <div id="mp-step-train" style="display:none;margin-top:14px;text-align:left">
+    <div class="lbl" style="margin-bottom:8px">RITMO DE TREINO INDIVIDUAL</div>
+    <div id="mp-train-intensity"></div>
+    <div class="lbl" style="margin:14px 0 8px">FOCO PREDOMINANTE</div>
+    <div id="mp-train-focus"></div>
+    <button class="btn" id="btn-mp-train-save" style="margin-top:14px">Salvar programa individual</button>
+    <button class="btn ghost" id="btn-mp-train-back" style="margin-top:8px">‹ Voltar</button>
+  </div>
+  <div class="pk-scoreline" id="mp-result"></div>
+  <button class="btn ghost" id="btn-mp-close" style="margin-top:10px">Fechar</button>
 </div></div>
 
 <div class="toast" id="toast"></div>
@@ -398,6 +729,99 @@ const LOGOS = {
   "Man City": "https://escudosfc.com.br/images/man_city.png",
   "Bournemouth": "https://escudosfc.com.br/images/bournemouth.png",
   "Brentford": "https://escudosfc.com.br/images/brentford.png",
+  "Amazonas": "https://escudosfc.com.br/images/amazonas_fc_am.png",
+  "Anápolis": "https://escudosfc.com.br/images/anapolis.png",
+  "Barra SC": "https://escudosfc.com.br/images/barra_sc.png",
+  "Botafogo-PB": "https://escudosfc.com.br/images/botapb.png",
+  "Brusque": "https://escudosfc.com.br/images/brusque.png",
+  "Caxias": "https://escudosfc.com.br/images/caxias.gif",
+  "Confiança": "https://escudosfc.com.br/images/confianca_se.png",
+  "Ferroviária": "https://escudosfc.com.br/images/ferroviaria.png",
+  "Figueirense": "https://escudosfc.com.br/images/figue.gif",
+  "Floresta": "https://escudosfc.com.br/images/floresta_ce.png",
+  "Guarani": "https://escudosfc.com.br/images/guarani.gif",
+  "Inter de Limeira": "https://escudosfc.com.br/images/intl.png",
+  "Itabaiana": "https://escudosfc.com.br/images/itabaiana.gif",
+  "Ituano": "https://escudosfc.com.br/images/ituano.png",
+  "Maranhão": "https://escudosfc.com.br/images/maranhao.png",
+  "Grêmio Maringá": "https://escudosfc.com.br/images/gremio_maringa.png",
+  "Paysandu": "https://escudosfc.com.br/images/paysandu_pa.png",
+  "Santa Cruz": "https://escudosfc.com.br/images/santacruz.png",
+  "Volta Redonda": "https://escudosfc.com.br/images/volta.png",
+  "Ypiranga": "https://escudosfc.com.br/images/ypiranga_rs.png",
+  "GAS-RR": "https://escudosfc.com.br/images/gas_rr.png",
+  "Manauara": "https://escudosfc.com.br/images/manauara_am.png",
+  "Manaus FC": "https://escudosfc.com.br/images/manaus_fc.png",
+  "Monte Roraima": "https://escudosfc.com.br/images/monteroraima_rr.png",
+  "Nacional AM": "https://escudosfc.com.br/images/nacionalam.png",
+  "São Raimundo-RR": "https://escudosfc.com.br/images/saoraimundo_rr.jpg",
+  "Araguaína": "https://escudosfc.com.br/images/araguaina.jpg",
+  "Galvez": "https://escudosfc.com.br/images/galvez_ac.png",
+  "Guaporé": "https://escudosfc.com.br/images/guapore_ro.png",
+  "Humaitá AC": "https://escudosfc.com.br/images/humaita_ac.png",
+  "Independência": "https://escudosfc.com.br/images/independencia_ac.png",
+  "Porto Velho": "https://escudosfc.com.br/images/porto_velho_ro.png",
+  "Aparecidense": "https://escudosfc.com.br/images/aparecidense_go.png",
+  "Brasiliense": "https://escudosfc.com.br/images/brasiliense.png",
+  "Gama": "https://escudosfc.com.br/images/gama.png",
+  "Inhumas": "https://escudosfc.com.br/images/inhumas_ec.jpg",
+  "Uverdense-MT": "https://escudosfc.com.br/images/uverdense_mt.png",
+  "Primavera": "https://escudosfc.com.br/images/primavera_ac_mt.jpg",
+  "Capital-DF": "https://escudosfc.com.br/images/capital_df.png",
+  "Ceilândia": "https://escudosfc.com.br/images/ceilandia_df.jpg",
+  "Boca Juniors": "https://escudosfc.com.br/images/bocc.png",
+  "Central Córdoba (SdE)": "https://escudosfc.com.br/images/central_cord_santiago_arg.png",
+  "Defensa y Justicia": "https://escudosfc.com.br/images/defensayjusticia.png",
+  "Deportivo Riestra": "https://escudosfc.com.br/images/deportivo_riestra_arg.png",
+  "Estudiantes": "https://escudosfc.com.br/images/estudic.png",
+  "Gimnasia Mendoza": "https://escudosfc.com.br/images/gimnasia_mendoza.png",
+  "Independiente": "https://escudosfc.com.br/images/indepc.png",
+  "Instituto": "https://escudosfc.com.br/images/instituto.png",
+  "Lanús": "https://escudosfc.com.br/images/lanusc.png",
+  "Newell's": "https://escudosfc.com.br/images/newelsc.png",
+  "Platense": "https://escudosfc.com.br/images/platensc.png",
+  "San Lorenzo": "https://escudosfc.com.br/images/san_loc.png",
+  "Talleres": "https://escudosfc.com.br/images/talleres.png",
+  "Unión Santa Fe": "https://escudosfc.com.br/images/union_santa_fe.png",
+  "Vélez": "https://escudosfc.com.br/images/velez.png",
+  "Atalanta": "https://escudosfc.com.br/images/atalanta.png",
+  "Bologna": "https://escudosfc.com.br/images/bologna.gif",
+  "Cagliari": "https://escudosfc.com.br/images/cagliari.png",
+  "Como": "https://escudosfc.com.br/images/como.png",
+  "Fiorentina": "https://escudosfc.com.br/images/fiore.png",
+  "Frosinone": "https://escudosfc.com.br/images/frosinone.png",
+  "Genoa": "https://escudosfc.com.br/images/genoa.png",
+  "Inter": "https://escudosfc.com.br/images/intermilao.png",
+  "Juventus": "https://escudosfc.com.br/images/juventus_new.png",
+  "Lazio": "https://escudosfc.com.br/images/lazio.png",
+  "Lecce": "https://escudosfc.com.br/images/lecce.gif",
+  "Milan": "https://escudosfc.com.br/images/milan.png",
+  "Monza": "https://escudosfc.com.br/images/monza.png",
+  "Napoli": "https://escudosfc.com.br/images/napoli.png",
+  "Parma": "https://escudosfc.com.br/images/parma.png",
+  "Roma": "https://escudosfc.com.br/images/ita_roma.png",
+  "Sassuolo": "https://escudosfc.com.br/images/sassuolo_ita.gif",
+  "Torino": "https://escudosfc.com.br/images/torino.png",
+  "Udinese": "https://escudosfc.com.br/images/udinese.png",
+  "Venezia": "https://escudosfc.com.br/images/venezia.png",
+  "ADO Den Haag": "https://escudosfc.com.br/images/denhaag.gif",
+  "Ajax": "https://escudosfc.com.br/images/ajax.png",
+  "AZ Alkmaar": "https://escudosfc.com.br/images/az.jpg",
+  "Cambuur": "https://escudosfc.com.br/images/cambuurl.jpg",
+  "Excelsior": "https://escudosfc.com.br/images/excelsior_hol.png",
+  "Feyenoord": "https://escudosfc.com.br/images/feyer.png",
+  "Fortuna Sittard": "https://escudosfc.com.br/images/sittard.png",
+  "Go Ahead Eagles": "https://escudosfc.com.br/images/go_ahead_eagles.gif",
+  "Groningen": "https://escudosfc.com.br/images/groningen.png",
+  "Heerenveen": "https://escudosfc.com.br/images/heerenveen.png",
+  "NEC Nijmegen": "https://escudosfc.com.br/images/nec.gif",
+  "PEC Zwolle": "https://escudosfc.com.br/images/zwolle_hol.jpg",
+  "PSV": "https://escudosfc.com.br/images/psv.png",
+  "Sparta Rotterdam": "https://escudosfc.com.br/images/sparta.jpg",
+  "Telstar": "https://escudosfc.com.br/images/telstar_hol.gif",
+  "Twente": "https://escudosfc.com.br/images/twente.gif",
+  "Utrecht": "https://escudosfc.com.br/images/utrecht.png",
+  "Willem II": "https://escudosfc.com.br/images/willemii.png",
 };
 
 /* ---------- COUNTRIES ---------- */
@@ -421,10 +845,11 @@ const LEAGUES={
  BRA:{
   d1:{name:"Brasileirão Série A",teams:[["Flamengo",85],["Palmeiras",85],["Botafogo",82],["São Paulo",80],["Atlético-MG",80],["Cruzeiro",79],["Internacional",79],["Fluminense",79],["Corinthians",79],["Grêmio",78],["Bahia",77],["Santos",77],["Fortaleza",77],["Bragantino",76],["Vasco",76],["Vitória",73],["Ceará",72],["Juventude",71],["Mirassol",71],["Sport",71]]},
   d2:{name:"Brasileirão Série B",teams:[["Goiás",69],["Coritiba",69],["América-MG",68],["Novorizontino",67],["Guarani",65],["Ponte Preta",65],["Chapecoense",65],["Avaí",65],["CRB",64],["Vila Nova",63],["Operário-PR",63],["Paysandu",63],["Botafogo-SP",62],["Amazonas",61],["Criciúma",66]]},
-  d3:{name:"Brasileirão Série C",teams:[["Remo",59],["ABC",57],["Londrina",57],["Náutico",57],["Figueirense",56],["Ferroviária",55],["São Raimundo-RR",55],["Ituano",55],["Brusque",54],["São Bernardo",54],["CSA",54],["Volta Redonda",53],["Ypiranga",53],["Tombense",53],["Confiança",52],["Botafogo-PB",51]]}
+  d3:{name:"Brasileirão Série C",teams:[["Remo",59],["ABC",57],["Londrina",57],["Náutico",57],["Figueirense",56],["Santa Cruz",56],["Ferroviária",55],["São Raimundo-RR",55],["Ituano",55],["Brusque",54],["São Bernardo",54],["CSA",54],["Grêmio Maringá",54],["Volta Redonda",53],["Ypiranga",53],["Tombense",53],["Inter de Limeira",53],["Confiança",52],["Botafogo-PB",51],["Barra SC",52],["Floresta",53],["Itabaiana",51],["Maranhão",52]]},
+  d4:{name:"Brasileirão Série D",teams:[["Gama",50],["Real Brasília",49],["Monte Roraima",47],["Nacional AM",50],["Manauara",48],["Manaus FC",47],["Rio Negro AM",47],["Trem AP",45],["Galvez",46],["Humaitá AC",45],["Princesa do Solimões",46],["Caxias",51],["São José RS",50],["Juventus SC",47],["Aparecidense",50],["Brasiliense",48],["Anápolis",46],["GAS-RR",45],["Araguaína",46],["Guaporé",45],["Independência",45],["Porto Velho",46],["Inhumas",46],["Uverdense-MT",47],["Primavera",46],["Capital-DF",47],["Ceilândia",48]]}
  },
  ARG:{
-  d1:{name:"Liga Profesional Argentina",teams:[["River Plate",81],["Boca Juniors",80],["Racing",77],["Estudiantes",75],["Vélez",75],["Independiente",74],["Talleres",74],["San Lorenzo",73],["Rosario Central",73],["Newell's",72],["Lanús",72],["Argentinos Jrs",72],["Huracán",71],["Defensa y Justicia",71],["Belgrano",70],["Instituto",69],["Gimnasia LP",70],["Banfield",69]]},
+  d1:{name:"Liga Profesional Argentina",teams:[["River Plate",81],["Boca Juniors",80],["Racing",77],["Estudiantes",75],["Vélez",75],["Independiente",74],["Talleres",74],["San Lorenzo",73],["Rosario Central",73],["Newell's",72],["Lanús",72],["Argentinos Jrs",72],["Huracán",71],["Defensa y Justicia",71],["Platense",71],["Belgrano",70],["Central Córdoba (SdE)",70],["Unión Santa Fe",70],["Instituto",69],["Gimnasia Mendoza",69],["Gimnasia LP",70],["Banfield",69],["Deportivo Riestra",68]]},
   d2:{name:"Primera Nacional",teams:[["Colón",64],["San Martín SJ",62],["Chacarita",60],["Almirante Brown",59],["Ferro",60],["Temperley",59]]}
  },
  ENG:{
@@ -437,8 +862,8 @@ const LEAGUES={
   d2:{name:"LaLiga Hypermotion",teams:[["Levante",65],["Elche",65],["Almería",65],["Racing Santander",64],["Real Oviedo",63],["Sporting Gijón",63],["Deportivo",63],["Málaga",62],["Zaragoza",61]]}
  },
  ITA:{
-  d1:{name:"Serie A",teams:[["Inter",87],["Napoli",84],["Juventus",83],["Atalanta",83],["Milan",82],["Roma",79],["Lazio",78],["Fiorentina",76],["Bologna",76],["Como",73],["Torino",73],["Udinese",71],["Genoa",71],["Parma",70],["Cagliari",69],["Verona",69],["Lecce",69],["Empoli",68]]},
-  d2:{name:"Serie B",teams:[["Sampdoria",65],["Palermo",65],["Cremonese",65],["Pisa",64],["Bari",63],["Spezia",63],["Cesena",62],["Frosinone",62]]}
+  d1:{name:"Serie A",teams:[["Inter",87],["Napoli",84],["Juventus",83],["Atalanta",83],["Milan",82],["Roma",79],["Lazio",78],["Fiorentina",76],["Bologna",76],["Como",73],["Torino",73],["Udinese",71],["Genoa",71],["Parma",70],["Cagliari",69],["Lecce",69],["Sassuolo",68],["Frosinone",66],["Monza",65],["Venezia",64]]},
+  d2:{name:"Serie B",teams:[["Sampdoria",65],["Palermo",65],["Cremonese",65],["Pisa",64],["Bari",63],["Spezia",63],["Cesena",62],["Verona",67],["Empoli",66]]}
  },
  GER:{
   d1:{name:"Bundesliga",teams:[["Bayern",88],["Leverkusen",84],["Dortmund",82],["RB Leipzig",82],["Stuttgart",77],["Eintracht Frankfurt",77],["Freiburg",74],["Gladbach",73],["Wolfsburg",73],["Mainz",72],["Werder Bremen",72],["Union Berlin",72],["Hoffenheim",72],["Augsburg",71],["St. Pauli",69],["Bochum",67]]},
@@ -453,8 +878,8 @@ const LEAGUES={
   d2:{name:"Liga Portugal 2",teams:[["Chaves",61],["Nacional",62],["Tondela",61],["Penafiel",59],["Mafra",57]]}
  },
  NED:{
-  d1:{name:"Eredivisie",teams:[["PSV",80],["Feyenoord",79],["Ajax",78],["AZ Alkmaar",75],["Twente",74],["Utrecht",71],["NEC Nijmegen",69],["Sparta Rotterdam",67],["Go Ahead Eagles",67],["Heerenveen",67],["Groningen",66],["Fortuna Sittard",65]]},
-  d2:{name:"Eerste Divisie",teams:[["Willem II",62],["Volendam",61],["Roda JC",60],["ADO Den Haag",59]]}
+  d1:{name:"Eredivisie",teams:[["PSV",80],["Feyenoord",79],["Ajax",78],["AZ Alkmaar",75],["Twente",74],["Utrecht",71],["NEC Nijmegen",69],["Sparta Rotterdam",67],["Go Ahead Eagles",67],["Heerenveen",67],["Groningen",66],["Fortuna Sittard",65],["Willem II",64],["ADO Den Haag",63],["PEC Zwolle",64],["Excelsior",62],["Cambuur",62],["Telstar",60]]},
+  d2:{name:"Eerste Divisie",teams:[["Volendam",61],["Roda JC",60]]}
  },
  KSA:{
   d1:{name:"Saudi Pro League",teams:[["Al-Hilal",82],["Al-Nassr",80],["Al-Ittihad",78],["Al-Ahli",77],["Al-Shabab",71],["Al-Ettifaq",70],["Al-Taawoun",68],["Al-Fateh",67],["Al-Fayha",66],["Al-Riyadh",65],["Damac",64],["Al-Khaleej",64]]},
@@ -670,14 +1095,24 @@ function getLeague(cid,div){const L=LEAGUES[cid];if(!L)return null;if(L[div])ret
 /* ============================================================
    1) CREATION
    ============================================================ */
+let GAME_MODE="quick";
 function initCreate(){
+ $("mode-quick").onclick=()=>{GAME_MODE="quick";showScreen("scr-create");$("in-age").min=30;$("in-age").max=55;$("in-age").value=38;};
+ $("mode-career").onclick=()=>{GAME_MODE="career";showScreen("scr-create");$("in-age").min=24;$("in-age").max=45;$("in-age").value=32;};
  $("in-country").innerHTML=COUNTRIES.map(c=>`<option value="${c.id}">${c.flag}  ${c.name}</option>`).join("");
+ $("btn-ret-new").onclick=()=>location.reload();
+ $("btn-c-restart").onclick=()=>{if(confirm("Reiniciar a carreira do zero?"))location.reload();};
  $("btn-start").onclick=()=>{
    const nm=$("in-name").value.trim();
    if(!nm){toast("Digite seu nome");$("in-name").focus();return;}
    S.name=nm;S.country=$("in-country").value;
-   S.age=clamp(parseInt($("in-age").value)||38,30,55);S.startAge=S.age;
-   S.retireAt=rint(25,30);
+   if(GAME_MODE==="career"){
+     S.age=clamp(parseInt($("in-age").value)||32,24,45);S.startAge=S.age;
+     S.retireAt=rint(25,30);
+   }else{
+     S.age=clamp(parseInt($("in-age").value)||38,30,55);S.startAge=S.age;
+     S.retireAt=rint(25,30);
+   }
    startSteal();
  };
 }
@@ -688,6 +1123,11 @@ function initCreate(){
 function startSteal(){
  S.coaches=[...COACH_POOL].sort(()=>Math.random()-.5).slice(0,7);
  S.stealIdx=0;S.filled={};S.attrs={L:0,T:0,M:0,R:0,F:0,D:0,W:0};
+ if(GAME_MODE==="career"){
+   $("steal-hint-text").innerHTML="Toque no atributo que quer <b>roubar</b>. A média das 6 notas vira o seu <b>potencial</b> — o teto que você pode alcançar crescendo aos poucos, com jogo e treino.";
+ }else{
+   $("steal-hint-text").innerHTML="Toque no atributo que quer <b>roubar</b>. Cada técnico te dá <b>uma</b> habilidade. A média das 6 notas (Trab. em equipe conta só um pouco) vira seu overall máximo.";
+ }
  showScreen("scr-steal");renderSteal();
 }
 function renderSteal(){
@@ -726,6 +1166,13 @@ function computeOverall(){
  const nums=["L","T","M","R","F","D"].map(k=>S.attrs[k]);
  const mean=nums.reduce((a,b)=>a+b,0)/nums.length;
  const twBonus=(S.attrs.W-3)*1.2; // trabalho em equipe conta só um pouco
+ if(GAME_MODE==="career"){
+   CS.potentialCap=clamp(Math.round(mean+twBonus),50,99);
+   CS.overall=rint(55,58);
+   CS.attrs={...S.attrs};
+   startCareerMode();
+   return;
+ }
  S.overallCap=clamp(Math.round(mean+twBonus),35,99);   // MÁXIMO que o técnico vai atingir
  S.overall=clamp(S.overallCap-rint(1,4),35,S.overallCap); // começa um pouco abaixo, sobe até o teto
  S.rep=clamp(S.overall-2,30,99);
@@ -1458,6 +1905,7 @@ function advanceToNextSeason(){S.season++;updateYouCard();startSeason();}
 /* ---------- MERCADO DE JOGADORES (automático, realista) ---------- */
 function genName(){return pick(FIRST_NAMES)+" "+pick(LAST_NAMES);}
 function clubRatingOf(name){const c=clubInfo(name);return c?c.rating:(S.club===name?S.clubRating:70);}
+
 function offseasonMarket(){
  const clubs=Object.keys(PLAYERS);const notable=[];
  clubs.forEach(club=>{
@@ -1472,7 +1920,7 @@ function offseasonMarket(){
  });
  const moves=rint(4,7);
  for(let m=0;m<moves;m++){
-   const src=pick(clubs);const arr=PLAYERS[src];if(!arr.length)continue;
+   const src=pick(clubs);const arr=PLAYERS[src];if(!arr||arr.length<=3)continue;
    const p=pick(arr);
    const dests=clubs.filter(c=>c!==src).map(c=>({c,r:clubRatingOf(c)})).filter(d=>d.r>=p.ov-9&&d.r<=p.ov+6);
    if(!dests.length)continue;
@@ -1596,6 +2044,1193 @@ function showRetirement(){
  feedItem(`🏁 Após ${S.seasonsPlayed} temporadas, você anunciou a <b>aposentadoria</b>.`,"gold");
 }
 
+
+/* ============================================================
+   MODO CARREIRA — ENGINE
+   ============================================================ */
+const POSITIONS=["GOL","ZAG","LD","LE","VOL","MC","PE","PD","ATA"];
+const POS_LABEL={GOL:"Goleiro",ZAG:"Zagueiro",LD:"Lateral-direito",LE:"Lateral-esquerdo",VOL:"Volante",MC:"Meio-campo",PE:"Ponta-esquerda",PD:"Ponta-direita",ATA:"Atacante"};
+const ROLE_TAGS={
+ GOL:["Goleiro líbero","Goleiro linha"],ZAG:["Zagueiro construtor","Zagueiro raça"],
+ LD:["Lateral apoiador","Lateral defensivo"],LE:["Lateral apoiador","Lateral defensivo"],
+ VOL:["Organizador recuado","Volante box-to-box"],MC:["Meia equilibrado","Meia criativo"],
+ PE:["Armador aberto","Ponta de velocidade"],PD:["Armador aberto","Ponta de velocidade"],
+ ATA:["Homem de referência","Finalizador"]
+};
+const SQUAD_TEMPLATE=["GOL","GOL","ZAG","ZAG","ZAG","ZAG","LD","LD","LE","LE","VOL","VOL","MC","MC","MC","PE","PD","ATA","ATA","ATA"];
+const CAREER_FORMATIONS={
+ "4-3-3":["GOL","LD","ZAG","ZAG","LE","VOL","MC","MC","PE","ATA","PD"],
+ "4-4-2":["GOL","LD","ZAG","ZAG","LE","PD","MC","MC","PE","ATA","ATA"],
+ "3-5-2":["GOL","ZAG","ZAG","ZAG","LD","VOL","MC","MC","LE","ATA","ATA"],
+ "4-2-3-1":["GOL","LD","ZAG","ZAG","LE","VOL","VOL","PE","MC","PD","ATA"]
+};
+const FORMATION_SLOTS={
+ "4-3-3":[["GOL",50,92],["LD",78,68],["ZAG",62,72],["ZAG",38,72],["LE",22,68],["VOL",50,52],["MC",30,38],["PE",78,20],["ATA",50,10],["PD",22,20],["MC",70,38]],
+ "4-4-2":[["GOL",50,92],["LD",80,68],["ZAG",62,72],["ZAG",38,72],["LE",20,68],["PD",80,38],["MC",60,44],["MC",40,44],["PE",20,38],["ATA",40,12],["ATA",60,12]],
+ "3-5-2":[["GOL",50,92],["ZAG",70,72],["ZAG",50,76],["ZAG",30,72],["LD",88,50],["VOL",40,48],["MC",60,38],["MC",40,30],["LE",12,50],["ATA",40,12],["ATA",60,12]],
+ "4-2-3-1":[["GOL",50,92],["LD",80,68],["ZAG",62,72],["ZAG",38,72],["LE",20,68],["VOL",38,50],["VOL",62,50],["PE",78,28],["MC",50,24],["PD",22,28],["ATA",50,10]]
+};
+function uid(){return Math.random().toString(36).slice(2,10);}
+function genCareerPlayer(pos,ovLo,ovHi,young){
+ const ov=clamp(rint(ovLo,ovHi),38,90);
+ const age=young?rint(16,19):rint(18,35);
+ const potGap=age<=21?rint(6,22):(age<=25?rint(2,10):rint(0,3));
+ return{id:uid(),n:genName(),pos,role:pick(ROLE_TAGS[pos]),ov,potential:clamp(ov+potGap,ov,94),age,
+   fitness:rint(78,100),morale:rint(55,80),injured:false,injuryWeeks:0,ovStart:ov,wage:Math.round(clamp(Math.pow(1.14,ov-55)*900,600,400000))};
+}
+function genCareerSquad(clubRating){
+ return SQUAD_TEMPLATE.map(pos=>genCareerPlayer(pos,clubRating-9,clubRating+7,false));
+}
+/* Elenco de scouting: usa jogadores REAIS quando o clube tem dados (mesma base do Modo Rápido),
+   completando as posições que faltam com jogadores gerados. */
+/* Posição real de cada jogador (não é mais um "chute" por rotação) */
+const REAL_PLAYER_POS={
+ "Mbappé":"ATA","Vinícius Jr":"PE","Bellingham":"MC","Valverde":"MC","Rodrygo":"PD","Courtois":"GOL","Militão":"ZAG","Endrick":"ATA","Rüdiger":"ZAG","Camavinga":"VOL",
+ "Lamine Yamal":"PD","Raphinha":"PE","Pedri":"MC","Lewandowski":"ATA","De Jong":"MC","Ter Stegen":"GOL","Cubarsí":"ZAG","Balde":"LE","Olmo":"MC",
+ "Haaland":"ATA","Rodri":"VOL","Foden":"MC","Bernardo Silva":"MC","Rúben Dias":"ZAG","Gvardiol":"ZAG","Savinho":"PD","Ederson":"GOL",
+ "Saka":"PD","Ødegaard":"MC","Rice":"VOL","Saliba":"ZAG","Gabriel Magalhães":"ZAG","Havertz":"ATA","Martinelli":"PE","Raya":"GOL",
+ "Salah":"PD","Van Dijk":"ZAG","Wirtz":"MC","Mac Allister":"MC","Szoboszlai":"MC","Alisson":"GOL","Konaté":"ZAG",
+ "Palmer":"MC","Caicedo":"VOL","Enzo Fernández":"MC","Nkunku":"ATA","Cucurella":"LE","Estêvão":"PD","Neto":"GOL",
+ "Bruno Fernandes":"MC","Martínez":"ZAG","Onana":"GOL","Garnacho":"PE","Mainoo":"MC","Højlund":"ATA",
+ "Son":"PE","Romero":"ZAG","Maddison":"MC","Van de Ven":"ZAG","Vicario":"GOL","Bissouma":"VOL",
+ "Isak":"ATA","Bruno Guimarães":"VOL","Tonali":"MC","Gordon":"PE","Trippier":"LD",
+ "Kane":"ATA","Musiala":"MC","Kimmich":"VOL","Olise":"PD","Sané":"PE","Davies":"LE","Upamecano":"ZAG","Neuer":"GOL",
+ "Frimpong":"LD","Grimaldo":"LE","Xhaka":"VOL","Boniface":"ATA","Hincapié":"ZAG",
+ "Guirassy":"ATA","Brandt":"MC","Schlotterbeck":"ZAG","Adeyemi":"PE","Gittens":"PD",
+ "Dembélé":"ATA","Kvaratskhelia":"PE","Vitinha":"MC","Hakimi":"LD","Marquinhos":"ZAG","Donnarumma":"GOL","João Neves":"VOL","Barcola":"PD",
+ "Lautaro Martínez":"ATA","Barella":"MC","Thuram":"ATA","Çalhanoğlu":"MC","Bastoni":"ZAG","Dumfries":"LD",
+ "Leão":"PE","Theo Hernández":"LE","Maignan":"GOL","Pulisic":"PD","Reijnders":"MC",
+ "Lukaku":"ATA","McTominay":"MC","Anguissa":"VOL","Di Lorenzo":"LD","Lobotka":"VOL",
+ "Vlahović":"ATA","Bremer":"ZAG","Yıldız":"PE","Koopmeiners":"MC","Di Gregorio":"GOL",
+ "Julián Álvarez":"ATA","Griezmann":"ATA","Oblak":"GOL","Sørloth":"ATA","Koke":"MC",
+ "Lookman":"PE","Retegui":"ATA","De Ketelaere":"MC","Éderson":"VOL",
+ "Mitrović":"ATA","Milinković-Savić":"MC","Rúben Neves":"MC","Koulibaly":"ZAG","Malcom":"PE",
+ "Cristiano Ronaldo":"ATA","Mané":"PE","Brozović":"MC",
+ "Benzema":"ATA","Kanté":"VOL","Fabinho":"VOL",
+ "Osimhen":"ATA","Icardi":"ATA","Mertens":"ATA",
+ "Talisca":"MC","En-Nesyri":"ATA","Tadić":"MC",
+ "Arrascaeta":"MC","De la Cruz":"MC","Pedro":"ATA","Gerson":"MC","Léo Ortiz":"ZAG","Alex Sandro":"LE",
+ "Vitor Roque":"ATA","Raphael Veiga":"MC","Richard Ríos":"VOL","Gustavo Gómez":"ZAG","Weverton":"GOL",
+ "Almada":"MC","Igor Jesus":"ATA","Savarino":"PD","Gregore":"VOL","John":"GOL",
+ "Neymar":"PE","Guilherme":"MC","João Schmidt":"VOL",
+ "Memphis Depay":"ATA","Yuri Alberto":"ATA","Rodrigo Garro":"MC","Hugo Souza":"GOL",
+ "Lucas Moura":"PE","Oscar":"MC","Calleri":"ATA","Rafael":"GOL",
+ "Matheus Pereira":"MC","Gabigol":"ATA","Cássio":"GOL",
+ "Hulk":"PD","Bernard":"PE","Everson":"GOL",
+ "Driussi":"ATA","Colidio":"ATA","Acuña":"LE","Franco Armani":"GOL",
+ "Cavani":"ATA","Merentiel":"ATA","Advíncula":"LD",
+ "Messi":"PD","Alba":"LE","Busquets":"VOL","Suárez":"ATA",
+ "Henry Martín":"ATA","Álvaro Fidalgo":"MC",
+ "Trézéguet":"PE","Wessam Abou Ali":"ATA"
+};
+function buildScoutSquad(clubName,clubRating){
+ const real=PLAYERS[clubName];
+ const squad=[];
+ const remaining=[...SQUAD_TEMPLATE];
+ if(real&&real.length){
+   real.forEach((rp)=>{
+     const pos=REAL_PLAYER_POS[rp.n]||"MC";
+     squad.push({id:uid(),n:rp.n,pos,role:pick(ROLE_TAGS[pos]),ov:rp.ov,
+       potential:clamp(rp.ov+(rp.age<=23?rint(2,8):0),rp.ov,97),age:rp.age,
+       fitness:rint(85,100),morale:rint(60,88),injured:false,injuryWeeks:0,ovStart:rp.ov,
+       wage:Math.round(clamp(Math.pow(1.19,rp.ov-50)*260,600,400000)),isReal:true,_rawRef:rp,_rawClub:clubName});
+     const idx=remaining.indexOf(pos);if(idx>=0)remaining.splice(idx,1);
+   });
+ }
+ remaining.forEach(pos=>squad.push(genCareerPlayer(pos,clubRating-8,clubRating+6,false)));
+ return squad;
+}
+function lerp(v,a,b,va,vb){const t=clamp((v-a)/(b-a),0,1);return va+(vb-va)*t;}
+function careerPlayerValue(p){
+ const ov=p.ov;
+ let base;
+ if(ov<=40)base=45000;
+ else if(ov<=50)base=lerp(ov,40,50,45000,100000);
+ else if(ov<=55)base=lerp(ov,50,55,100000,250000);
+ else if(ov<=65)base=lerp(ov,55,65,250000,1000000);
+ else if(ov<=70)base=lerp(ov,65,70,1000000,5000000);
+ else if(ov<=80)base=lerp(ov,70,80,5000000,30000000);
+ else if(ov<=88)base=lerp(ov,80,88,30000000,80000000);
+ else if(ov<=92)base=lerp(ov,88,92,100000000,150000000);
+ else base=lerp(ov,92,99,150000000,220000000);
+ if(ov>=88&&p.age<=23)base*=1.6; // craques jovens acima de 88 — costuma passar de 200 milhões
+ else if(p.age<=21)base*=1.35;
+ else if(p.age<=25)base*=1.12;
+ else if(p.age>=32)base*=0.45;
+ else if(p.age>=29)base*=0.72;
+ return Math.round(clamp(base,30000,350000000));
+}
+function genYouthPlayers(clubRating,n){
+ const arr=[];const pool=["GOL","ZAG","LD","LE","VOL","MC","PE","PD","ATA"];
+ // garante pelo menos 1 de cada posição
+ pool.forEach(pos=>arr.push(genCareerPlayer(pos,clubRating-16,clubRating+2,true)));
+ // completa o restante aleatoriamente
+ for(let i=arr.length;i<n;i++)arr.push(genCareerPlayer(pick(pool),clubRating-16,clubRating+2,true));
+ return arr;
+}
+
+/* ---------- STATE ---------- */
+const CS={
+ name:"",country:"BRA",age:32,startAge:32,
+ attrs:{},potentialCap:0,overall:0,rep:45,
+ club:null,clubRating:0,clubCountry:"BRA",division:"d4",leagueName:"",
+ squad:[],youth:[],
+ season:2026,seasonsPlayed:0,retireAt:27,
+ budget:0,wageBudget:0,ticketRevenue:0,sponsorRevenue:0,
+ boardConfidence:62,objectives:[],
+ staff:{},trainingIntensity:"Média",trainingFocus:"Tático",
+ formation:"4-3-3",style:"Equilíbrio",lineup:{},bench:[],
+ calendar:[],fixtureIdx:0,standingsByComp:{},
+ messages:[],careerTitles:0,careerGames:0,clubsCoached:[],
+ currentSubview:null,
+ seasonStats:{}
+};
+function csAvgOv(){if(!CS.squad.length)return CS.clubRating;return Math.round(CS.squad.reduce((s,p)=>s+p.ov,0)/CS.squad.length);}
+
+/* ---------- 3 PROPOSALS ---------- */
+const PROJECT_OBJ_POOL=["Valorizar atletas jovens","Conquistar o acesso","Construir uma identidade de jogo reconhecível","Montar uma equipe competitiva","Estabilizar o clube financeiramente","Chegar à semifinal da copa estadual"];
+/* Orçamento por faixa de força do clube — Série D 1-4M, C 4-8M, B 30-50M, A 85-200M, gigantes 200M-1B */
+function budgetForRating(rating){
+ if(rating<=52)return rint(10,40)*100000;
+ if(rating<=60)return rint(40,80)*100000;
+ if(rating<=70)return rint(30,50)*1000000;
+ if(rating<=85)return rint(85,200)*1000000;
+ return rint(200,1000)*1000000;
+}
+function genProposal(){
+ const div=pick(["d4","d4","d3"]);
+ const gl=getLeague("BRA",div);
+ const teams=gl.league.teams.filter(t=>t[1]<=62);
+ const t=pick(teams.length?teams:gl.league.teams);
+ const rating=t[1];
+ const compat=rint(74,93);
+ const quotes=["A direção considera sua liderança ideal para recuperar a confiança do elenco.","O clube busca um treinador com fome de crescer junto com o projeto.","A comissão técnica viu no seu perfil a chance de reconstruir a equipe.","A diretoria quer alguém disposto a valorizar a base e crescer aos poucos."];
+ return{
+   name:t[0],rating,div,leagueName:gl.league.name,
+   city:pick(["São Paulo, São Paulo","Brasília, Distrito Federal","Manaus, Amazonas","Porto Velho, Rondônia","Boa Vista, Roraima","Belém, Pará","Macapá, Amapá","Cuiabá, Mato Grosso"]),
+   founded:rint(1912,1998),
+   compat,quote:pick(quotes),
+   contractYears:rint(1,3),
+   salary:Math.round(rint(18,42)*(rating/50)*1000),
+   budget:budgetForRating(rating),
+   squadStrength:rating,
+   crowdPressure:pick(["Baixa","Média","Alta"]),
+   boardPatience:pick(["Baixa","Média","Alta"]),
+   objectives:[...PROJECT_OBJ_POOL].sort(()=>Math.random()-.5).slice(0,3)
+ };
+}
+function startCareerMode(){
+ CS.name=S.name;CS.country=S.country;CS.age=S.age;CS.startAge=S.startAge;CS.retireAt=S.retireAt;
+ CS.rep=clamp(CS.overall-8,20,60);
+ CS._proposals=[genProposal(),genProposal(),genProposal()];
+ renderCareerProposals();
+}
+function renderCareerProposals(){
+ showScreen("scr-career-proposals");
+ const wrap=$("cprop-list");wrap.innerHTML="";
+ CS._proposals.forEach((p,i)=>{
+   const card=document.createElement("div");card.className="cprop-card";
+   card.innerHTML=`
+     <div class="cprop-top"><span class="cprop-idx">PROPOSTA ${String(i+1).padStart(2,"0")}</span><span class="cprop-match">${p.compat}% compatível</span></div>
+     <div class="cprop-league">${FLAG("BRA")} ${p.leagueName}</div>
+     <div class="cprop-club"><div class="club-badge">${badgeHTML(p.name)}</div><div><div class="cprop-name">${p.name}</div><div class="cprop-loc">${p.city} · Fundado em ${p.founded}</div></div></div>
+     <div class="cprop-quote">💬 ${p.quote}</div>
+     <div class="cprop-stats">
+       <div class="cprop-stat"><div class="cs-l">📅 Contrato</div><div class="cs-v">${p.contractYears} ano${p.contractYears>1?"s":""}</div></div>
+       <div class="cprop-stat"><div class="cs-l">💰 Salário</div><div class="cs-v">R$ ${p.salary.toLocaleString("pt-BR")}</div></div>
+       <div class="cprop-stat"><div class="cs-l">🏦 Orçamento</div><div class="cs-v">R$ ${p.budget.toLocaleString("pt-BR")}</div></div>
+       <div class="cprop-stat"><div class="cs-l">👥 Força do elenco</div><div class="cs-v">${p.squadStrength}</div></div>
+       <div class="cprop-stat"><div class="cs-l">📣 Pressão da torcida</div><div class="cs-v">${p.crowdPressure}</div></div>
+       <div class="cprop-stat"><div class="cs-l">🛡️ Paciência da diretoria</div><div class="cs-v">${p.boardPatience}</div></div>
+     </div>
+     <div class="cprop-obj"><div class="lbl" style="margin-bottom:8px">OBJETIVOS DO PROJETO</div>${p.objectives.map(o=>`<div class="co-row">✅ ${o}</div>`).join("")}</div>
+   `;
+   const btnRow=document.createElement("div");btnRow.className="cprop-btns";
+   const btnReject=document.createElement("button");btnReject.className="btn ghost";btnReject.style.flex="1";btnReject.textContent="Recusar";
+   const btnAccept=document.createElement("button");btnAccept.className="btn";btnAccept.style.flex="2";btnAccept.textContent="Aceitar proposta →";
+   btnAccept.onclick=()=>acceptCareerProposal(p);
+   btnReject.onclick=()=>{card.style.opacity=.35;card.style.pointerEvents="none";};
+   btnRow.appendChild(btnReject);btnRow.appendChild(btnAccept);
+   card.appendChild(btnRow);
+   wrap.appendChild(card);
+ });
+}
+function acceptCareerProposal(p){
+ CS.club=p.name;CS.clubRating=p.rating;CS.division=p.div;CS.leagueName=p.leagueName;
+ CS.budget=p.budget;CS.wageBudget=Math.round(p.budget*0.35);CS.boardConfidence=62;
+ CS.objectives=p.objectives.map(o=>({text:o,done:false}));
+ CS.squad=genCareerSquad(p.rating);
+ CS.youth=genYouthPlayers(p.rating,rint(11,15));
+ CS.clubsCoached=[p.name];CS.season=2026;CS.seasonsPlayed=0;
+ CS.staff={};CS.messages=[];CS.careerTitles=0;CS.careerGames=0;
+ pickBestLineup();
+ buildCareerCalendar();
+ renderCareerMessage(`Bem-vindo ao ${p.name}! A diretoria espera por você.`,"gold");
+ showScreen("scr-career-dash");
+ renderCareerDash();
+}
+
+/* ---------- MENSAGENS / FEED ---------- */
+function renderCareerMessage(text,kind){
+ CS.messages.unshift({text,kind,season:CS.season,id:uid()});
+ if(CS.messages.length>200)CS.messages.pop();
+}
+
+/* ---------- NAV GRID ---------- */
+const CAREER_NAV=[
+ {id:"elenco",ic:"👥",t:"Elenco"},{id:"tatica",ic:"🎯",t:"Tática"},
+ {id:"calendario",ic:"📅",t:"Calendário"},{id:"classificacao",ic:"📊",t:"Classificação"},
+ {id:"mensagens",ic:"✉️",t:"Mensagens"},{id:"financas",ic:"💰",t:"Finanças"},
+ {id:"scouting",ic:"🔭",t:"Scouting"},{id:"mercado",ic:"🤝",t:"Mercado"},
+ {id:"treinamento",ic:"🏋️",t:"Treinamento"},{id:"evolucao",ic:"📈",t:"Evolução"},
+ {id:"base",ic:"🌱",t:"Base"},{id:"comissao",ic:"💼",t:"Comissão"},
+ {id:"dm",ic:"🩺",t:"DM"},{id:"cargo",ic:"🛡️",t:"Meu cargo"}
+];
+function renderCareerDash(){
+ $("cdash-season").textContent=seasonStr(CS.season)+" · "+CS.club;
+ $("cv-fit").textContent=Math.round(squadAvgFitness())+"%";$("cv-fit-bar").style.width=Math.round(squadAvgFitness())+"%";
+ $("cv-mor").textContent=Math.round(squadAvgMorale())+"%";$("cv-mor-bar").style.width=Math.round(squadAvgMorale())+"%";
+ const rhythm=clamp(50+CS.careerGames*2,50,95);
+ $("cv-rit").textContent=rhythm+"%";$("cv-rit-bar").style.width=rhythm+"%";
+ const injured=CS.squad.filter(p=>p.injured);
+ $("cv-injuries").textContent=injured.length?injured.map(p=>p.n+" ("+p.injuryWeeks+" sem.)").join(", "):"Nenhum desfalque registrado.";
+ renderNextFixtureCards();
+ renderAgenda();
+ const grid=$("cnav-grid");grid.innerHTML="";
+ CAREER_NAV.forEach(item=>{
+   const el=document.createElement("div");el.className="cnav-btn";
+   el.innerHTML=`<div class="cnb-ic">${item.ic}</div><div class="cnb-t">${item.t}</div>`;
+   el.onclick=()=>openSubview(item.id);
+   grid.appendChild(el);
+ });
+ $("lnk-c-elenco").onclick=()=>openSubview("elenco");
+ $("lnk-c-calendario").onclick=()=>openSubview("calendario");
+ updateFutureRowState();
+}
+function squadAvgFitness(){if(!CS.squad.length)return 90;return CS.squad.reduce((s,p)=>s+p.fitness,0)/CS.squad.length;}
+function squadAvgMorale(){if(!CS.squad.length)return 65;return CS.squad.reduce((s,p)=>s+p.morale,0)/CS.squad.length;}
+function nextFixture(){return CS.calendar[CS.fixtureIdx]||null;}
+function renderNextFixtureCards(){
+ const fx=nextFixture();
+ if(!fx){$("cnb-title").textContent="Temporada concluída";$("cnc-comp").textContent="—";$("btn-c-advance").disabled=true;$("btn-c-prepare").disabled=true;return;}
+ $("btn-c-advance").disabled=false;$("btn-c-prepare").disabled=false;
+ $("cnb-title").textContent=`${fx.opponent} · ${fx.dateLabel}`;
+ $("cnc-comp").textContent=fx.comp+(fx.round?" · "+fx.round:"");
+ const home=fx.home;
+ setBadge($("cnc-home-badge"),home?CS.club:fx.opponent);$("cnc-home-name").textContent=home?CS.club:fx.opponent;
+ setBadge($("cnc-away-badge"),home?fx.opponent:CS.club);$("cnc-away-name").textContent=home?fx.opponent:CS.club;
+ $("cnc-date").textContent=fx.dateLabel+" · "+fx.time;
+ $("btn-c-advance").onclick=()=>advanceToNextFixture();
+ $("btn-c-prepare").onclick=()=>openLineupPrep();
+}
+function renderAgenda(){
+ const list=$("cagenda-list");list.innerHTML="";
+ const upcoming=CS.calendar.slice(CS.fixtureIdx,CS.fixtureIdx+5);
+ if(!upcoming.length){list.innerHTML='<div style="color:var(--mut);font-size:13px">Sem mais jogos na temporada.</div>';return;}
+ upcoming.forEach(fx=>{
+   const row=document.createElement("div");row.className="cagenda-row";
+   row.innerHTML=`<div class="ar-date">${fx.dateLabel}</div><div class="club-badge">${badgeHTML(fx.opponent)}</div><div>${fx.opponent}</div><div style="color:var(--mut);font-size:11px">${fx.home?"Casa":"Fora"}</div><div class="ar-comp">${fx.comp}</div>`;
+   list.appendChild(row);
+ });
+}
+function updateFutureRowState(){
+ const seasonOver=!nextFixture();
+ const endRow=$("cfut-endseason");
+ endRow.classList.toggle("disabled",!seasonOver);
+ endRow.onclick=seasonOver?()=>{}:null;
+ $("cfut-endcareer").onclick=()=>{if(confirm("Simular o resto da carreira até a aposentadoria?"))skipCareerToEnd();};
+ $("cfut-retire").onclick=()=>{if(confirm("Encerrar a carreira agora e ir para o Hall da Fama?"))showCareerRetirement();};
+}
+
+/* ---------- SUBVIEW SHELL ---------- */
+function openSubview(id){
+ CS.currentSubview=id;
+ $("cdash-home").style.display="none";$("cdash-subview").style.display="block";
+ $("btn-csub-back").onclick=closeSubview;
+ const renderers={
+   elenco:renderSubElenco,tatica:renderSubTatica,calendario:renderSubCalendario,
+   classificacao:renderSubClassificacao,mensagens:renderSubMensagens,financas:renderSubFinancas,
+   scouting:renderSubScouting,mercado:renderSubMercado,treinamento:renderSubTreinamento,
+   evolucao:renderSubEvolucao,base:renderSubBase,comissao:renderSubComissao,
+   dm:renderSubDM,cargo:renderSubCargo
+ };
+ const titles={elenco:"Elenco",tatica:"Tática",calendario:"Calendário",classificacao:"Classificação",mensagens:"Mensagens",financas:"Finanças",scouting:"Scouting",mercado:"Mercado",treinamento:"Treinamento",evolucao:"Evolução",base:"Base",comissao:"Comissão Técnica",dm:"Departamento Médico",cargo:"Meu Cargo"};
+ $("csub-title").textContent=titles[id]||id;
+ const fn=renderers[id];
+ if(fn)fn();else $("csub-body").innerHTML="";
+}
+function closeSubview(){
+ $("cdash-subview").style.display="none";$("cdash-home").style.display="block";
+ CS.currentSubview=null;
+ renderCareerDash();
+}
+
+/* ---------- PITCH / LINEUP ---------- */
+function pickBestLineup(){
+ const slots=FORMATION_SLOTS[CS.formation];
+ const used=new Set();
+ const lineup=slots.map((slot,idx)=>{
+   const[pos,x,y]=slot;
+   let cands=CS.squad.filter(p=>!used.has(p.id)&&p.pos===pos&&!p.injured).sort((a,b)=>b.ov-a.ov);
+   if(!cands.length)cands=CS.squad.filter(p=>!used.has(p.id)&&!p.injured).sort((a,b)=>b.ov-a.ov);
+   const chosen=cands[0];if(chosen)used.add(chosen.id);
+   return{slotIdx:idx,pos,x,y,playerId:chosen?chosen.id:null};
+ });
+ CS.lineup=lineup;
+ CS.bench=CS.squad.filter(p=>!used.has(p.id)).map(p=>p.id);
+}
+function renderPitch(container,editable){
+ container.innerHTML="";
+ CS.lineup.forEach(slot=>{
+   const p=CS.squad.find(x=>x.id===slot.playerId);
+   const el=document.createElement("div");el.className="cpitch-player"+(p&&p.injured?" injured":"");
+   el.style.left=slot.x+"%";el.style.top=slot.y+"%";
+   el.innerHTML=`<div class="pp-badge">${p?p.pos:"?"}</div><div class="pp-name">${p?p.n.split(" ")[0]:"—"}</div><div class="pp-ov">${p?p.ov:""}</div>`;
+   if(editable&&p)el.onclick=()=>openSwapPicker(slot.slotIdx);
+   container.appendChild(el);
+ });
+}
+let _swapSlotIdx=null;
+function openSwapPicker(slotIdx){
+ _swapSlotIdx=slotIdx;
+ const slot=CS.lineup[slotIdx];const outP=CS.squad.find(p=>p.id===slot.playerId);
+ $("csw-out-name").textContent=outP?`${outP.n} (${outP.pos} · ${outP.ov})`:"—";
+ const list=$("csw-list");list.innerHTML="";
+ const benchPlayers=CS.bench.map(id=>CS.squad.find(p=>p.id===id)).filter(Boolean)
+   .sort((a,b)=>(b.pos===slot.pos?1:0)-(a.pos===slot.pos?1:0)||b.ov-a.ov);
+ if(!benchPlayers.length)list.innerHTML='<div style="color:var(--mut);font-size:13px">Sem reservas disponíveis.</div>';
+ benchPlayers.forEach(p=>{
+   const chip=document.createElement("div");chip.className="cbench-chip";
+   chip.innerHTML=`<div class="bc-pos">${p.pos}</div><div class="bc-name">${p.n}${p.injured?" 🩹":""}</div><div class="bc-ov">${p.ov}</div>`;
+   if(!p.injured)chip.onclick=()=>doSwap(slotIdx,p.id);else chip.style.opacity=.4;
+   list.appendChild(chip);
+ });
+ $("btn-csw-cancel").onclick=()=>$("ov-c-swap").classList.remove("show");
+ $("ov-c-swap").classList.add("show");
+}
+function doSwap(slotIdx,newPlayerId){
+ const slot=CS.lineup[slotIdx];const oldId=slot.playerId;
+ slot.playerId=newPlayerId;
+ CS.bench=CS.bench.filter(id=>id!==newPlayerId);
+ if(oldId)CS.bench.push(oldId);
+ $("ov-c-swap").classList.remove("show");
+ if($("ov-c-lineup").classList.contains("show"))renderPitch($("cl-pitch"),true);
+ if(CS.currentSubview==="tatica")renderSubTatica();
+}
+
+/* ---------- SUBVIEW: ELENCO ---------- */
+function renderSubElenco(){
+ let filterPos="TODOS";
+ function draw(){
+   const body=$("csub-body");
+   const positions=["TODOS",...POSITIONS];
+   body.innerHTML='<div class="cfilter-row" id="elenco-filters"></div><div class="ccard" style="padding:0"><div id="elenco-rows"></div></div>';
+   const fWrap=$("elenco-filters");fWrap.innerHTML="";
+   positions.forEach(p=>{
+     const f=document.createElement("div");f.className="cfilter"+(p===filterPos?" sel":"");f.textContent=p;
+     f.onclick=()=>{filterPos=p;draw();};
+     fWrap.appendChild(f);
+   });
+   const list=[...CS.squad].filter(p=>filterPos==="TODOS"||p.pos===filterPos).sort((a,b)=>b.ov-a.ov);
+   const rows=$("elenco-rows");rows.innerHTML="";
+   list.forEach(p=>{
+   const row=document.createElement("div");row.className="cplayer-row";row.style.cursor="pointer";
+   row.innerHTML=`<div class="cp-pos">${p.pos}</div><div><div class="cp-name">${p.n}${p.injured?" 🩹":""}${p.onLoan?' <span style="color:var(--mut);font-size:10px">(empréstimo)</span>':""}</div><div class="cp-sub">${p.age} anos · ${p.role}</div></div><div class="cp-ov mono-num">${p.ov}</div><div class="cp-sub" style="text-align:center">POT ${p.potential}</div><div class="cp-sub" style="text-align:right">${Math.round(p.fitness)}% físico</div>`;
+   row.onclick=()=>openMyPlayerAction(p);
+   rows.appendChild(row);
+ });
+ }
+ draw();
+}
+
+/* ---------- SEU JOGADOR: TREINO / RENOVAR / DEMITIR ---------- */
+function openMyPlayerAction(p){
+ $("mp-name").textContent=`${p.n} (${p.pos} · ${p.ov})`;
+ $("mp-sub").textContent=`${p.age} anos · Moral ${Math.round(p.morale)}% · Físico ${Math.round(p.fitness)}%${p.onLoan?" · Emprestado pelo "+p.loanFrom:""}`;
+ $("mp-result").textContent="";
+ $("mp-step-menu").style.display="block";$("mp-step-train").style.display="none";
+ $("mp-train").onclick=()=>showMpTrainConfig(p);
+ $("mp-renew").onclick=()=>{
+   if(p.onLoan){$("mp-result").innerHTML='<span class="red">Não é possível renovar um jogador emprestado.</span>';return;}
+   const newWage=Math.round(p.wage*rnd(1.08,1.22));
+   p.wage=newWage;p.morale=clamp(p.morale+12,0,100);
+   $("mp-result").innerHTML=`<span class="green">Contrato renovado! Novo salário: ${fmtCareerMoney(newWage)}/mês.</span>`;
+   renderCareerMessage(`✍️ ${CS.club} renovou o contrato de <b>${p.n}</b>.`,"gold");
+ };
+ $("mp-release").onclick=()=>{
+   if(!confirm(`Tem certeza que quer demitir ${p.n}?`))return;
+   const idx=CS.squad.indexOf(p);if(idx>=0)CS.squad.splice(idx,1);
+   CS.bench=CS.bench.filter(id=>id!==p.id);
+   CS.lineup.forEach(slot=>{if(slot.playerId===p.id)slot.playerId=null;});
+   renderCareerMessage(`🚪 ${CS.club} dispensou <b>${p.n}</b>.`,"");
+   $("ov-myplayer").classList.remove("show");
+   toast(p.n+" foi dispensado.");
+   if(CS.currentSubview==="elenco")renderSubElenco();
+ };
+ $("btn-mp-close").onclick=()=>{$("ov-myplayer").classList.remove("show");};
+ $("ov-myplayer").classList.add("show");
+}
+function showMpTrainConfig(p){
+ $("mp-step-menu").style.display="none";$("mp-step-train").style.display="block";
+ if(!p.trainIntensity)p.trainIntensity="Média";
+ if(!p.trainFocus)p.trainFocus="Tático";
+ const intensities=["Baixa","Média","Alta"];
+ const focuses=["Físico","Tático","Técnico","Finalização","Recuperação"];
+ const iw=$("mp-train-intensity");iw.innerHTML="";
+ intensities.forEach(i=>{
+   const row=document.createElement("div");row.className="training-opt"+(p.trainIntensity===i?" sel":"");
+   row.innerHTML=`<div><b>${i}</b><div style="color:var(--mut);font-size:12px">${i==="Baixa"?"Mais seguro, evolui devagar":i==="Média"?"Equilíbrio":"Evolui mais rápido, mais desgaste"}</div></div>${p.trainIntensity===i?"✅":""}`;
+   row.onclick=()=>{p.trainIntensity=i;showMpTrainConfig(p);};
+   iw.appendChild(row);
+ });
+ const fw=$("mp-train-focus");fw.innerHTML="";
+ focuses.forEach(f=>{
+   const row=document.createElement("div");row.className="training-opt"+(p.trainFocus===f?" sel":"");
+   row.innerHTML=`<div><b>${f}</b></div>${p.trainFocus===f?"✅":""}`;
+   row.onclick=()=>{p.trainFocus=f;showMpTrainConfig(p);};
+   fw.appendChild(row);
+ });
+ $("btn-mp-train-save").onclick=()=>{
+   $("ov-myplayer").classList.remove("show");
+   toast(`Programa de ${p.n} definido: ${p.trainIntensity} · foco em ${p.trainFocus}.`);
+   renderCareerMessage(`🎯 Programa de treino individual definido para <b>${p.n}</b>: ritmo ${p.trainIntensity}, foco em ${p.trainFocus}.`,"");
+   if(CS.currentSubview==="elenco")renderSubElenco();
+ };
+ $("btn-mp-train-back").onclick=()=>{$("mp-step-train").style.display="none";$("mp-step-menu").style.display="block";};
+}
+/* ---------- SUBVIEW: TÁTICA ---------- */
+function renderSubTatica(){
+ const body=$("csub-body");
+ body.innerHTML=`
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+     <div class="setup-block" style="margin:0"><div class="lbl">Formação</div><div class="opt-row" id="tat-formations"></div></div>
+     <button class="btn ghost" id="btn-tat-best" style="width:auto;padding:10px 16px;font-size:12px">Escalar melhor time</button>
+   </div>
+   <div class="cpitch" id="tat-pitch" style="min-height:440px"></div>
+   <div class="lbl" style="margin:16px 0 8px">RESERVAS (${CS.bench.length})</div>
+   <div id="tat-bench"></div>
+   <div class="setup-block" style="margin-top:14px"><div class="lbl">Estilo de jogo</div><div class="opt-row" id="tat-styles"></div></div>
+ `;
+ const fWrap=$("tat-formations");
+ Object.keys(CAREER_FORMATIONS).forEach(f=>{
+   const o=document.createElement("div");o.className="opt"+(f===CS.formation?" sel":"");o.textContent=f;
+   o.onclick=()=>{CS.formation=f;pickBestLineup();renderSubTatica();};
+   fWrap.appendChild(o);
+ });
+ const sWrap=$("tat-styles");
+ STYLES.forEach(st=>{
+   const o=document.createElement("div");o.className="opt"+(st===CS.style?" sel":"");o.textContent=st;
+   o.onclick=()=>{CS.style=st;[...sWrap.children].forEach(x=>x.classList.remove("sel"));o.classList.add("sel");};
+   sWrap.appendChild(o);
+ });
+ renderPitch($("tat-pitch"),true);
+ const benchWrap=$("tat-bench");benchWrap.innerHTML="";
+ CS.bench.map(id=>CS.squad.find(p=>p.id===id)).filter(Boolean).sort((a,b)=>b.ov-a.ov).forEach(p=>{
+   const chip=document.createElement("div");chip.className="cbench-chip";chip.style.cursor="default";
+   chip.innerHTML=`<div class="bc-pos">${p.pos}</div><div class="bc-name">${p.n}${p.injured?" 🩹":""}</div><div class="bc-ov">${p.ov}</div>`;
+   benchWrap.appendChild(chip);
+ });
+ $("btn-tat-best").onclick=()=>{pickBestLineup();renderSubTatica();};
+}
+
+/* ---------- SUBVIEW: CALENDÁRIO ---------- */
+function renderSubCalendario(){
+ let mode="lista";
+ function draw(){
+   const body=$("csub-body");
+   body.innerHTML=`<div class="ccal-toggle"><div class="cfilter${mode==="lista"?" sel":""}" id="cal-mode-lista">Lista de jogos</div><div class="cfilter${mode==="cal"?" sel":""}" id="cal-mode-cal">Calendário</div></div><div id="cal-body"></div>`;
+   $("cal-mode-lista").onclick=()=>{mode="lista";draw();};
+   $("cal-mode-cal").onclick=()=>{mode="cal";draw();};
+   const cb=$("cal-body");
+   if(mode==="lista"){
+     let html='<div class="ccard" style="padding:0">';
+     CS.calendar.forEach((fx,i)=>{
+       const played=i<CS.fixtureIdx;const isNext=i===CS.fixtureIdx;
+       html+=`<div class="cagenda-row" style="${isNext?'background:#1a1a05':''}"><div class="ar-date">${fx.dateLabel}</div><div class="club-badge">${badgeHTML(fx.opponent)}</div><div style="flex:1">${fx.home?"vs":"@"} ${fx.opponent}</div>${played?`<div class="mono-num" style="font-weight:800">${fx.result||""}</div>`:""}<div class="ar-comp">${fx.comp}</div></div>`;
+     });
+     html+="</div>";cb.innerHTML=html||'<div style="color:var(--mut)">Sem jogos.</div>';
+   }else{
+     const byMonth={};
+     CS.calendar.forEach(fx=>{(byMonth[fx.monthLabel]=byMonth[fx.monthLabel]||[]).push(fx);});
+     let html="";
+     Object.keys(byMonth).forEach(m=>{
+       html+=`<div class="ccal-month">${m}</div><div class="ccard" style="padding:0">`;
+       byMonth[m].forEach(fx=>{html+=`<div class="cagenda-row"><div class="ar-date">${fx.dayLabel}</div><div class="club-badge">${badgeHTML(fx.opponent)}</div><div style="flex:1">${fx.home?"vs":"@"} ${fx.opponent}</div><div class="ar-comp">${fx.comp}</div></div>`;});
+       html+="</div>";
+     });
+     cb.innerHTML=html||'<div style="color:var(--mut)">Sem jogos.</div>';
+   }
+ }
+ draw();
+}
+
+/* ---------- SUBVIEW: CLASSIFICAÇÃO ---------- */
+function renderSubClassificacao(){
+ const comps=[...new Set(CS.calendar.map(f=>f.comp))];
+ let selComp=comps.find(c=>CS.standingsByComp[c])||comps[0];
+ function draw(){
+   const body=$("csub-body");
+   body.innerHTML='<div class="cfilter-row" id="cls-filters"></div><div class="ccard" style="padding:0" id="cls-table"></div>';
+   const fWrap=$("cls-filters");fWrap.innerHTML="";
+   comps.forEach(c=>{
+     const f=document.createElement("div");f.className="cfilter"+(c===selComp?" sel":"");f.textContent=c;
+     f.onclick=()=>{selComp=c;draw();};
+     fWrap.appendChild(f);
+   });
+   const tbl=$("cls-table");
+   const st=CS.standingsByComp[selComp];
+   if(!st){tbl.innerHTML='<div style="padding:16px;color:var(--mut)">Ainda sem jogos nesta competição.</div>';return;}
+   let html="";
+   st.forEach((t,i)=>{
+     const me=t.name===CS.club?" me":"";
+     html+=`<div class="srow${me}"><span class="pos mono-num">${i+1}</span><span class="team"><span class="tlogo">${badgeHTML(t.name)}</span>${t.name}</span><span class="pts mono-num">${t.pts}</span></div>`;
+   });
+   tbl.innerHTML=html;
+ }
+ draw();
+}
+
+/* ---------- SUBVIEW: MENSAGENS ---------- */
+function renderSubMensagens(){
+ const body=$("csub-body");
+ if(!CS.messages.length){body.innerHTML='<div style="color:var(--mut)">Nenhuma mensagem ainda.</div>';return;}
+ body.innerHTML='<div class="ccard" style="padding:0"><div class="feed" style="max-height:none" id="msg-feed"></div></div>';
+ const feed=$("msg-feed");
+ CS.messages.forEach(m=>{
+   const row=document.createElement("div");row.className="feed-row"+(m.kind?" "+m.kind:"");
+   row.innerHTML=`<span class="yr">${seasonStr(m.season)}</span><span class="tx">${m.text}</span>`;
+   feed.appendChild(row);
+ });
+}
+
+/* ---------- SUBVIEW: FINANÇAS ---------- */
+function clubMonthlyRevenue(){return Math.round((CS.clubRating*1100)+(CS.boardConfidence*70));}
+function squadWageBill(){return CS.squad.reduce((s,p)=>s+p.wage*(p.loanSplit??1),0);}
+function renderSubFinancas(){
+ const rev=clubMonthlyRevenue();const wages=squadWageBill();const net=rev-wages;
+ const body=$("csub-body");
+ body.innerHTML=`
+   <div class="cprop-stats" style="grid-template-columns:1fr 1fr">
+     <div class="cfin-tile"><div class="ft-l">Saldo do clube</div><div class="ft-v" style="color:var(--gold)">R$ ${Math.round(CS.budget).toLocaleString("pt-BR")}</div></div>
+     <div class="cfin-tile"><div class="ft-l">Orçamento p/ salários</div><div class="ft-v">R$ ${Math.round(CS.wageBudget).toLocaleString("pt-BR")}</div></div>
+     <div class="cfin-tile"><div class="ft-l">Receita mensal</div><div class="ft-v" style="color:var(--green)">+R$ ${rev.toLocaleString("pt-BR")}</div></div>
+     <div class="cfin-tile"><div class="ft-l">Folha salarial</div><div class="ft-v" style="color:var(--red)">-R$ ${wages.toLocaleString("pt-BR")}</div></div>
+   </div>
+   <div class="ccard" style="margin-top:14px">
+     <div class="ccard-t">Balanço mensal</div>
+     <div class="cbar-row"><div class="cb-top"><span>Resultado líquido</span><span class="cbv" style="color:${net>=0?'var(--green)':'var(--red)'}">${net>=0?"+":""}R$ ${net.toLocaleString("pt-BR")}</span></div></div>
+     <div style="color:var(--mut);font-size:12px;margin-top:8px">Receita = bilheteria + patrocínio, estimada pela força do clube e confiança da diretoria. A folha salarial soma os salários de todo o elenco.</div>
+   </div>`;
+}
+
+/* ---------- SUBVIEW: SCOUTING ---------- */
+function renderSubScouting(){
+ let selClub=null;let filterPos="TODOS";let filterOv=0;
+ function draw(){
+   const body=$("csub-body");
+   const allClubs=ALL_CLUBS.filter(c=>c.name!==CS.club).sort((a,b)=>b.rating-a.rating);
+   body.innerHTML=`<input type="text" id="scout-search" placeholder="Buscar clube..." style="width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:#fff;padding:12px;font-size:14px;margin-bottom:12px">
+     <div class="ccard" style="padding:0;max-height:240px;overflow-y:auto" id="scout-list"></div>
+     <div id="scout-detail" style="margin-top:16px"></div>`;
+   const listEl=$("scout-list");
+   function drawList(filter){
+     listEl.innerHTML="";
+     allClubs.filter(c=>!filter||c.name.toLowerCase().includes(filter.toLowerCase())).slice(0,40).forEach(c=>{
+       const row=document.createElement("div");row.className="ctable-row";row.style.cursor="pointer";
+       row.innerHTML=`<div class="club-badge">${badgeHTML(c.name)}</div><div style="flex:1">${c.name}${PLAYERS[c.name]?' <span style="color:var(--green);font-size:10px">● elenco real</span>':""}</div><div class="mono-num" style="color:var(--gold);font-weight:800">${c.rating}</div>`;
+       row.onclick=()=>{selClub=c;filterPos="TODOS";filterOv=0;drawDetail();};
+       listEl.appendChild(row);
+     });
+   }
+   function drawDetail(){
+     const det=$("scout-detail");
+     if(!selClub){det.innerHTML="";return;}
+     const sq=buildScoutSquad(selClub.name,selClub.rating);
+     det.innerHTML=`<div class="ccard-t">${selClub.name} · ${LEAGUES[selClub.cid][selClub.div].name} · Força ${selClub.rating}</div>
+       <div class="lbl" style="margin:10px 0 6px">FILTRAR POR POSIÇÃO</div><div class="cfilter-row" id="scout-pos-filters"></div>
+       <div class="lbl" style="margin:12px 0 6px">OVERALL MÍNIMO: <span id="scout-ov-label" style="color:var(--gold)">${filterOv||"qualquer"}</span></div>
+       <input type="range" id="scout-ov-range" min="0" max="90" step="5" value="${filterOv}" style="width:100%">
+       <div class="ccard" style="padding:0;margin-top:12px" id="scout-players"></div>`;
+     const posWrap=$("scout-pos-filters");posWrap.innerHTML="";
+     ["TODOS",...POSITIONS].forEach(p=>{
+       const f=document.createElement("div");f.className="cfilter"+(p===filterPos?" sel":"");f.textContent=p;
+       f.onclick=()=>{filterPos=p;drawDetail();};
+       posWrap.appendChild(f);
+     });
+     $("scout-ov-range").oninput=(e)=>{filterOv=+e.target.value;$("scout-ov-label").textContent=filterOv||"qualquer";};
+     $("scout-ov-range").onchange=()=>drawDetail();
+     const playersWrap=$("scout-players");playersWrap.innerHTML="";
+     const filtered=sq.filter(p=>(filterPos==="TODOS"||p.pos===filterPos)&&p.ov>=filterOv).sort((a,b)=>b.ov-a.ov);
+     if(!filtered.length){playersWrap.innerHTML='<div style="padding:14px;color:var(--mut)">Nenhum jogador com esse filtro.</div>';}
+     filtered.forEach(p=>{
+       const row=document.createElement("div");row.className="cplayer-row";row.style.cursor="pointer";
+       row.innerHTML=`<div class="cp-pos">${p.pos}</div><div><div class="cp-name">${p.n}${p.isReal?' <span style="color:var(--gold);font-size:10px">★</span>':""}</div><div class="cp-sub">${p.age} anos</div></div><div class="cp-ov mono-num">${p.ov}</div><div class="cp-sub" style="text-align:right">${fmtCareerMoney(careerPlayerValue(p))}</div>`;
+       row.onclick=()=>openScoutPlayerAction(p,selClub.name,sq);
+       playersWrap.appendChild(row);
+     });
+   }
+   $("scout-search").oninput=(e)=>drawList(e.target.value);
+   drawList("");drawDetail();
+ }
+ draw();
+}
+
+/* ---------- COMPRAR / EMPRESTAR JOGADOR (via Scouting) ---------- */
+function fmtCareerMoney(v){return v>=1000000?"R$ "+(v/1000000).toFixed(1)+"mi":"R$ "+Math.round(v/1000)+"mil";}
+let SCOUT_TARGET=null;
+const LOAN_TIERS=[
+ {label:"Proposta modesta",feePct:0.012,split:0.35,chance:0.25},
+ {label:"Proposta padrão",feePct:0.022,split:0.50,chance:0.68},
+ {label:"Proposta generosa",feePct:0.035,split:0.65,chance:0.90}
+];
+function openScoutPlayerAction(player,clubName,squadCtx){
+ SCOUT_TARGET={player,clubName,squadCtx};
+ $("sp-name").textContent=`${player.n} (${player.pos} · ${player.ov})`;
+ $("sp-sub").textContent=`${clubName} · ${player.age} anos${player.isReal?" · jogador real":""}`;
+ $("sp-step-choice").style.display="block";
+ $("sp-step-buy").style.display="none";$("sp-step-buy-terms").style.display="none";$("sp-step-loan").style.display="none";
+ $("sp-buy-result").textContent="";$("sp-loan-result").textContent="";
+ $("btn-sp-buy").onclick=showScoutBuyStep;
+ $("btn-sp-loan").onclick=showScoutLoanStep;
+ $("btn-sp-cancel").onclick=()=>{$("ov-scout-player").classList.remove("show");};
+ $("ov-scout-player").classList.add("show");
+}
+function scoutBuyChance(){
+ const {player,squadCtx,clubName}=SCOUT_TARGET;
+ if(clubName==="Mercado Livre")return 0.85;
+ const sorted=[...squadCtx].sort((a,b)=>b.ov-a.ov);
+ const rank=sorted.findIndex(p=>p===player);
+ if(rank===0)return 0.55;if(rank<=2)return 0.72;return 0.9;
+}
+function showScoutBuyStep(){
+ $("sp-step-choice").style.display="none";$("sp-step-buy").style.display="block";
+ const value=careerPlayerValue(SCOUT_TARGET.player);
+ SCOUT_TARGET.buyValue=value;
+ $("sp-buy-value").textContent=fmtCareerMoney(value);
+ $("sp-buy-result").textContent="";
+ $("btn-sp-buy-send").disabled=false;
+ $("btn-sp-buy-send").onclick=()=>{
+   $("btn-sp-buy-send").disabled=true;
+   const chance=scoutBuyChance();
+   const ok=Math.random()<chance;
+   if(!ok){$("sp-buy-result").innerHTML='<span class="red">O clube recusou a proposta. Não querem vender agora.</span>';setTimeout(()=>{$("ov-scout-player").classList.remove("show");},1400);return;}
+   if(value>CS.budget){$("sp-buy-result").innerHTML='<span class="red">Orçamento insuficiente para essa compra.</span>';return;}
+   $("sp-buy-result").innerHTML='<span class="green">Clube aceitou! Agora acerte com o jogador.</span>';
+   setTimeout(()=>{$("sp-step-buy").style.display="none";showScoutBuyTerms();},1100);
+ };
+}
+function showScoutBuyTerms(){
+ $("sp-step-buy-terms").style.display="block";
+ const wage=Math.round(SCOUT_TARGET.player.wage*rnd(1.05,1.25));
+ SCOUT_TARGET.finalWage=wage;
+ $("sp-terms-wage").textContent=fmtCareerMoney(wage)+"/mês";
+ $("btn-sp-terms-close").onclick=()=>{
+   CS.budget-=SCOUT_TARGET.buyValue;
+   finalizeSignPlayer("buy");
+   $("ov-scout-player").classList.remove("show");
+   toast("Contratação concluída!");
+   if(CS.currentSubview==="scouting")renderSubScouting();else if(CS.currentSubview==="mercado")renderSubMercado();
+ };
+}
+function showScoutLoanStep(){
+ $("sp-step-choice").style.display="none";$("sp-step-loan").style.display="block";
+ const value=careerPlayerValue(SCOUT_TARGET.player);
+ const wrap=$("sp-loan-opts");wrap.innerHTML="";
+ LOAN_TIERS.forEach(tier=>{
+   const feeMonth=Math.round(value*tier.feePct);
+   const el=document.createElement("div");el.className="opt";el.style.display="block";el.style.marginBottom="8px";el.style.textAlign="left";
+   el.innerHTML=`<b>${tier.label}</b> — ${fmtCareerMoney(feeMonth)}/mês, você paga ${Math.round(tier.split*100)}% do salário <span style="color:var(--mut)">(${Math.round(tier.chance*100)}% de chance)</span>`;
+   el.onclick=()=>resolveScoutLoan(tier,feeMonth);
+   wrap.appendChild(el);
+ });
+ $("sp-loan-result").textContent="";
+}
+function resolveScoutLoan(tier,feeMonth){
+ const ok=Math.random()<tier.chance;
+ const upfront=feeMonth*6;
+ if(!ok){$("sp-loan-result").innerHTML='<span class="red">O clube recusou os termos do empréstimo.</span>';setTimeout(()=>{$("ov-scout-player").classList.remove("show");},1400);return;}
+ if(upfront>CS.budget){$("sp-loan-result").innerHTML='<span class="red">Orçamento insuficiente para essa negociação.</span>';return;}
+ $("sp-loan-result").innerHTML='<span class="green">Empréstimo fechado!</span>';
+ CS.budget-=upfront;
+ SCOUT_TARGET.loanSplit=tier.split;
+ setTimeout(()=>{
+   finalizeSignPlayer("loan");
+   $("ov-scout-player").classList.remove("show");
+   toast(SCOUT_TARGET.player.n+" chegou por empréstimo!");
+   if(CS.currentSubview==="scouting")renderSubScouting();else if(CS.currentSubview==="mercado")renderSubMercado();
+ },1100);
+}
+function finalizeSignPlayer(mode){
+ const {player,clubName}=SCOUT_TARGET;
+ const csPlayer={...player,id:uid()};
+ if(mode==="buy"){
+   csPlayer.wage=SCOUT_TARGET.finalWage;csPlayer.loanSplit=1;csPlayer.onLoan=false;
+   if(player._rawRef&&PLAYERS[clubName]){
+     const idx=PLAYERS[clubName].indexOf(player._rawRef);
+     if(idx>=0)PLAYERS[clubName].splice(idx,1);
+   }
+   renderCareerMessage(`✍️ ${CS.club} contratou <b>${player.n}</b> (${player.pos}, ${player.ov}) do ${clubName} por ${fmtCareerMoney(SCOUT_TARGET.buyValue)}.`,"gold");
+ }else{
+   csPlayer.loanSplit=SCOUT_TARGET.loanSplit;csPlayer.onLoan=true;csPlayer.loanFrom=clubName;
+   renderCareerMessage(`🔄 ${CS.club} acertou o empréstimo de <b>${player.n}</b> (${player.pos}, ${player.ov}) junto ao ${clubName}.`,"gold");
+ }
+ delete csPlayer._rawRef;delete csPlayer._rawClub;
+ CS.squad.push(csPlayer);CS.bench.push(csPlayer.id);
+ nudgeClubRatingForScouting(csPlayer.ov);
+}
+function nudgeClubRatingForScouting(ov){
+ const avg=csAvgOv();const diff=ov-avg;
+ if(diff>5)CS.clubRating=clamp(CS.clubRating+2,35,97);
+ else if(diff>0)CS.clubRating=clamp(CS.clubRating+1,35,97);
+}
+
+/* ---------- SUBVIEW: MERCADO ---------- */
+function renderSubMercado(){
+ const body=$("csub-body");
+ const recs=[];
+ for(let i=0;i<6;i++){
+   const pos=pick(POSITIONS);
+   recs.push(genCareerPlayer(pos,CS.clubRating-8,CS.clubRating+10,Math.random()<0.3));
+ }
+ body.innerHTML='<div class="ccard-t" style="margin-bottom:10px">RECOMENDAÇÕES DE OLHEIROS</div><div class="ccard" style="padding:0" id="mkt-recs"></div><div class="ccard-t" style="margin:18px 0 10px">NEGOCIAÇÕES EM ANDAMENTO</div><div id="mkt-negs" class="ccard" style="padding:0"></div>';
+ const recsWrap=$("mkt-recs");recsWrap.innerHTML="";
+ recs.forEach(p=>{
+   const value=careerPlayerValue(p);
+   const row=document.createElement("div");row.className="cplayer-row";row.style.gridTemplateColumns="34px 1fr 46px 90px";row.style.cursor="pointer";
+   row.innerHTML=`<div class="cp-pos">${p.pos}</div><div><div class="cp-name">${p.n}</div><div class="cp-sub">${p.age} anos · POT ${p.potential}</div></div><div class="cp-ov mono-num">${p.ov}</div><div class="cp-sub" style="text-align:right">${fmtCareerMoney(value)}</div>`;
+   row.onclick=()=>openScoutPlayerAction(p,"Mercado Livre",recs);
+   recsWrap.appendChild(row);
+ });
+ const negWrap=$("mkt-negs");negWrap.innerHTML="";
+ if(!CS._negotiations||!CS._negotiations.length){negWrap.innerHTML='<div style="padding:16px;color:var(--mut)">Nenhuma negociação em andamento.</div>';}
+ else{
+   CS._negotiations.forEach(n=>{
+     const row=document.createElement("div");row.className="cagenda-row";
+     row.innerHTML=`<div style="flex:1">${n.type==="sell"?"Vendendo":"Contratando"} ${n.playerName} — ${n.club}</div><div class="mono-num" style="font-weight:800">R$ ${n.value.toLocaleString("pt-BR")}</div>`;
+     negWrap.appendChild(row);
+   });
+ }
+}
+
+/* ---------- SUBVIEW: TREINAMENTO ---------- */
+function renderSubTreinamento(){
+ const body=$("csub-body");
+ const intensities=["Baixa","Média","Alta"];
+ const focuses=["Físico","Tático","Técnico","Finalização","Recuperação"];
+ body.innerHTML=`
+   <div class="ccard-t">INTENSIDADE</div>
+   <div id="tr-intensity"></div>
+   <div class="ccard-t" style="margin-top:18px">FOCO DO TREINO</div>
+   <div id="tr-focus"></div>
+   <div style="color:var(--mut);font-size:12px;margin-top:14px">O programa fica valendo todos os dias até você mudar. Intensidade alta acelera evolução mas cansa mais o elenco; foco físico recupera fôlego mais rápido.</div>
+ `;
+ const iw=$("tr-intensity");
+ intensities.forEach(i=>{
+   const row=document.createElement("div");row.className="training-opt"+(CS.trainingIntensity===i?" sel":"");
+   row.innerHTML=`<div><b>${i}</b><div style="color:var(--mut);font-size:12px">${i==="Baixa"?"Preserva o elenco, evolui devagar":i==="Média"?"Equilíbrio entre evolução e desgaste":"Evolui mais rápido, mais risco de lesão"}</div></div>${CS.trainingIntensity===i?"✅":""}`;
+   row.onclick=()=>{CS.trainingIntensity=i;renderSubTreinamento();};
+   iw.appendChild(row);
+ });
+ const fw=$("tr-focus");
+ focuses.forEach(f=>{
+   const row=document.createElement("div");row.className="training-opt"+(CS.trainingFocus===f?" sel":"");
+   row.innerHTML=`<div><b>${f}</b></div>${CS.trainingFocus===f?"✅":""}`;
+   row.onclick=()=>{CS.trainingFocus=f;renderSubTreinamento();};
+   fw.appendChild(row);
+ });
+}
+
+/* ---------- SUBVIEW: EVOLUÇÃO ---------- */
+function renderSubEvolucao(){
+ const body=$("csub-body");
+ const sorted=[...CS.squad].sort((a,b)=>(b.ov-b.ovStart)-(a.ov-a.ovStart));
+ let html='<div class="ccard" style="padding:0">';
+ sorted.forEach(p=>{
+   const delta=p.ov-p.ovStart;
+   html+=`<div class="cplayer-row" style="grid-template-columns:34px 1fr 46px 60px"><div class="cp-pos">${p.pos}</div><div class="cp-name">${p.n}</div><div class="cp-ov mono-num">${p.ov}</div><div class="mono-num" style="font-weight:800;color:${delta>0?'var(--green)':delta<0?'var(--red)':'var(--mut)'}">${delta>0?"+":""}${delta}</div></div>`;
+ });
+ html+="</div>";
+ body.innerHTML=html;
+}
+
+/* ---------- SUBVIEW: BASE ---------- */
+function renderSubBase(){
+ const body=$("csub-body");
+ if(!CS.youth.length){body.innerHTML='<div class="ccard" style="color:var(--mut)">Sem jogadores na base.</div>';return;}
+ body.innerHTML='<div class="ccard" style="padding:0" id="base-rows"></div>';
+ const rows=$("base-rows");rows.innerHTML="";
+ CS.youth.forEach((p,idx)=>{
+   const row=document.createElement("div");row.className="cplayer-row";row.style.gridTemplateColumns="34px 1fr 46px 90px";
+   row.innerHTML=`<div class="cp-pos">${p.pos}</div><div><div class="cp-name">${p.n}</div><div class="cp-sub">${p.age} anos · POT ${p.potential}</div></div><div class="cp-ov mono-num">${p.ov}</div>`;
+   const btn=document.createElement("button");btn.className="btn ghost";btn.style.width="auto";btn.style.padding="6px 10px";btn.style.fontSize="11px";btn.textContent="Promover";
+   btn.onclick=()=>{
+     const i=CS.youth.indexOf(p);if(i<0)return;
+     CS.youth.splice(i,1);CS.squad.push(p);CS.bench.push(p.id);
+     renderCareerMessage(`🌱 <b>${p.n}</b> (${p.age} anos) foi promovido à equipe principal!`,"gold");
+     toast(`${p.n} promovido ao elenco principal!`);
+     renderSubBase();
+   };
+   row.appendChild(btn);rows.appendChild(row);
+ });
+}
+
+/* ---------- SUBVIEW: COMISSÃO ---------- */
+const STAFF_ROLES=[
+ {id:"medico",t:"Médico do clube",ic:"⚕️",d:"Lesões se recuperam mais rápido.",cost:8000},
+ {id:"fisico",t:"Preparador físico",ic:"🏃",d:"O elenco recupera o condicionamento mais rápido entre jogos.",cost:7000},
+ {id:"analista",t:"Analista de desempenho",ic:"📊",d:"Melhores recomendações de escalação e leitura de adversários.",cost:6000},
+ {id:"olheiro",t:"Olheiro-chefe",ic:"🔭",d:"Recomendações de mercado com jogadores mais compatíveis.",cost:6500},
+ {id:"aux",t:"Auxiliar técnico",ic:"📋",d:"Pequeno bônus de desempenho tático no dia de jogo.",cost:7500}
+];
+function renderSubComissao(){
+ const body=$("csub-body");
+ body.innerHTML="";
+ STAFF_ROLES.forEach(role=>{
+   const hired=!!CS.staff[role.id];
+   const card=document.createElement("div");card.className="cstaff-card";
+   card.innerHTML=`<div class="cstaff-top"><div class="st-t">${role.ic} ${role.t}</div><div class="st-cost">${hired?"Contratado":"R$ "+role.cost.toLocaleString("pt-BR")+"/mês"}</div></div><div class="cstaff-d">${role.d}</div>`;
+   const btn=document.createElement("button");btn.className="btn"+(hired?" red":" ghost");btn.style.width="100%";
+   btn.textContent=hired?"Demitir":"Contratar";
+   btn.onclick=()=>{
+     if(hired){delete CS.staff[role.id];renderCareerMessage(`${role.t} deixou o clube.`,"");}
+     else{CS.staff[role.id]=true;renderCareerMessage(`💼 ${CS.club} contratou um novo <b>${role.t}</b>.`,"gold");}
+     renderSubComissao();
+   };
+   card.appendChild(btn);body.appendChild(card);
+ });
+}
+
+/* ---------- SUBVIEW: DM ---------- */
+function renderSubDM(){
+ const body=$("csub-body");
+ const injured=CS.squad.filter(p=>p.injured);
+ if(!injured.length){body.innerHTML='<div class="ccard" style="text-align:center;color:var(--mut)">✅ Nenhum jogador machucado no momento.</div>';return;}
+ let html='<div class="ccard" style="padding:0">';
+ injured.forEach(p=>{html+=`<div class="cagenda-row"><div class="club-badge">🩹</div><div style="flex:1"><b>${p.n}</b><div style="color:var(--mut);font-size:11px">${p.pos}</div></div><div style="color:var(--red);font-weight:800">${p.injuryWeeks} semana${p.injuryWeeks>1?"s":""}</div></div>`;});
+ html+="</div>";
+ body.innerHTML=html;
+}
+
+/* ---------- SUBVIEW: MEU CARGO ---------- */
+function renderSubCargo(){
+ const body=$("csub-body");
+ const c=CS.boardConfidence;
+ const color=c>=65?"var(--green)":c>=40?"var(--gold)":"var(--red)";
+ body.innerHTML=`
+   <div class="ccard" style="text-align:center">
+     <div class="cconf-ring" style="background:conic-gradient(${color} ${c*3.6}deg, #222 0deg)"><div style="width:150px;height:150px;border-radius:50%;background:var(--panel);display:flex;align-items:center;justify-content:center"><div class="cr-num" style="color:${color}">${Math.round(c)}%</div></div></div>
+     <div style="font-size:14px;color:var(--mut)">${c>=65?"A diretoria está satisfeita com seu trabalho.":c>=40?"A diretoria observa de perto os resultados.":"Risco real de demissão se os resultados não melhorarem."}</div>
+   </div>
+   <div class="ccard" style="margin-top:14px"><div class="ccard-t">Objetivos do projeto</div>${CS.objectives.map(o=>`<div class="co-row">${o.done?"✅":"⬜"} ${o.text}</div>`).join("")}</div>
+ `;
+}
+
+/* ---------- CALENDÁRIO ---------- */
+const WEEKDAYS=["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+const MONTHS=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+function fmtCareerDate(d){
+ return{dateLabel:d.getDate()+" DE "+MONTHS[d.getMonth()].slice(0,3).toUpperCase()+".",
+   dayLabel:String(d.getDate()).padStart(2,"0")+" "+MONTHS[d.getMonth()].slice(0,3).toUpperCase(),
+   monthLabel:MONTHS[d.getMonth()].toUpperCase()+" "+d.getFullYear(),
+   weekday:WEEKDAYS[d.getDay()]};
+}
+function buildCareerCalendar(){
+ const gl=getLeague("BRA",CS.division);
+ const rivals=gl.league.teams.filter(t=>t[0]!==CS.club);
+ const opponents=[...rivals].sort(()=>Math.random()-.5).slice(0,7);
+ CS.standingsByComp={};
+ const leagueTeams=[CS.club,...opponents.map(o=>o[0])];
+ CS.standingsByComp[gl.league.name]=leagueTeams.map(n=>({name:n,rating:n===CS.club?CS.clubRating:opponents.find(o=>o[0]===n)[1],pts:0,gf:0,ga:0,games:0}));
+ let cur=new Date(CS.season,1,rint(3,10));
+ const fixtures=[];
+ const rounds=[];
+ opponents.forEach(o=>{rounds.push({opp:o,home:true});rounds.push({opp:o,home:false});});
+ rounds.sort(()=>Math.random()-.5);
+ rounds.forEach(r=>{
+   const info=fmtCareerDate(cur);
+   fixtures.push({opponent:r.opp[0],oppRating:r.opp[1],home:r.home,comp:gl.league.name,round:null,
+     date:new Date(cur),time:pick(["16:00","18:00","19:30","20:00"]),played:false,result:null,...info});
+   cur=new Date(cur.getTime()+7*86400000);
+ });
+ // Copa do Brasil — mata-mata com 3 fases
+ const cupRoundNames=["1/32-avos","Oitavas de final","Quartas de final"];
+ let cupDate=new Date(CS.season,1,rint(11,17));
+ cupRoundNames.forEach((rn,i)=>{
+   const oppPool=ALL_CLUBS.filter(c=>c.cid==="BRA"&&c.name!==CS.club).sort((a,b)=>b.rating-a.rating);
+   const eliteN=clamp(Math.ceil(oppPool.length*0.15),4,10);
+   const opp=pick(oppPool.slice(0,eliteN));
+   const info=fmtCareerDate(cupDate);
+   fixtures.push({opponent:opp.name,oppRating:opp.rating,home:Math.random()<0.5,comp:"Copa Do Brasil",round:rn,
+     date:new Date(cupDate),time:"20:00",played:false,result:null,...info,_cupRound:i});
+   cupDate=new Date(cupDate.getTime()+21*86400000);
+ });
+ fixtures.sort((a,b)=>a.date-b.date);
+ CS.calendar=fixtures;CS.fixtureIdx=0;
+}
+function advanceToNextFixture(){openLineupPrep();}
+
+/* ---------- LINEUP PREP ---------- */
+function openLineupPrep(){
+ const fx=nextFixture();if(!fx)return;
+ if(!CS.lineup.length)pickBestLineup();
+ $("cl-comp").textContent=fx.comp+(fx.round?" · "+fx.round:"");
+ setBadge($("cl-home-badge"),fx.home?CS.club:fx.opponent);$("cl-home-name").textContent=fx.home?CS.club:fx.opponent;
+ setBadge($("cl-away-badge"),fx.home?fx.opponent:CS.club);$("cl-away-name").textContent=fx.home?fx.opponent:CS.club;
+ const fWrap=$("cl-formations");fWrap.innerHTML="";
+ Object.keys(CAREER_FORMATIONS).forEach(f=>{
+   const o=document.createElement("div");o.className="opt"+(f===CS.formation?" sel":"");o.textContent=f;
+   o.onclick=()=>{CS.formation=f;pickBestLineup();renderPitch($("cl-pitch"),true);[...fWrap.children].forEach(x=>x.classList.remove("sel"));o.classList.add("sel");};
+   fWrap.appendChild(o);
+ });
+ const sWrap=$("cl-styles");sWrap.innerHTML="";
+ STYLES.forEach(st=>{
+   const o=document.createElement("div");o.className="opt"+(st===CS.style?" sel":"");o.textContent=st;
+   o.onclick=()=>{CS.style=st;[...sWrap.children].forEach(x=>x.classList.remove("sel"));o.classList.add("sel");};
+   sWrap.appendChild(o);
+ });
+ renderPitch($("cl-pitch"),true);
+ const benchWrap=$("cl-bench");benchWrap.innerHTML="";
+ CS.bench.map(id=>CS.squad.find(p=>p.id===id)).filter(Boolean).sort((a,b)=>b.ov-a.ov).forEach(p=>{
+   const chip=document.createElement("div");chip.className="cbench-chip";chip.style.cursor="default";
+   chip.innerHTML=`<div class="bc-pos">${p.pos}</div><div class="bc-name">${p.n}${p.injured?" 🩹":""}</div><div class="bc-ov">${p.ov}</div>`;
+   benchWrap.appendChild(chip);
+ });
+ $("btn-cl-best").onclick=()=>{pickBestLineup();renderPitch($("cl-pitch"),true);};
+ $("btn-cl-confirm").onclick=()=>{$("ov-c-lineup").classList.remove("show");startCareerLiveMatch(fx);};
+ $("ov-c-lineup").classList.add("show");
+}
+
+/* ---------- LIVE MATCH ---------- */
+let CLIVE=null;
+function careerStyleBonus(st){const m={"Tiki-Taka":{atk:.06,def:0},"Catenaccio":{atk:-.03,def:.12},"Contra-ataque":{atk:.04,def:.05},"Gegenpressing":{atk:.08,def:-.04},"Equilíbrio":{atk:.02,def:.03},"Bola longa":{atk:.03,def:0}};return m[st]||{atk:0,def:0};}
+function startCareerLiveMatch(fx){
+ const myOv=csAvgOv()+(CS.staff.analista?1.5:0)+(CS.staff.aux?1:0);
+ const sb=careerStyleBonus(CS.style);
+ const myR=fx.home?myOv:myOv;const oppR=fx.oppRating;
+ const myXG=clamp(1.1*Math.pow(myR/oppR,1.2)*(fx.home?1.06:0.96)*(1+sb.atk),0.15,3.2);
+ const opXG=clamp(1.1*Math.pow(oppR/myR,1.2)*(fx.home?0.96:1.06)*(1-sb.def),0.15,3.4);
+ const a=poisson(myXG),b=poisson(opXG);
+ const goals=[];
+ for(let i=0;i<a;i++)goals.push({m:rint(2,90),team:"home"===  (fx.home?"home":"away")?"me":"opp"});
+ // build separately to respect home/away side
+ goals.length=0;
+ for(let i=0;i<a;i++)goals.push({m:rint(2,90),side:fx.home?"home":"away"});
+ for(let i=0;i<b;i++)goals.push({m:rint(2,90),side:fx.home?"away":"home"});
+ goals.sort((x,y)=>x.m-y.m);
+ const poss=clamp(50+(myR-oppR)*0.8+rint(-6,6),28,74);
+ CLIVE={fx,a,b,goals,idx:0,scoreH:0,scoreA:0,minute:0,timer:null,halftimeDone:false,
+   stats:{poss,myPoss:fx.home?poss:100-poss,shots:[rint(4,14),rint(4,14)],onTarget:[0,0],corners:[rint(1,7),rint(1,7)],fouls:[rint(4,12),rint(4,12)]},
+   secondHalfMod:1,injuryHappened:false};
+ CLIVE.stats.onTarget=[Math.round(CLIVE.stats.shots[0]*.42),Math.round(CLIVE.stats.shots[1]*.42)];
+ $("cliv-comp").textContent=fx.comp+(fx.round?" · "+fx.round:"");
+ setBadge($("cliv-home-badge"),fx.home?CS.club:fx.opponent);$("cliv-home-name").textContent=fx.home?CS.club:fx.opponent;
+ setBadge($("cliv-away-badge"),fx.home?fx.opponent:CS.club);$("cliv-away-name").textContent=fx.home?fx.opponent:CS.club;
+ $("cliv-sc").textContent="0 - 0";$("cliv-clock").textContent="0'";$("cliv-fill").style.width="0%";
+ $("cliv-events").innerHTML="";
+ renderCLiveStats();
+ $("btn-cliv-skip").onclick=skipCareerLive;
+ $("ov-c-live").classList.add("show");
+ tickCareerLive();
+}
+function renderCLiveStats(){
+ const s=CLIVE.stats;const homeName=CLIVE.fx.home?CS.club:CLIVE.fx.opponent,awayName=CLIVE.fx.home?CLIVE.fx.opponent:CS.club;
+ const homePoss=CLIVE.fx.home?s.poss:100-s.poss;
+ const rows=[["Posse de bola",homePoss+"%",(100-homePoss)+"%",homePoss],
+   ["Chutes",s.shots[0],s.shots[1],Math.round(s.shots[0]/(s.shots[0]+s.shots[1]||1)*100)],
+   ["No alvo",s.onTarget[0],s.onTarget[1],Math.round(s.onTarget[0]/(s.onTarget[0]+s.onTarget[1]||1)*100)],
+   ["Escanteios",s.corners[0],s.corners[1],Math.round(s.corners[0]/(s.corners[0]+s.corners[1]||1)*100)],
+   ["Faltas",s.fouls[0],s.fouls[1],Math.round(s.fouls[0]/(s.fouls[0]+s.fouls[1]||1)*100)]];
+ $("cliv-stats").innerHTML=rows.map(r=>`<div class="cstat-row"><div class="csr-v">${r[1]}</div><div class="csr-bar"><div class="csr-a" style="width:${r[3]}%"></div><div class="csr-b" style="width:${100-r[3]}%"></div></div><div class="csr-v">${r[2]}</div></div><div style="text-align:center;color:var(--mut);font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin:-4px 0 6px">${r[0]}</div>`).join("");
+}
+function tickCareerLive(){
+ if(!CLIVE)return;
+ CLIVE.minute++;
+ $("cliv-clock").textContent=CLIVE.minute+"'";
+ $("cliv-fill").style.width=(CLIVE.minute/90*100)+"%";
+ while(CLIVE.idx<CLIVE.goals.length&&CLIVE.goals[CLIVE.idx].m<=CLIVE.minute){
+   const g=CLIVE.goals[CLIVE.idx];CLIVE.idx++;
+   const isHome=g.side==="home";
+   if(isHome)CLIVE.scoreH++;else CLIVE.scoreA++;
+   $("cliv-sc").textContent=`${CLIVE.scoreH} - ${CLIVE.scoreA}`;
+   const clubName=isHome?(CLIVE.fx.home?CS.club:CLIVE.fx.opponent):(CLIVE.fx.home?CLIVE.fx.opponent:CS.club);
+   const scorer=(isHome===CLIVE.fx.home)?careerScorerName():"";
+   addCLiveEvent(g.m,`⚽ Gol do <b>${clubName}</b>${scorer?" — "+scorer:""}`,true);
+ }
+ // pequena chance de lesão
+ if(!CLIVE.injuryHappened&&CLIVE.minute>15&&CLIVE.minute<85&&Math.random()<0.006){
+   CLIVE.injuryHappened=true;autoInjuryAndSub();
+ }
+ if(CLIVE.minute===45&&!CLIVE.halftimeDone){openCareerHalftime();return;}
+ if(CLIVE.minute>=90){finishCareerLive();return;}
+ CLIVE.timer=setTimeout(tickCareerLive,90);
+}
+function careerScorerName(){
+ const attackers=[...CS.lineup].map(s=>CS.squad.find(p=>p.id===s.playerId)).filter(p=>p&&["ATA","PE","PD","MC"].includes(p.pos));
+ if(!attackers.length)return"";
+ const w=[];attackers.forEach(p=>{const n=Math.max(1,Math.round((p.ov-45)/4));for(let i=0;i<n;i++)w.push(p.n);});
+ return w.length?pick(w):attackers[0].n;
+}
+function addCLiveEvent(m,txt,goal){
+ const div=document.createElement("div");div.className="le"+(goal?" goal":"");
+ div.innerHTML=`<span class="m">${m}'</span><span>${txt}</span>`;
+ $("cliv-events").prepend(div);
+}
+function autoInjuryAndSub(){
+ const onPitch=CS.lineup.map(s=>s.playerId).filter(Boolean);
+ if(!onPitch.length)return;
+ const slot=pick(CS.lineup.filter(s=>s.playerId));
+ const p=CS.squad.find(x=>x.id===slot.playerId);
+ if(!p)return;
+ p.injured=true;p.injuryWeeks=rint(1,4);
+ addCLiveEvent(CLIVE.minute,`🩹 ${p.n} sentiu uma lesão e precisou sair.`,false);
+ const bench=CS.bench.map(id=>CS.squad.find(x=>x.id===id)).filter(x=>x&&!x.injured);
+ let repl=bench.filter(x=>x.pos===slot.pos).sort((a,b)=>b.ov-a.ov)[0]||bench.sort((a,b)=>b.ov-a.ov)[0];
+ if(repl){
+   slot.playerId=repl.id;CS.bench=CS.bench.filter(id=>id!==repl.id);CS.bench.push(p.id);
+   addCLiveEvent(CLIVE.minute,`🔄 Substituição automática: entra <b>${repl.n}</b>.`,false);
+ }
+}
+function openCareerHalftime(){
+ if(CLIVE.timer)clearTimeout(CLIVE.timer);
+ CLIVE.halftimeDone=true;
+ $("chalf-score").textContent=`${CLIVE.scoreH} — ${CLIVE.scoreA}`;
+ $("ov-c-live").classList.remove("show");
+ $("chalf-keep").onclick=()=>resolveHalftimeChoice(1,0);
+ $("chalf-press").onclick=()=>resolveHalftimeChoice(1.18,0.12);
+ $("chalf-protect").onclick=()=>resolveHalftimeChoice(0.82,-0.1);
+ $("ov-c-half").classList.add("show");
+}
+function resolveHalftimeChoice(atkMod,defShift){
+ CLIVE.secondHalfMod=atkMod;CLIVE._defShift=defShift;
+ $("ov-c-half").classList.remove("show");
+ $("ov-c-live").classList.add("show");
+ CLIVE.timer=setTimeout(tickCareerLive,90);
+}
+function skipCareerLive(){
+ if(CLIVE.timer)clearTimeout(CLIVE.timer);
+ if(!CLIVE.halftimeDone){CLIVE.halftimeDone=true;}
+ while(CLIVE.idx<CLIVE.goals.length){const g=CLIVE.goals[CLIVE.idx++];if(g.side==="home")CLIVE.scoreH++;else CLIVE.scoreA++;}
+ CLIVE.minute=90;$("cliv-sc").textContent=`${CLIVE.scoreH} - ${CLIVE.scoreA}`;$("cliv-clock").textContent="90'";$("cliv-fill").style.width="100%";
+ finishCareerLive();
+}
+function finishCareerLive(){
+ if(CLIVE.timer)clearTimeout(CLIVE.timer);
+ $("ov-c-live").classList.remove("show");
+ const fx=CLIVE.fx;const myGoals=fx.home?CLIVE.scoreH:CLIVE.scoreA;const oppGoals=fx.home?CLIVE.scoreA:CLIVE.scoreH;
+ applyCareerMatchOutcome(fx,myGoals,oppGoals);
+ $("cres-eyebrow").textContent=fx.comp;
+ $("cres-comp").textContent=fx.round||fx.comp;
+ setBadge($("cres-home-badge"),fx.home?CS.club:fx.opponent);$("cres-home-name").textContent=fx.home?CS.club:fx.opponent;
+ setBadge($("cres-away-badge"),fx.home?fx.opponent:CS.club);$("cres-away-name").textContent=fx.home?fx.opponent:CS.club;
+ $("cres-score").textContent=`${CLIVE.scoreH} - ${CLIVE.scoreA}`;
+ const res=myGoals>oppGoals?"Vitória":myGoals===oppGoals?"Empate":"Derrota";
+ $("cres-detail").innerHTML=`<span style="color:${myGoals>oppGoals?'var(--green)':myGoals===oppGoals?'var(--mut)':'var(--red)'}">${res}</span>`;
+ $("btn-cres-close").onclick=()=>{$("ov-c-result").classList.remove("show");CLIVE=null;afterCareerMatch();};
+ $("ov-c-result").classList.add("show");
+}
+function afterCareerMatch(){
+ renderCareerDash();
+ checkCareerFiring();
+ if(!nextFixture()){toast("Temporada concluída! Veja 'Ir ao fim da temporada'.");}
+}
+
+/* ---------- APLICAR RESULTADO ---------- */
+function applyCareerMatchOutcome(fx,myGoals,oppGoals){
+ fx.played=true;fx.result=`${myGoals}-${oppGoals}`;CS.fixtureIdx++;CS.careerGames++;
+ const won=myGoals>oppGoals,draw=myGoals===oppGoals;
+ // padrão de tabela
+ const st=CS.standingsByComp[fx.comp];
+ if(st){
+   let me=st.find(t=>t.name===CS.club);
+   if(!me){me={name:CS.club,rating:CS.clubRating,pts:0,gf:0,ga:0,games:0};st.push(me);}
+   me.pts+=won?3:draw?1:0;me.gf+=myGoals;me.ga+=oppGoals;me.games++;
+   let opp=st.find(t=>t.name===fx.opponent);
+   if(!opp){opp={name:fx.opponent,rating:fx.oppRating,pts:0,gf:0,ga:0,games:0};st.push(opp);}
+   opp.pts+=won?0:draw?1:3;opp.gf+=oppGoals;opp.ga+=myGoals;opp.games++;
+   // outros times da tabela também avançam
+   st.forEach(t=>{if(t.name!==CS.club&&t.name!==fx.opponent){t.pts+=expPointsResult(t.rating,CS.clubRating);t.games++;}});
+   st.sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga));
+ }
+ // moral/fitness
+ CS.squad.forEach(p=>{
+   const focusBonus=p.trainFocus==="Físico"?4:0;
+   p.fitness=clamp(p.fitness-rint(4,10)+focusBonus,35,100);
+   p.morale=clamp(p.morale+(won?rint(1,4):draw?0:-rint(1,3)),20,95);
+   if(p.injured){p.injuryWeeks--;if(p.injuryWeeks<=0){p.injured=false;}}
+ });
+ // evolução leve de overall rumo ao potencial (mais forte com treino de intensidade alta — próprio do jogador, se definido, senão o padrão do time)
+ CS.squad.forEach(p=>{
+   const intensity=p.trainIntensity||CS.trainingIntensity;
+   const growthChance=intensity==="Alta"?0.22:intensity==="Média"?0.14:0.08;
+   if(p.ov<p.potential&&Math.random()<growthChance)p.ov=clamp(p.ov+1,p.ov,p.potential);
+ });
+ // confiança da diretoria
+ const posIdx=st?st.findIndex(t=>t.name===CS.club):-1;
+ let confDelta=won?rint(3,6):draw?rint(-1,1):-rint(3,7);
+ CS.boardConfidence=clamp(CS.boardConfidence+confDelta,5,98);
+ // objetivos
+ if(posIdx>=0&&posIdx<=3){const o=CS.objectives.find(x=>x.text==="Conquistar o acesso");if(o)o.done=true;}
+ if(CS.careerGames>=10){const o=CS.objectives.find(x=>x.text==="Montar uma equipe competitiva"||x.text==="Construir uma identidade de jogo reconhecível");if(o&&CS.boardConfidence>=55)o.done=true;}
+ renderCareerMessage(won?`✅ Vitória sobre o ${fx.opponent} por ${myGoals}-${oppGoals} (${fx.comp}).`:draw?`➖ Empate com o ${fx.opponent} em ${myGoals}-${oppGoals} (${fx.comp}).`:`❌ Derrota para o ${fx.opponent} por ${myGoals}-${oppGoals} (${fx.comp}).`,won?"green":(draw?"":"red"));
+}
+
+/* ---------- DEMISSÃO (modo carreira) ---------- */
+function checkCareerFiring(){
+ if(CS.boardConfidence>18)return;
+ if(Math.random()<0.35)fireCareerCoach();
+}
+function fireCareerCoach(){
+ renderCareerMessage(`🔴 <b>VOCÊ FOI DEMITIDO</b> do ${CS.club}. A diretoria perdeu a confiança no projeto.`,"red");
+ toast("Você foi demitido! Novas propostas a caminho...");
+ setTimeout(()=>{
+   CS._proposals=[genProposal(),genProposal(),genProposal()].map(p=>({...p,rating:clamp(p.rating-6,40,99)}));
+   renderCareerProposals();
+ },900);
+}
+
+/* ---------- PULAR / APOSENTAR ---------- */
+function skipCareerToEnd(){
+ let guard=0;
+ while(CS.seasonsPlayed<CS.retireAt&&guard<5000){
+   while(nextFixture()&&guard<5000){
+     guard++;
+     const fx=nextFixture();
+     const myOv=csAvgOv();
+     const r=simMatch(myOv,fx.oppRating);
+     applyCareerMatchOutcome(fx,r.a,r.b);
+   }
+   endCareerSeason(true);
+   guard++;
+ }
+ showCareerRetirement();
+}
+function endCareerSeason(silent){
+ const st=CS.standingsByComp[CS.leagueName];
+ if(st&&st.length&&st[0].name===CS.club){
+   CS.careerTitles++;
+   renderCareerMessage(`🏆 <b>CAMPEÃO!</b> ${CS.club} conquistou a ${CS.leagueName} na temporada ${seasonStr(CS.season)}!`,"gold");
+   CS.boardConfidence=clamp(CS.boardConfidence+15,5,98);
+ }
+ CS.seasonsPlayed++;CS.season++;
+ CS.squad.forEach(p=>{p.ovStart=p.ov;p.fitness=clamp(p.fitness+20,0,100);});
+ CS.youth.forEach(p=>{if(p.age<23)p.age++;});
+ if(!silent)renderCareerMessage(`📅 Fim da temporada ${CS.season-1}. Preparando ${seasonStr(CS.season)}.`,"gold");
+ if(CS.seasonsPlayed<CS.retireAt){buildCareerCalendar();}
+}
+function showCareerRetirement(){
+ if(CLIVE&&CLIVE.timer)clearTimeout(CLIVE.timer);
+ let verdict,emoji,sub;
+ const titles=CS.careerTitles;
+ if(titles>=3){verdict="VOCÊ É O FENÔMENO";emoji="🐐";sub="Subiu do zero até o topo. Uma carreira e tanto.";}
+ else if(titles>=1){verdict="Lenda da base ao topo";emoji="👑";sub="Poucos conseguem sair da Série D e virar campeão.";}
+ else if(CS.overall>=CS.potentialCap-3){verdict="Potencial realizado";emoji="🎖️";sub="Você tirou o máximo do seu potencial em campo.";}
+ else{verdict="Carreira honesta";emoji="📋";sub="Nem todo mundo vira o Fenômeno. Bora tentar de novo?";}
+ $("ret-emoji").textContent=emoji;$("ret-verdict").textContent=verdict;$("ret-sub").textContent=sub;
+ const rows=[["Técnico",CS.name],["Temporadas",CS.seasonsPlayed],["Clubes treinados",CS.clubsCoached.length],["Jogos na carreira",CS.careerGames],["Títulos",CS.careerTitles],["Overall final",CS.overall+" (potencial "+CS.potentialCap+")"]];
+ $("ret-stats").innerHTML=rows.map(r=>`<div class="retire-stat"><span class="k">${r[0]}</span><span class="v ${r[0]==='Títulos'?'gold':''}">${r[1]}</span></div>`).join("");
+ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+ $("ov-retire").classList.add("show");
+}
 /* ============================================================ BOOT ============================================================ */
 initCreate();
 </script>
