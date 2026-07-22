@@ -403,6 +403,10 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
       <div><div class="nb-l">Próximo jogo</div><div class="nb-v" id="cnb-title">—</div></div>
       <button class="btn" id="btn-c-advance" style="width:auto;padding:12px 22px">Avançar até o jogo »</button>
     </div>
+    <div class="cnext-bar" style="background:linear-gradient(90deg,#0a1a0a,#0e0e0e);border-color:var(--green-line)">
+      <div><div class="nb-l" style="color:var(--green)">Saldo do clube</div><div class="nb-v" id="cdash-budget">—</div></div>
+      <button class="ctl-btn" id="btn-cdash-fin" style="width:auto">Ver finanças ›</button>
+    </div>
     <div class="cgrid">
       <div class="ccol">
         <div class="ccard">
@@ -748,7 +752,7 @@ const LOGOS = {
   "Brentford": "https://escudosfc.com.br/images/brentford.png",
   "Amazonas": "https://escudosfc.com.br/images/amazonas_fc_am.png",
   "Anápolis": "https://escudosfc.com.br/images/anapolis.png",
-  "Barra SC": "https://escudosfc.com.br/images/barra_sc.png",
+  "Barra-SC": "https://escudosfc.com.br/images/barra_sc.png",
   "Botafogo-PB": "https://escudosfc.com.br/images/botapb.png",
   "Brusque": "https://escudosfc.com.br/images/brusque.png",
   "Caxias": "https://escudosfc.com.br/images/caxias.gif",
@@ -761,7 +765,7 @@ const LOGOS = {
   "Itabaiana": "https://escudosfc.com.br/images/itabaiana.gif",
   "Ituano": "https://escudosfc.com.br/images/ituano.png",
   "Maranhão": "https://escudosfc.com.br/images/maranhao.png",
-  "Grêmio Maringá": "https://escudosfc.com.br/images/gremio_maringa.png",
+  "Maringá": "https://escudosfc.com.br/images/gremio_maringa.png",
   "Paysandu": "https://escudosfc.com.br/images/paysandu_pa.png",
   "Santa Cruz": "https://escudosfc.com.br/images/santacruz.png",
   "Volta Redonda": "https://escudosfc.com.br/images/volta.png",
@@ -900,10 +904,10 @@ const CNAME=id=>{const c=COUNTRIES.find(x=>x.id===id);return c?c.name:({CHN:"Chi
 /* ---------- LEAGUES (times reais + ratings) ---------- */
 const LEAGUES={
  BRA:{
-  d1:{name:"Brasileirão Série A",teams:[["Flamengo",85],["Palmeiras",85],["Botafogo",82],["São Paulo",80],["Atlético-MG",80],["Cruzeiro",79],["Internacional",79],["Fluminense",79],["Corinthians",79],["Grêmio",78],["Bahia",77],["Santos",77],["Fortaleza",77],["Bragantino",76],["Vasco",76],["Vitória",73],["Ceará",72],["Juventude",71],["Mirassol",71],["Sport",71]]},
-  d2:{name:"Brasileirão Série B",teams:[["Goiás",69],["Coritiba",69],["América-MG",68],["Novorizontino",67],["Guarani",65],["Ponte Preta",65],["Chapecoense",65],["Avaí",65],["CRB",64],["Vila Nova",63],["Operário-PR",63],["Paysandu",63],["Botafogo-SP",62],["Amazonas",61],["Criciúma",66]]},
-  d3:{name:"Brasileirão Série C",teams:[["Remo",59],["ABC",57],["Londrina",57],["Náutico",57],["Figueirense",56],["Santa Cruz",56],["Ferroviária",55],["São Raimundo-RR",55],["Ituano",55],["Brusque",54],["São Bernardo",54],["CSA",54],["Grêmio Maringá",54],["Volta Redonda",53],["Ypiranga",53],["Tombense",53],["Inter de Limeira",53],["Confiança",52],["Botafogo-PB",51],["Barra SC",52],["Floresta",53],["Itabaiana",51],["Maranhão",52]]},
-  d4:{name:"Brasileirão Série D",teams:[["Gama",50],["Real Brasília",49],["Monte Roraima",47],["Nacional AM",50],["Manauara",48],["Manaus FC",47],["Rio Negro AM",47],["Trem AP",45],["Galvez",46],["Humaitá AC",45],["Princesa do Solimões",46],["Caxias",51],["São José RS",50],["Juventus SC",47],["Aparecidense",50],["Brasiliense",48],["Anápolis",46],["GAS-RR",45],["Araguaína",46],["Guaporé",45],["Independência",45],["Porto Velho",46],["Inhumas",46],["Uverdense-MT",47],["Primavera",46],["Capital-DF",47],["Ceilândia",48]]}
+  d1:{name:"Brasileirão Série A",teams:[["Flamengo",85],["Palmeiras",85],["Botafogo",82],["São Paulo",80],["Atlético-MG",80],["Cruzeiro",79],["Internacional",79],["Fluminense",79],["Corinthians",79],["Grêmio",78],["Bahia",77],["Santos",77],["Fortaleza",77],["Bragantino",76],["Vasco",76],["Athletico-PR",73],["Coritiba",72],["Chapecoense",71],["Juventude",71],["Remo",70]]},
+  d2:{name:"Brasileirão Série B",teams:[["Goiás",69],["América-MG",68],["Vitória",66],["Criciúma",66],["Novorizontino",67],["Ponte Preta",65],["Avaí",65],["Atlético-GO",65],["Sport",65],["CRB",64],["Mirassol",64],["Ceará",64],["Cuiabá",63],["Vila Nova",63],["Operário-PR",63],["Botafogo-SP",62],["Londrina",60],["Náutico",60],["São Bernardo",58],["Athletic Club-MG",57]]},
+  d3:{name:"Brasileirão Série C",teams:[["Figueirense",56],["Santa Cruz",56],["Caxias",55],["Ferroviária",55],["Ituano",55],["Guarani",58],["Paysandu",58],["Brusque",54],["Maringá",54],["Volta Redonda",53],["Ypiranga",53],["Floresta",53],["Inter de Limeira",53],["Amazonas",53],["Maranhão",52],["Anápolis",52],["Confiança",52],["Barra-SC",52],["Botafogo-PB",51],["Itabaiana",51]]},
+  d4:{name:"Brasileirão Série D",teams:[["Gama",50],["Nacional AM",50],["São José RS",50],["Aparecidense",50],["Manauara",48],["Brasiliense",48],["Ceilândia",48],["Monte Roraima",47],["Manaus FC",47],["Trem AP",45]]}
  },
  ARG:{
   d1:{name:"Liga Profesional Argentina",teams:[["River Plate",81],["Boca Juniors",80],["Racing",77],["Estudiantes",75],["Vélez",75],["Independiente",74],["Talleres",74],["San Lorenzo",73],["Rosario Central",73],["Newell's",72],["Lanús",72],["Argentinos Jrs",72],["Huracán",71],["Defensa y Justicia",71],["Platense",71],["Belgrano",70],["Central Córdoba (SdE)",70],["Unión Santa Fe",70],["Instituto",69],["Gimnasia Mendoza",69],["Gimnasia LP",70],["Banfield",69],["Deportivo Riestra",68]]},
@@ -977,8 +981,8 @@ const STATE_LEAGUE={
  "Bahia":"Baiano","Vitória":"Baiano","Confiança":"Sergipano","Itabaiana":"Sergipano",
  "Fortaleza":"Cearense","Ceará":"Cearense","Floresta":"Cearense",
  "Sport":"Pernambucano","Náutico":"Pernambucano","Santa Cruz":"Pernambucano",
- "Coritiba":"Paranaense","Londrina":"Paranaense","Operário-PR":"Paranaense","Grêmio Maringá":"Paranaense",
- "Figueirense":"Catarinense","Avaí":"Catarinense","Chapecoense":"Catarinense","Brusque":"Catarinense","Criciúma":"Catarinense","Juventus SC":"Catarinense","Barra SC":"Catarinense",
+ "Coritiba":"Paranaense","Londrina":"Paranaense","Operário-PR":"Paranaense","Maringá":"Paranaense",
+ "Figueirense":"Catarinense","Avaí":"Catarinense","Chapecoense":"Catarinense","Brusque":"Catarinense","Criciúma":"Catarinense","Juventus SC":"Catarinense","Barra-SC":"Catarinense",
  "Goiás":"Goiano","Vila Nova":"Goiano","Aparecidense":"Goiano","Anápolis":"Goiano","Inhumas":"Goiano",
  "Remo":"Paraense","Paysandu":"Paraense",
  "Amazonas":"Amazonense","Manauara":"Amazonense","Manaus FC":"Amazonense","Nacional AM":"Amazonense","Rio Negro AM":"Amazonense","Princesa do Solimões":"Amazonense",
@@ -997,7 +1001,7 @@ const STATE_LEAGUE={
 };
 /* Cidade/estado real de cada clube — usado nas propostas pra não misturar região errada */
 const CLUB_CITY={
- "Remo":"Belém, Pará","ABC":"Natal, Rio Grande do Norte","Londrina":"Londrina, Paraná","Náutico":"Recife, Pernambuco","Figueirense":"Florianópolis, Santa Catarina","Santa Cruz":"Recife, Pernambuco","Ferroviária":"Araraquara, São Paulo","São Raimundo-RR":"Boa Vista, Roraima","Ituano":"Itu, São Paulo","Brusque":"Brusque, Santa Catarina","São Bernardo":"São Bernardo do Campo, São Paulo","CSA":"Maceió, Alagoas","Grêmio Maringá":"Maringá, Paraná","Volta Redonda":"Volta Redonda, Rio de Janeiro","Ypiranga":"Erechim, Rio Grande do Sul","Tombense":"Tombos, Minas Gerais","Inter de Limeira":"Limeira, São Paulo","Confiança":"Aracaju, Sergipe","Botafogo-PB":"João Pessoa, Paraíba","Barra SC":"Barra Velha, Santa Catarina","Floresta":"Fortaleza, Ceará","Itabaiana":"Itabaiana, Sergipe","Maranhão":"São Luís, Maranhão",
+ "Remo":"Belém, Pará","ABC":"Natal, Rio Grande do Norte","Londrina":"Londrina, Paraná","Náutico":"Recife, Pernambuco","Figueirense":"Florianópolis, Santa Catarina","Santa Cruz":"Recife, Pernambuco","Ferroviária":"Araraquara, São Paulo","São Raimundo-RR":"Boa Vista, Roraima","Ituano":"Itu, São Paulo","Brusque":"Brusque, Santa Catarina","São Bernardo":"São Bernardo do Campo, São Paulo","CSA":"Maceió, Alagoas","Maringá":"Maringá, Paraná","Volta Redonda":"Volta Redonda, Rio de Janeiro","Ypiranga":"Erechim, Rio Grande do Sul","Tombense":"Tombos, Minas Gerais","Inter de Limeira":"Limeira, São Paulo","Confiança":"Aracaju, Sergipe","Botafogo-PB":"João Pessoa, Paraíba","Barra-SC":"Barra Velha, Santa Catarina","Floresta":"Fortaleza, Ceará","Itabaiana":"Itabaiana, Sergipe","Maranhão":"São Luís, Maranhão",
  "Gama":"Brasília, Distrito Federal","Real Brasília":"Brasília, Distrito Federal","Monte Roraima":"Boa Vista, Roraima","Nacional AM":"Manaus, Amazonas","Manauara":"Manaus, Amazonas","Manaus FC":"Manaus, Amazonas","Rio Negro AM":"Manaus, Amazonas","Trem AP":"Macapá, Amapá","Galvez":"Rio Branco, Acre","Humaitá AC":"Porto Velho, Rondônia","Princesa do Solimões":"Manacapuru, Amazonas","Caxias":"Caxias do Sul, Rio Grande do Sul","São José RS":"São José, Rio Grande do Sul","Juventus SC":"Criciúma, Santa Catarina","Aparecidense":"Aparecida de Goiânia, Goiás","Brasiliense":"Taguatinga, Distrito Federal","Anápolis":"Anápolis, Goiás","GAS-RR":"Boa Vista, Roraima","Araguaína":"Araguaína, Tocantins","Guaporé":"Guajará-Mirim, Rondônia","Independência":"Rio Branco, Acre","Porto Velho":"Porto Velho, Rondônia","Inhumas":"Inhumas, Goiás","Uverdense-MT":"Lucas do Rio Verde, Mato Grosso","Primavera":"Primavera do Leste, Mato Grosso","Capital-DF":"Brasília, Distrito Federal","Ceilândia":"Ceilândia, Distrito Federal",
  "Goiás":"Goiânia, Goiás","Coritiba":"Curitiba, Paraná","América-MG":"Belo Horizonte, Minas Gerais","Novorizontino":"Novo Horizonte, São Paulo","Guarani":"Campinas, São Paulo","Ponte Preta":"Campinas, São Paulo","Chapecoense":"Chapecó, Santa Catarina","Avaí":"Florianópolis, Santa Catarina","CRB":"Maceió, Alagoas","Vila Nova":"Goiânia, Goiás","Operário-PR":"Ponta Grossa, Paraná","Paysandu":"Belém, Pará","Botafogo-SP":"Ribeirão Preto, São Paulo","Amazonas":"Manaus, Amazonas","Criciúma":"Criciúma, Santa Catarina"
 };
@@ -2261,7 +2265,7 @@ const CS={
  formation:"4-3-3",style:"Equilíbrio",lineup:{},bench:[],
  calendar:[],fixtureIdx:0,standingsByComp:{},
  messages:[],careerTitles:0,careerGames:0,clubsCoached:[],
- seasonsSinceProposal:0,_nextProposalIn:0,titlesThisSeason:[],
+ seasonsSinceProposal:0,_nextProposalIn:0,titlesThisSeason:[],transactions:[],wageBudgetPct:35,
  currentSubview:null,
  seasonStats:{}
 };
@@ -2444,6 +2448,9 @@ const CAREER_NAV=[
 ];
 function renderCareerDash(){
  $("cdash-season").textContent=seasonStr(CS.season)+" · "+CS.club;
+ $("cdash-budget").textContent="R$ "+Math.round(CS.budget).toLocaleString("pt-BR");
+ $("cdash-budget").style.color=CS.budget>=0?"var(--green)":"var(--red)";
+ $("btn-cdash-fin").onclick=()=>openSubview("financas");
  $("cv-fit").textContent=Math.round(squadAvgFitness())+"%";$("cv-fit-bar").style.width=Math.round(squadAvgFitness())+"%";
  $("cv-mor").textContent=Math.round(squadAvgMorale())+"%";$("cv-mor-bar").style.width=Math.round(squadAvgMorale())+"%";
  const rhythm=clamp(50+CS.careerGames*2,50,95);
@@ -2762,22 +2769,52 @@ function renderSubMensagens(){
 
 /* ---------- SUBVIEW: FINANÇAS ---------- */
 function clubMonthlyRevenue(){return Math.round((CS.clubRating*1100)+(CS.boardConfidence*70));}
-function squadWageBill(){return CS.squad.reduce((s,p)=>s+p.wage*(p.loanSplit??1),0);}
+function staffMonthlyCost(){return Object.keys(CS.staff).reduce((s,id)=>{const role=STAFF_ROLES.find(r=>r.id===id);return s+(role?role.cost:0);},0);}
+function squadWageBill(){return CS.squad.reduce((s,p)=>s+p.wage*(p.loanSplit??1),0)+staffMonthlyCost();}
+function logTransaction(desc,amount){
+ CS.transactions=CS.transactions||[];
+ CS.transactions.unshift({desc,amount,season:CS.season});
+ if(CS.transactions.length>60)CS.transactions.pop();
+}
 function renderSubFinancas(){
  const rev=clubMonthlyRevenue();const wages=squadWageBill();const net=rev-wages;
+ if(!CS.wageBudgetPct)CS.wageBudgetPct=35;
  const body=$("csub-body");
  body.innerHTML=`
    <div class="cprop-stats" style="grid-template-columns:1fr 1fr">
      <div class="cfin-tile"><div class="ft-l">Saldo do clube</div><div class="ft-v" style="color:var(--gold)">R$ ${Math.round(CS.budget).toLocaleString("pt-BR")}</div></div>
-     <div class="cfin-tile"><div class="ft-l">Orçamento p/ salários</div><div class="ft-v">R$ ${Math.round(CS.wageBudget).toLocaleString("pt-BR")}</div></div>
+     <div class="cfin-tile"><div class="ft-l">Disponível p/ transferências</div><div class="ft-v">R$ ${Math.round(CS.budget*(1-CS.wageBudgetPct/100)).toLocaleString("pt-BR")}</div></div>
      <div class="cfin-tile"><div class="ft-l">Receita mensal</div><div class="ft-v" style="color:var(--green)">+R$ ${rev.toLocaleString("pt-BR")}</div></div>
-     <div class="cfin-tile"><div class="ft-l">Folha salarial</div><div class="ft-v" style="color:var(--red)">-R$ ${wages.toLocaleString("pt-BR")}</div></div>
+     <div class="cfin-tile"><div class="ft-l">Folha salarial (com comissão)</div><div class="ft-v" style="color:var(--red)">-R$ ${wages.toLocaleString("pt-BR")}</div></div>
    </div>
    <div class="ccard" style="margin-top:14px">
      <div class="ccard-t">Balanço mensal</div>
-     <div class="cbar-row"><div class="cb-top"><span>Resultado líquido</span><span class="cbv" style="color:${net>=0?'var(--green)':'var(--red)'}">${net>=0?"+":""}R$ ${net.toLocaleString("pt-BR")}</span></div></div>
-     <div style="color:var(--mut);font-size:12px;margin-top:8px">Receita = bilheteria + patrocínio, estimada pela força do clube e confiança da diretoria. A folha salarial soma os salários de todo o elenco.</div>
-   </div>`;
+     <div class="cbar-row"><div class="cb-top"><span>Resultado líquido</span><span class="cbv" style="color:${net>=0?"var(--green)":"var(--red)"}">${net>=0?"+":""}R$ ${net.toLocaleString("pt-BR")}</span></div></div>
+     <div style="color:var(--mut);font-size:12px;margin-top:8px">Todo mês, esse resultado líquido é somado ou descontado do saldo do clube automaticamente.</div>
+   </div>
+   <div class="ccard-t" style="margin:18px 0 10px">RESERVA PARA SALÁRIOS</div>
+   <div id="fin-wage-pct"></div>
+   <div style="color:var(--mut);font-size:12px;margin:8px 0 0">Define quanto do orçamento fica reservado pra folha salarial. O resto fica livre para transferências.</div>
+   <div class="ccard-t" style="margin:18px 0 10px">MOVIMENTAÇÕES RECENTES</div>
+   <div class="ccard" style="padding:0" id="fin-transactions"></div>
+ `;
+ const pctWrap=$("fin-wage-pct");
+ [20,35,50,65].forEach(pct=>{
+   const row=document.createElement("div");row.className="training-opt"+(CS.wageBudgetPct===pct?" sel":"");
+   row.innerHTML=`<div><b>${pct}%</b></div>${CS.wageBudgetPct===pct?"✅":""}`;
+   row.onclick=()=>{CS.wageBudgetPct=pct;renderSubFinancas();};
+   pctWrap.appendChild(row);
+ });
+ const txWrap=$("fin-transactions");
+ const txs=CS.transactions||[];
+ if(!txs.length){txWrap.innerHTML='<div style="padding:16px;color:var(--mut)">Nenhuma movimentação ainda.</div>';}
+ else{
+   txs.slice(0,20).forEach(tx=>{
+     const row=document.createElement("div");row.className="cagenda-row";
+     row.innerHTML=`<div style="flex:1">${tx.desc}</div><div class="mono-num" style="font-weight:800;color:${tx.amount>=0?"var(--green)":"var(--red)"}">${tx.amount>=0?"+":""}R$ ${Math.round(tx.amount).toLocaleString("pt-BR")}</div>`;
+     txWrap.appendChild(row);
+   });
+ }
 }
 
 /* ---------- SUBVIEW: SCOUTING ---------- */
@@ -2909,7 +2946,8 @@ function resolveScoutLoan(tier,feeMonth){
  if(upfront>CS.budget){$("sp-loan-result").innerHTML='<span class="red">Orçamento insuficiente para essa negociação.</span>';return;}
  $("sp-loan-result").innerHTML='<span class="green">Empréstimo fechado!</span>';
  CS.budget-=upfront;
- SCOUT_TARGET.loanSplit=tier.split;
+ logTransaction("Taxa de empréstimo antecipada",-upfront);
+ SCOUT_TARGET.loanSplit=tier.split;SCOUT_TARGET.loanUpfront=upfront;
  setTimeout(()=>{
    finalizeSignPlayer("loan");
    $("ov-scout-player").classList.remove("show");
@@ -2927,6 +2965,7 @@ function finalizeSignPlayer(mode){
      if(idx>=0)PLAYERS[clubName].splice(idx,1);
    }
    renderCareerMessage(`✍️ ${CS.club} contratou <b>${player.n}</b> (${player.pos}, ${player.ov}) do ${clubName} por ${fmtCareerMoney(SCOUT_TARGET.buyValue)}.`,"gold");
+   logTransaction("Contratação de "+player.n,-SCOUT_TARGET.buyValue);
  }else{
    csPlayer.loanSplit=SCOUT_TARGET.loanSplit;csPlayer.onLoan=true;csPlayer.loanFrom=clubName;
    renderCareerMessage(`🔄 ${CS.club} acertou o empréstimo de <b>${player.n}</b> (${player.pos}, ${player.ov}) junto ao ${clubName}.`,"gold");
@@ -2962,11 +3001,50 @@ function renderSubMercado(){
  if(!CS._negotiations||!CS._negotiations.length){negWrap.innerHTML='<div style="padding:16px;color:var(--mut)">Nenhuma negociação em andamento.</div>';}
  else{
    CS._negotiations.forEach(n=>{
-     const row=document.createElement("div");row.className="cagenda-row";
-     row.innerHTML=`<div style="flex:1">${n.type==="sell"?"Vendendo":"Contratando"} ${n.playerName} — ${n.club}</div><div class="mono-num" style="font-weight:800">R$ ${n.value.toLocaleString("pt-BR")}</div>`;
+     const row=document.createElement("div");row.className="cagenda-row";row.style.flexWrap="wrap";
+     row.innerHTML=`<div style="flex:1;min-width:160px">💰 <b>${n.club}</b> quer comprar <b>${n.playerName}</b><div class="mono-num" style="font-weight:800;color:var(--gold)">${fmtCareerMoney(n.value)}</div></div>`;
+     const btnRow=document.createElement("div");btnRow.style.display="flex";btnRow.style.gap="6px";
+     const btnAccept=document.createElement("button");btnAccept.className="btn green";btnAccept.style.width="auto";btnAccept.style.padding="8px 12px";btnAccept.style.fontSize="12px";btnAccept.textContent="Aceitar";
+     const btnReject=document.createElement("button");btnReject.className="btn ghost";btnReject.style.width="auto";btnReject.style.padding="8px 12px";btnReject.style.fontSize="12px";btnReject.textContent="Recusar";
+     btnAccept.onclick=()=>{
+       const idx=CS.squad.findIndex(p=>p.id===n.playerId);
+       if(idx>=0){
+         const sold=CS.squad[idx];
+         CS.squad.splice(idx,1);CS.bench=CS.bench.filter(id=>id!==n.playerId);
+         CS.lineup.forEach(slot=>{if(slot.playerId===n.playerId)slot.playerId=null;});
+         CS.budget+=n.value;
+         logTransaction("Venda de "+sold.n+" para "+n.club,n.value);
+         renderCareerMessage(`💰 ${CS.club} vendeu <b>${sold.n}</b> para o ${n.club} por ${fmtCareerMoney(n.value)}.`,"gold");
+         toast("Venda concluída!");
+       }
+       CS._negotiations=CS._negotiations.filter(x=>x.id!==n.id);
+       renderSubMercado();
+     };
+     btnReject.onclick=()=>{
+       CS._negotiations=CS._negotiations.filter(x=>x.id!==n.id);
+       renderCareerMessage(`Você recusou a proposta do ${n.club} por ${n.playerName}.`,"");
+       renderSubMercado();
+     };
+     btnRow.appendChild(btnReject);btnRow.appendChild(btnAccept);
+     row.appendChild(btnRow);
      negWrap.appendChild(row);
    });
  }
+}
+function maybeGenerateSellOffer(){
+ CS._negotiations=CS._negotiations||[];
+ if(CS._negotiations.filter(n=>n.type==="sell").length>=3)return;
+ if(Math.random()>0.14)return;
+ if(!CS.squad.length)return;
+ const sorted=[...CS.squad].sort((a,b)=>b.ov-a.ov);
+ const pool=sorted.slice(0,Math.max(3,Math.ceil(sorted.length*0.6)));
+ const player=pick(pool);
+ if(CS._negotiations.some(n=>n.playerId===player.id))return;
+ const value=Math.round(careerPlayerValue(player)*rnd(0.85,1.2));
+ const buyerPool=ALL_CLUBS.filter(c=>c.name!==CS.club&&Math.abs(c.rating-player.ov)<=10);
+ const buyer=pick(buyerPool.length?buyerPool:ALL_CLUBS.filter(c=>c.name!==CS.club));
+ CS._negotiations.push({id:uid(),type:"sell",playerId:player.id,playerName:player.n,club:buyer.name,value});
+ renderCareerMessage(`📩 O ${buyer.name} fez uma proposta por <b>${player.n}</b>. Veja em Mercado.`,"");
 }
 
 /* ---------- SUBVIEW: TREINAMENTO ---------- */
@@ -3033,11 +3111,11 @@ function renderSubBase(){
 
 /* ---------- SUBVIEW: COMISSÃO ---------- */
 const STAFF_ROLES=[
- {id:"medico",t:"Médico do clube",ic:"⚕️",d:"Lesões se recuperam mais rápido.",cost:8000},
- {id:"fisico",t:"Preparador físico",ic:"🏃",d:"O elenco recupera o condicionamento mais rápido entre jogos.",cost:7000},
- {id:"analista",t:"Analista de desempenho",ic:"📊",d:"Melhores recomendações de escalação e leitura de adversários.",cost:6000},
- {id:"olheiro",t:"Olheiro-chefe",ic:"🔭",d:"Recomendações de mercado com jogadores mais compatíveis.",cost:6500},
- {id:"aux",t:"Auxiliar técnico",ic:"📋",d:"Pequeno bônus de desempenho tático no dia de jogo.",cost:7500}
+ {id:"medico",t:"Médico do clube",ic:"⚕️",d:"Lesões se recuperam mais rápido.",cost:4000},
+ {id:"fisico",t:"Preparador físico",ic:"🏃",d:"O elenco recupera o condicionamento mais rápido entre jogos.",cost:3500},
+ {id:"analista",t:"Analista de desempenho",ic:"📊",d:"Melhores recomendações de escalação e leitura de adversários.",cost:3000},
+ {id:"olheiro",t:"Olheiro-chefe",ic:"🔭",d:"Recomendações de mercado com jogadores mais compatíveis.",cost:3250},
+ {id:"aux",t:"Auxiliar técnico",ic:"📋",d:"Pequeno bônus de desempenho tático no dia de jogo.",cost:3750}
 ];
 function renderSubComissao(){
  const body=$("csub-body");
@@ -3118,10 +3196,13 @@ function buildCareerCalendar(){
  }
  const gl=getLeague("BRA",CS.division);
  const rivals=gl.league.teams.filter(t=>t[0]!==CS.club);
- const opponents=[...rivals].sort(()=>Math.random()-.5).slice(0,7);
  CS.standingsByComp={};
- const leagueTeams=[CS.club,...opponents.map(o=>o[0])];
- CS.standingsByComp[gl.league.name]=leagueTeams.map(n=>({name:n,rating:n===CS.club?CS.clubRating:opponents.find(o=>o[0]===n)[1],pts:0,gf:0,ga:0,games:0}));
+ CS.standingsByComp[gl.league.name]=[
+   {name:CS.club,rating:CS.clubRating,pts:0,gf:0,ga:0,games:0},
+   ...rivals.map(t=>({name:t[0],rating:t[1],pts:0,gf:0,ga:0,games:0}))
+ ];
+ // o calendário jogável do técnico continua sendo contra um grupo de adversários, mas a TABELA agora tem a liga inteira
+ const opponents=[...rivals].sort(()=>Math.random()-.5).slice(0,7);
 
  const fixtures=[];
  let cur=new Date(CS.season,1,rint(3,10));
@@ -3334,6 +3415,12 @@ function afterCareerMatch(){
 function applyCareerMatchOutcome(fx,myGoals,oppGoals){
  fx.played=true;fx.result=`${myGoals}-${oppGoals}`;CS.fixtureIdx++;CS.careerGames++;
  const won=myGoals>oppGoals,draw=myGoals===oppGoals;
+ // resultado financeiro mensal — dividido pelos ~4 jogos que cabem num mês, cai automaticamente no saldo
+ const monthlyNet=clubMonthlyRevenue()-squadWageBill();
+ const weeklyNet=Math.round(monthlyNet/4);
+ CS.budget+=weeklyNet;
+ logTransaction(weeklyNet>=0?"Receita semanal (bilheteria/patrocínio)":"Folha salarial e comissão",weeklyNet);
+ if(!CS.isNationalTeam)maybeGenerateSellOffer();
  // Copa do Brasil — mata-mata de verdade: perdeu tá fora, ganhou a próxima fase entra na agenda na hora
  if(fx.comp==="Copa Do Brasil"&&typeof fx._cupRoundIdx==="number"){
    let advanced=won,how="";
@@ -3377,7 +3464,7 @@ function applyCareerMatchOutcome(fx,myGoals,oppGoals){
  // moral/fitness
  CS.squad.forEach(p=>{
    const focusBonus=p.trainFocus==="Físico"?4:0;
-   p.fitness=clamp(p.fitness-rint(4,10)+focusBonus,35,100);
+   p.fitness=clamp(p.fitness+rint(6,14)+focusBonus,60,100); // uma semana de descanso entre jogos recupera o elenco
    p.morale=clamp(p.morale+(won?rint(1,4):draw?0:-rint(1,3)),20,95);
    if(p.injured){p.injuryWeeks--;if(p.injuryWeeks<=0){p.injured=false;}}
  });
@@ -3457,7 +3544,9 @@ function checkEstadualTitle(){
 }
 function showSeasonSummary(summary,onContinue){
  $("ssum-title").textContent=`Temporada ${seasonStr(summary.season)}`;
- $("ssum-sub").textContent=`${summary.club} · ${summary.wins+summary.draws+summary.losses} jogos disputados`;
+ let subTxt=`${summary.club} · ${summary.wins+summary.draws+summary.losses} jogos disputados`;
+ if(summary.pyramidMove)subTxt+=summary.pyramidMove.type==="promoted"?` · ⬆️ Acesso para a ${summary.pyramidMove.to}!`:` · ⬇️ Rebaixado para a ${summary.pyramidMove.to}`;
+ $("ssum-sub").textContent=subTxt;
  $("ssum-wins").textContent=summary.wins;
  $("ssum-draws").textContent=summary.draws;
  $("ssum-losses").textContent=summary.losses;
@@ -3481,6 +3570,33 @@ function showSeasonSummary(summary,onContinue){
  };
  $("ov-season-summary").classList.add("show");
 }
+const PROMO_COUNT={d4:3,d3:3,d2:4};
+const RELEG_COUNT={d3:3,d2:3,d1:4};
+function handleCareerPyramidMove(){
+ if(CS.isNationalTeam)return null;
+ const st=CS.standingsByComp[CS.leagueName];
+ if(!st)return null;
+ const pos=st.findIndex(t=>t.name===CS.club)+1;
+ const n=st.length;
+ const order=["d4","d3","d2","d1"];
+ const idx=order.indexOf(CS.division);
+ if(idx<0)return null;
+ if(idx<3&&PROMO_COUNT[CS.division]&&pos<=PROMO_COUNT[CS.division]){
+   const newDiv=order[idx+1];
+   const newLeagueName=LEAGUES.BRA[newDiv].name;
+   CS.division=newDiv;CS.clubRating=clamp(CS.clubRating+2,35,90);CS.leagueName=newLeagueName;
+   renderCareerMessage(`⬆️ <b>ACESSO!</b> ${CS.club} sobe para a ${newLeagueName}!`,"green");
+   return{type:"promoted",to:newLeagueName};
+ }
+ if(idx>0&&RELEG_COUNT[CS.division]&&pos>n-RELEG_COUNT[CS.division]){
+   const newDiv=order[idx-1];
+   const newLeagueName=LEAGUES.BRA[newDiv].name;
+   CS.division=newDiv;CS.clubRating=clamp(CS.clubRating-2,35,90);CS.leagueName=newLeagueName;
+   renderCareerMessage(`⬇️ <b>REBAIXADO!</b> ${CS.club} desce para a ${newLeagueName}.`,"red");
+   return{type:"relegated",to:newLeagueName};
+ }
+ return null;
+}
 function endCareerSeason(silent){
  const st=CS.standingsByComp[CS.leagueName];
  if(st&&st.length&&st[0].name===CS.club){
@@ -3491,6 +3607,8 @@ function endCareerSeason(silent){
  }
  checkEstadualTitle();
  const summary=!silent?computeSeasonSummary():null;
+ const pyramidMove=handleCareerPyramidMove();
+ if(summary)summary.pyramidMove=pyramidMove;
  CS.titlesThisSeason=[];
  CS.seasonsPlayed++;CS.season++;
  CS.squad.forEach(p=>{p.ovStart=p.ov;p.fitness=clamp(p.fitness+20,0,100);});
