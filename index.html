@@ -412,6 +412,10 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
       <div><div class="nb-l" style="color:var(--green)">Saldo do clube</div><div class="nb-v" id="cdash-budget">—</div></div>
       <button class="ctl-btn" id="btn-cdash-fin" style="width:auto">Ver finanças ›</button>
     </div>
+    <div class="cnext-bar" id="cdash-sponsor-banner" style="display:none;background:linear-gradient(90deg,#1a1405,#0e0e0e);border-color:var(--gold-dim)">
+      <div><div class="nb-l" style="color:var(--gold)">Proposta de patrocínio</div><div class="nb-v" id="cdash-sponsor-title">—</div></div>
+      <button class="btn" id="btn-cdash-sponsor-view" style="width:auto;padding:10px 18px">Ver proposta</button>
+    </div>
     <div class="cgrid">
       <div class="ccol">
         <div class="ccard">
@@ -430,6 +434,10 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
           <div class="cbar-row"><div class="cb-top"><span>Moral</span><span class="cbv" id="cv-mor">—</span></div><div class="cbar"><div class="cbf" id="cv-mor-bar" style="background:#4f8cff"></div></div></div>
           <div class="cbar-row"><div class="cb-top"><span>Ritmo de jogo</span><span class="cbv" id="cv-rit">—</span></div><div class="cbar"><div class="cbf" id="cv-rit-bar" style="background:#ff9f43"></div></div></div>
           <div style="margin-top:10px;font-size:12px;color:var(--mut)" id="cv-injuries">Nenhum desfalque registrado.</div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-t">Patrocinadores</div>
+          <div id="cdash-sponsors-list"></div>
         </div>
         <div class="ccard">
           <div class="ccard-t">Agenda <a id="lnk-c-calendario">Calendário ›</a></div>
@@ -719,6 +727,46 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
   <div class="lbl" style="margin:16px 0 8px">CALENDÁRIO DA TEMPORADA</div>
   <div class="ccard" style="padding:0;max-height:320px;overflow-y:auto" id="ssum-calendar"></div>
   <button class="btn" id="btn-ssum-continue" style="margin-top:16px">Continuar para a próxima temporada</button>
+</div></div>
+
+<!-- NEGOTIATION PLAYER DETAIL -->
+<div class="overlay" id="ov-nego-detail"><div class="modal" style="max-width:400px;text-align:center">
+  <div class="modal-eyebrow gold">DETALHES DO JOGADOR</div>
+  <div class="modal-title" id="nd-name">—</div>
+  <div class="modal-sub" id="nd-sub">—</div>
+  <div class="cprop-stats" style="grid-template-columns:1fr 1fr;margin:16px 0">
+    <div class="cfin-tile"><div class="ft-l">Overall</div><div class="ft-v" id="nd-ov">—</div></div>
+    <div class="cfin-tile"><div class="ft-l">Potencial</div><div class="ft-v" id="nd-pot">—</div></div>
+    <div class="cfin-tile"><div class="ft-l">Idade</div><div class="ft-v" id="nd-age">—</div></div>
+    <div class="cfin-tile"><div class="ft-l">Valor estimado</div><div class="ft-v" style="color:var(--gold)" id="nd-value">—</div></div>
+  </div>
+  <button class="btn ghost" id="btn-nd-close">Fechar</button>
+</div></div>
+
+<!-- DISMISSAL CONTRACT -->
+<div class="overlay" id="ov-dismissal"><div class="modal" style="max-width:480px;text-align:center">
+  <div class="modal-eyebrow red">RESCISÃO DE CONTRATO</div>
+  <div class="modal-title">Você foi demitido</div>
+  <div style="background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:20px;margin:16px 0;text-align:left;font-size:13px;line-height:1.7;color:var(--mut)">
+    <div style="text-align:center;font-weight:800;color:var(--white);margin-bottom:10px">TERMO DE RESCISÃO</div>
+    <div id="dism-text">—</div>
+  </div>
+  <button class="btn red" id="btn-dism-sign">✍️ Assinar rescisão</button>
+</div></div>
+
+<!-- SPONSOR OFFER -->
+<div class="overlay" id="ov-sponsor"><div class="modal" style="max-width:460px;text-align:center">
+  <div class="modal-eyebrow gold">PROPOSTA DE PATROCÍNIO</div>
+  <div class="modal-title" id="spo-name">—</div>
+  <div class="modal-sub" id="spo-sub">—</div>
+  <div class="cfin-tile" style="margin:16px 0"><div class="ft-l">Valor oferecido (por mês)</div><div class="ft-v" id="spo-value" style="color:var(--gold)">—</div></div>
+  <div style="display:flex;gap:10px;margin-bottom:10px">
+    <button class="btn green" id="btn-spo-accept" style="flex:1">Aceitar</button>
+    <button class="btn ghost" id="btn-spo-reject" style="flex:1">Recusar</button>
+  </div>
+  <div class="lbl" style="text-align:left;margin-bottom:8px">OU PEÇA MAIS</div>
+  <div id="spo-ask-opts"></div>
+  <button class="btn ghost" id="btn-spo-close" style="margin-top:10px">Fechar</button>
 </div></div>
 
 <div class="toast" id="toast"></div>
@@ -2307,7 +2355,7 @@ const CS={
  formation:"4-3-3",style:"Equilíbrio",lineup:{},bench:[],
  calendar:[],fixtureIdx:0,standingsByComp:{},
  messages:[],careerTitles:0,careerGames:0,clubsCoached:[],
- seasonsSinceProposal:0,_nextProposalIn:0,titlesThisSeason:[],transactions:[],wageBudgetPct:35,
+ seasonsSinceProposal:0,_nextProposalIn:0,titlesThisSeason:[],transactions:[],wageBudgetPct:35,sponsors:{principal:null,secundario:null,terciario:null},_sponsorOffer:null,
  currentSubview:null,
  seasonStats:{}
 };
@@ -2416,7 +2464,7 @@ function acceptCareerProposal(p){
  CS.youth=genYouthPlayers(p.rating,rint(11,15));
  CS.clubsCoached=[p.name];CS.season=2026;CS.seasonsPlayed=0;
  CS.staff={};CS.messages=[];CS.careerTitles=0;CS.careerGames=0;
- CS.isNationalTeam=false;CS.ntConfed=null;CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(2,3);
+ CS.isNationalTeam=false;CS.ntConfed=null;CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(1,2);
  pickBestLineup();
  buildCareerCalendar();
  renderCareerMessage(`Bem-vindo ao ${p.name}! A diretoria espera por você.`,"gold");
@@ -2424,7 +2472,7 @@ function acceptCareerProposal(p){
  renderCareerDash();
 }
 /* ---------- TROCA DE CLUBE / SELEÇÃO NO MEIO DA CARREIRA (mantém histórico) ---------- */
-function switchCareerClub(p){
+function switchCareerClub(p,keepDate){
  CS.isNationalTeam=false;CS.ntConfed=null;
  CS.club=p.name;CS.clubRating=p.rating;CS.division=p.div;CS.leagueName=p.leagueName;
  CS.budget=p.budget;CS.wageBudget=Math.round(p.budget*0.35);CS.boardConfidence=62;
@@ -2434,8 +2482,8 @@ function switchCareerClub(p){
  if(!CS.clubsCoached.includes(p.name))CS.clubsCoached.push(p.name);
  CS.staff={};
  pickBestLineup();
- buildCareerCalendar();
- renderCareerMessage(`✍️ Você assinou com o <b>${p.name}</b>! A diretoria espera por você.`,"gold");
+ buildCareerCalendar(keepDate?CS._lastMatchDate:null);
+ renderCareerMessage(keepDate?`✍️ Você assinou com o <b>${p.name}</b> e assume o time no meio da temporada, a partir de agora.`:`✍️ Você assinou com o <b>${p.name}</b>! A diretoria espera por você.`,"gold");
  showScreen("scr-career-dash");
  renderCareerDash();
 }
@@ -2493,6 +2541,7 @@ function renderCareerDash(){
  $("cdash-budget").textContent="R$ "+Math.round(CS.budget).toLocaleString("pt-BR");
  $("cdash-budget").style.color=CS.budget>=0?"var(--green)":"var(--red)";
  $("btn-cdash-fin").onclick=()=>openSubview("financas");
+ renderSponsorsCard();
  $("cv-fit").textContent=Math.round(squadAvgFitness())+"%";$("cv-fit-bar").style.width=Math.round(squadAvgFitness())+"%";
  $("cv-mor").textContent=Math.round(squadAvgMorale())+"%";$("cv-mor-bar").style.width=Math.round(squadAvgMorale())+"%";
  const rhythm=clamp(50+CS.careerGames*2,50,95);
@@ -2503,8 +2552,10 @@ function renderCareerDash(){
  renderAgenda();
  const grid=$("cnav-grid");grid.innerHTML="";
  CAREER_NAV.forEach(item=>{
-   const el=document.createElement("div");el.className="cnav-btn";
-   el.innerHTML=`<div class="cnb-ic">${item.ic}</div><div class="cnb-t">${item.t}</div>`;
+   const el=document.createElement("div");el.className="cnav-btn";el.style.position="relative";
+   const pendingNegs=item.id==="mercado"?(CS._negotiations||[]).length:0;
+   const badge=pendingNegs>0?`<div style="position:absolute;top:6px;right:6px;background:var(--red);color:#fff;border-radius:999px;min-width:18px;height:18px;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 4px">${pendingNegs}</div>`:"";
+   el.innerHTML=`${badge}<div class="cnb-ic">${item.ic}</div><div class="cnb-t">${item.t}</div>`;
    el.onclick=()=>openSubview(item.id);
    grid.appendChild(el);
  });
@@ -2827,7 +2878,109 @@ function clubMonthlyRevenue(){
  else if(r<=69)base=lerp(r,58,69,180000,400000);
  else if(r<=85)base=lerp(r,69,85,400000,1400000);
  else base=lerp(r,85,99,1400000,5000000);
- return Math.round(base+CS.boardConfidence*500);
+ const sponsorIncome=sponsorMonthlyIncome();
+ return Math.round(base+CS.boardConfidence*500+sponsorIncome);
+}
+function sponsorMonthlyIncome(){
+ if(!CS.sponsors)return 0;
+ return["principal","secundario","terciario"].reduce((s,k)=>s+(CS.sponsors[k]?CS.sponsors[k].value:0),0);
+}
+const SPONSOR_NAMES={
+ principal:["MaxBet","Cyber Sports","TitanCorp","Vello Energia","NordTech","Atlas Seguros","Prime Bank"],
+ secundario:["Praiana Bebidas","Ford Regional","Delta Construtora","Nexus Telecom","Rota Logística"],
+ terciario:["Padaria Bom Pão","AutoPeças União","Farmácia Vida","Posto Estrela","Mercado Popular"]
+};
+function sponsorValueRange(tier){
+ const r=CS.clubRating;
+ const mult=lerp(r,35,90,0.3,3.5);
+ const base={principal:[15000,60000],secundario:[6000,25000],terciario:[2000,10000]}[tier];
+ return[Math.round(base[0]*mult),Math.round(base[1]*mult)];
+}
+function maybeGenerateSponsorOffer(){
+ if(CS.isNationalTeam)return;
+ if(CS._sponsorOffer)return; // já tem uma pendente
+ if(!CS.sponsors)CS.sponsors={principal:null,secundario:null,terciario:null};
+ const emptySlots=["principal","secundario","terciario"].filter(k=>!CS.sponsors[k]);
+ if(!emptySlots.length)return;
+ if(Math.random()>0.10)return;
+ const tier=pick(emptySlots);
+ const[lo,hi]=sponsorValueRange(tier);
+ const value=rint(lo,hi);
+ const name=pick(SPONSOR_NAMES[tier]);
+ CS._sponsorOffer={tier,name,value,seasons:rint(2,4)};
+ renderCareerMessage(`📢 A <b>${name}</b> quer ser patrocinadora ${tier==="principal"?"principal":tier==="secundario"?"secundária":"terciária"} do ${CS.club}! Veja no painel.`,"gold");
+}
+function resolveSponsorOffer(action,askMoreValue){
+ const off=CS._sponsorOffer;
+ if(!off)return;
+ if(action==="reject"){
+   renderCareerMessage(`Você recusou a proposta de patrocínio da ${off.name}.`,"");
+   CS._sponsorOffer=null;
+   renderCareerDash();
+   return;
+ }
+ if(action==="accept"){
+   CS.sponsors[off.tier]={name:off.name,value:off.value,seasonsLeft:off.seasons};
+   renderCareerMessage(`✍️ ${CS.club} fechou patrocínio ${off.tier} com a <b>${off.name}</b>: ${fmtCareerMoney(off.value)}/mês.`,"gold");
+   CS._sponsorOffer=null;
+   renderCareerDash();
+   return;
+ }
+ if(action==="askmore"){
+   const chance=clamp(0.75-((askMoreValue-off.value)/off.value)*1.4,0.08,0.75);
+   const ok=Math.random()<chance;
+   if(ok){
+     CS.sponsors[off.tier]={name:off.name,value:askMoreValue,seasonsLeft:off.seasons};
+     renderCareerMessage(`✍️ Negociação bem-sucedida! ${off.name} topou pagar ${fmtCareerMoney(askMoreValue)}/mês.`,"gold");
+   }else{
+     renderCareerMessage(`A ${off.name} recusou pagar mais e desistiu do patrocínio.`,"red");
+   }
+   CS._sponsorOffer=null;
+   renderCareerDash();
+ }
+}
+function renderSponsorsCard(){
+ const list=$("cdash-sponsors-list");list.innerHTML="";
+ const labels={principal:"Principal",secundario:"Secundário",terciario:"Terciário"};
+ ["principal","secundario","terciario"].forEach(k=>{
+   const s=CS.sponsors&&CS.sponsors[k];
+   const row=document.createElement("div");row.className="cagenda-row";
+   if(s){
+     row.innerHTML=`<div style="width:74px;font-size:11px;color:var(--mut);text-transform:uppercase">${labels[k]}</div><div style="flex:1;font-weight:700">${s.name}</div><div class="mono-num" style="color:var(--green);font-weight:800">+${fmtCareerMoney(s.value)}</div>`;
+   }else{
+     row.innerHTML=`<div style="width:74px;font-size:11px;color:var(--mut);text-transform:uppercase">${labels[k]}</div><div style="flex:1;color:var(--mut)">Sem patrocinador</div>`;
+   }
+   list.appendChild(row);
+ });
+ const banner=$("cdash-sponsor-banner");
+ if(CS._sponsorOffer){
+   banner.style.display="flex";
+   const labels2={principal:"principal",secundario:"secundário",terciario:"terciário"};
+   $("cdash-sponsor-title").textContent=`${CS._sponsorOffer.name} · patrocínio ${labels2[CS._sponsorOffer.tier]}`;
+   $("btn-cdash-sponsor-view").onclick=()=>openSponsorOfferOverlay();
+ }else{
+   banner.style.display="none";
+ }
+}
+function openSponsorOfferOverlay(){
+ const off=CS._sponsorOffer;
+ if(!off)return;
+ const labels={principal:"Principal (uniforme)",secundario:"Secundário (manga/costas)",terciario:"Terciário (calção/placas)"};
+ $("spo-name").textContent=off.name;
+ $("spo-sub").textContent=`Patrocínio ${labels[off.tier]} · contrato de ${off.seasons} temporadas`;
+ $("spo-value").textContent=fmtCareerMoney(off.value)+"/mês";
+ $("btn-spo-accept").onclick=()=>{$("ov-sponsor").classList.remove("show");resolveSponsorOffer("accept");};
+ $("btn-spo-reject").onclick=()=>{$("ov-sponsor").classList.remove("show");resolveSponsorOffer("reject");};
+ $("btn-spo-close").onclick=()=>{$("ov-sponsor").classList.remove("show");};
+ const askWrap=$("spo-ask-opts");askWrap.innerHTML="";
+ [1.2,1.4,1.7].forEach(mult=>{
+   const askVal=Math.round(off.value*mult);
+   const el=document.createElement("div");el.className="opt";el.style.display="block";el.style.marginBottom="8px";el.style.textAlign="left";
+   el.innerHTML=`Pedir ${fmtCareerMoney(askVal)}/mês <span style="color:var(--mut)">(+${Math.round((mult-1)*100)}%)</span>`;
+   el.onclick=()=>{$("ov-sponsor").classList.remove("show");resolveSponsorOffer("askmore",askVal);};
+   askWrap.appendChild(el);
+ });
+ $("ov-sponsor").classList.add("show");
 }
 function staffMonthlyCost(){return Object.keys(CS.staff).reduce((s,id)=>{const role=STAFF_ROLES.find(r=>r.id===id);return s+(role?role.cost:0);},0);}
 function squadWageBill(){return CS.squad.reduce((s,p)=>s+p.wage*(p.loanSplit??1),0)+staffMonthlyCost();}
@@ -3062,7 +3215,10 @@ function renderSubMercado(){
  else{
    CS._negotiations.forEach(n=>{
      const row=document.createElement("div");row.className="cagenda-row";row.style.flexWrap="wrap";
-     row.innerHTML=`<div style="flex:1;min-width:160px">💰 <b>${n.club}</b> quer comprar <b>${n.playerName}</b><div class="mono-num" style="font-weight:800;color:var(--gold)">${fmtCareerMoney(n.value)}</div></div>`;
+     const infoDiv=document.createElement("div");infoDiv.style.flex="1";infoDiv.style.minWidth="160px";
+     infoDiv.innerHTML=`💰 <b>${n.club}</b> quer comprar <span style="color:var(--gold);text-decoration:underline;cursor:pointer" id="nego-name-${n.id}">${n.playerName}</span><div class="mono-num" style="font-weight:800;color:var(--gold)">${fmtCareerMoney(n.value)}</div>`;
+     row.appendChild(infoDiv);
+     $("nego-name-"+n.id).onclick=()=>openNegoPlayerDetail(n);
      const btnRow=document.createElement("div");btnRow.style.display="flex";btnRow.style.gap="6px";
      const btnAccept=document.createElement("button");btnAccept.className="btn green";btnAccept.style.width="auto";btnAccept.style.padding="8px 12px";btnAccept.style.fontSize="12px";btnAccept.textContent="Aceitar";
      const btnReject=document.createElement("button");btnReject.className="btn ghost";btnReject.style.width="auto";btnReject.style.padding="8px 12px";btnReject.style.fontSize="12px";btnReject.textContent="Recusar";
@@ -3090,6 +3246,17 @@ function renderSubMercado(){
      negWrap.appendChild(row);
    });
  }
+}
+function openNegoPlayerDetail(n){
+ const player=CS.squad.find(p=>p.id===n.playerId);
+ $("nd-name").textContent=n.playerName;
+ $("nd-sub").textContent=player?`${player.pos} · Proposta do ${n.club}`:`Proposta do ${n.club}`;
+ $("nd-ov").textContent=player?player.ov:"—";
+ $("nd-pot").textContent=player?player.potential:"—";
+ $("nd-age").textContent=player?player.age+" anos":"—";
+ $("nd-value").textContent=fmtCareerMoney(n.value);
+ $("btn-nd-close").onclick=()=>{$("ov-nego-detail").classList.remove("show");};
+ $("ov-nego-detail").classList.add("show");
 }
 function maybeGenerateSellOffer(){
  CS._negotiations=CS._negotiations||[];
@@ -3229,7 +3396,12 @@ function fmtCareerDate(d){
    monthLabel:MONTHS[d.getMonth()].toUpperCase()+" "+d.getFullYear(),
    weekday:WEEKDAYS[d.getDay()]};
 }
-const CUP_ROUND_NAMES=["1/32-avos","1/16-avos","Oitavas de final","Quartas de final","Semifinal","Final"];
+const CUP_ROUND_NAMES=["1ª Fase","2ª Fase","3ª Fase","Oitavas de final","Quartas de final","Semifinal","Final"];
+function cupStartRoundIdx(){
+ if(CS.division==="d1"||CS.clubRating>=72)return 2; // Série A e times fortes da B entram direto na 3ª fase
+ if(CS.division==="d2"&&CS.clubRating>=62)return 1; // resto da Série B entra na 2ª fase
+ return 0; // Série C/D entram na 1ª fase
+}
 function cupOpponentForRound(roundIdx){
  const oppPool=ALL_CLUBS.filter(c=>c.cid==="BRA"&&c.name!==CS.club).sort((a,b)=>b.rating-a.rating);
  const eliteN=clamp(Math.ceil(oppPool.length*(0.16-roundIdx*0.02)),3,10);
@@ -3242,7 +3414,7 @@ function estadualOpponentForRound(stateName,roundIdx){
  const eliteN=clamp(Math.ceil(rivals.length*(0.7-roundIdx*0.2)),1,rivals.length);
  return pick(rivals.slice(0,eliteN));
 }
-function buildCareerCalendar(){
+function buildCareerCalendar(startDate){
  if(CS.isNationalTeam){
    let rivals=NATIONAL_TEAMS.filter(t=>t.name!==CS.club&&t.confed===CS.ntConfed);
    if(!rivals.length)rivals=NATIONAL_TEAMS.filter(t=>t.name!==CS.club);
@@ -3270,7 +3442,7 @@ function buildCareerCalendar(){
  ];
 
  const fixtures=[];
- let cur=new Date(CS.season,1,rint(3,10));
+ let cur=startDate?new Date(startDate.getTime()+7*86400000):new Date(CS.season,1,rint(3,10));
 
  // Estadual — mata-mata de verdade (igual à Copa do Brasil): só a 1ª fase entra na agenda
  const stateName=STATE_LEAGUE[CS.club];
@@ -3295,12 +3467,13 @@ function buildCareerCalendar(){
    cur=new Date(cur.getTime()+7*86400000);
  });
 
- // Copa do Brasil — mata-mata de verdade: só a 1ª fase entra na agenda. Perdeu, tá fora; ganhou, a próxima fase é agendada na hora.
- const cupDate=new Date(CS.season,1,rint(11,17));
- const cupOpp=cupOpponentForRound(0);
+ // Copa do Brasil — mata-mata de verdade: times grandes entram direto na 3ª fase, o resto começa antes. Perdeu, tá fora; ganhou, a próxima fase é agendada na hora.
+ const cupDate=startDate?new Date(startDate.getTime()+21*86400000):new Date(CS.season,1,rint(11,17));
+ const cupStartIdx=cupStartRoundIdx();
+ const cupOpp=cupOpponentForRound(cupStartIdx);
  const cupInfo=fmtCareerDate(cupDate);
- fixtures.push({opponent:cupOpp.name,oppRating:cupOpp.rating,home:Math.random()<0.5,comp:"Copa Do Brasil",round:CUP_ROUND_NAMES[0],
-   date:cupDate,time:"20:00",played:false,result:null,...cupInfo,_cupRoundIdx:0});
+ fixtures.push({opponent:cupOpp.name,oppRating:cupOpp.rating,home:Math.random()<0.5,comp:"Copa Do Brasil",round:CUP_ROUND_NAMES[cupStartIdx],
+   date:cupDate,time:"20:00",played:false,result:null,...cupInfo,_cupRoundIdx:cupStartIdx});
 
  fixtures.sort((a,b)=>a.date-b.date);
  CS.calendar=fixtures;CS.fixtureIdx=0;
@@ -3475,6 +3648,7 @@ function afterCareerMatch(){
 /* ---------- APLICAR RESULTADO ---------- */
 function applyCareerMatchOutcome(fx,myGoals,oppGoals){
  fx.played=true;fx.result=`${myGoals}-${oppGoals}`;CS.fixtureIdx++;CS.careerGames++;
+ CS._lastMatchDate=fx.date;
  const won=myGoals>oppGoals,draw=myGoals===oppGoals;
  // resultado financeiro mensal — dividido pelos ~4 jogos que cabem num mês, cai automaticamente no saldo
  const monthlyNet=clubMonthlyRevenue()-squadWageBill();
@@ -3482,6 +3656,7 @@ function applyCareerMatchOutcome(fx,myGoals,oppGoals){
  CS.budget+=weeklyNet;
  logTransaction(weeklyNet>=0?"Receita semanal (bilheteria/patrocínio)":"Folha salarial e comissão",weeklyNet);
  if(!CS.isNationalTeam)maybeGenerateSellOffer();
+ if(!CS.isNationalTeam)maybeGenerateSponsorOffer();
  // Copa do Brasil — mata-mata de verdade: perdeu tá fora, ganhou a próxima fase entra na agenda na hora
  if(fx.comp==="Copa Do Brasil"&&typeof fx._cupRoundIdx==="number"){
    let advanced=won,how="";
@@ -3561,7 +3736,7 @@ function applyCareerMatchOutcome(fx,myGoals,oppGoals){
  // evolução leve de overall rumo ao potencial (mais forte com treino de intensidade alta — próprio do jogador, se definido, senão o padrão do time)
  CS.squad.forEach(p=>{
    const intensity=p.trainIntensity||CS.trainingIntensity;
-   const growthChance=intensity==="Alta"?0.22:intensity==="Média"?0.14:0.08;
+   const growthChance=intensity==="Alta"?0.14:intensity==="Média"?0.09:0.05;
    if(p.ov<p.potential&&Math.random()<growthChance)p.ov=clamp(p.ov+1,p.ov,p.potential);
  });
  // confiança da diretoria
@@ -3580,14 +3755,19 @@ function checkCareerFiring(){
  if(Math.random()<0.35)fireCareerCoach();
 }
 function fireCareerCoach(){
- renderCareerMessage(`🔴 <b>VOCÊ FOI DEMITIDO</b> do ${CS.club}. A diretoria perdeu a confiança no projeto.`,"red");
- toast("Você foi demitido! Novas propostas a caminho...");
- setTimeout(()=>{
-   const minR=clamp(CS.clubRating-20,20,80);
-   const maxR=clamp(CS.clubRating-4,minR+4,90);
-   const weakerProposals=[genProposal(minR,maxR),genProposal(minR,maxR),genProposal(minR,maxR)];
-   renderCareerProposals(weakerProposals,{allowStay:false,onAccept:switchCareerClub});
- },900);
+ $("dism-text").innerHTML=`O <b>${CS.club}</b> comunica o encerramento do vínculo de trabalho com o treinador <b>${CS.name}</b>, com efeito imediato, em razão dos resultados apresentados nas últimas competições. Fica estabelecido que o profissional está livre para negociar com outros clubes ou seleções a partir desta data.`;
+ $("btn-dism-sign").onclick=()=>{
+   $("ov-dismissal").classList.remove("show");
+   renderCareerMessage(`🔴 <b>VOCÊ FOI DEMITIDO</b> do ${CS.club}. A diretoria perdeu a confiança no projeto.`,"red");
+   toast("Contrato assinado. Novas propostas a caminho...");
+   setTimeout(()=>{
+     const minR=clamp(CS.clubRating-20,20,80);
+     const maxR=clamp(CS.clubRating-4,minR+4,90);
+     const weakerProposals=[genProposal(minR,maxR),genProposal(minR,maxR),genProposal(minR,maxR)];
+     renderCareerProposals(weakerProposals,{allowStay:false,onAccept:(p)=>switchCareerClub(p,true)});
+   },700);
+ };
+ $("ov-dismissal").classList.add("show");
 }
 
 /* ---------- PULAR / APOSENTAR ---------- */
@@ -3713,22 +3893,31 @@ function endCareerSeason(silent){
  CS.seasonsPlayed++;CS.season++;
  CS.squad.forEach(p=>{p.ovStart=p.ov;p.fitness=clamp(p.fitness+20,0,100);});
  CS.youth.forEach(p=>{if(p.age<23)p.age++;});
+ ["principal","secundario","terciario"].forEach(k=>{
+   if(CS.sponsors&&CS.sponsors[k]){
+     CS.sponsors[k].seasonsLeft--;
+     if(CS.sponsors[k].seasonsLeft<=0){
+       renderCareerMessage(`📢 O contrato de patrocínio com a <b>${CS.sponsors[k].name}</b> chegou ao fim.`,"");
+       CS.sponsors[k]=null;
+     }
+   }
+ });
  if(!silent)renderCareerMessage(`📅 Fim da temporada ${CS.season-1}. Preparando ${seasonStr(CS.season)}.`,"gold");
  try{localStorage.setItem(SAVE_KEY,JSON.stringify(CS));}catch(e){}
  const retiring=CS.seasonsPlayed>=CS.retireAt;
- if(!CS._nextProposalIn)CS._nextProposalIn=rint(2,3);
+ if(!CS._nextProposalIn)CS._nextProposalIn=rint(1,2);
  CS.seasonsSinceProposal=(CS.seasonsSinceProposal||0)+1;
  const needsProposal=CS.seasonsSinceProposal>=CS._nextProposalIn&&!CS.isNationalTeam&&!retiring;
  if(silent){
    if(retiring)return;
-   if(needsProposal){CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(2,3);}
+   if(needsProposal){CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(1,2);}
    buildCareerCalendar();
    return;
  }
  showSeasonSummary(summary,()=>{
    if(retiring){showCareerRetirement();return;}
    if(needsProposal){
-     CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(2,3);
+     CS.seasonsSinceProposal=0;CS._nextProposalIn=rint(1,2);
      openPeriodicCareerProposals();
    }else{
      buildCareerCalendar();
