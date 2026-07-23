@@ -342,6 +342,11 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
       <div class="mc-d">Jogo por jogo, começando de baixo (Série C/D). Escalação, tática, mercado, finanças, base, comissão técnica e muito mais.</div>
       <div class="mc-tag">NOVO · GESTÃO COMPLETA</div>
     </div>
+    <div class="mode-card" id="mode-continue" style="display:none;border-color:var(--gold-dim)">
+      <div class="mc-ic">💾</div><div class="mc-t">Continuar Carreira Salva</div>
+      <div class="mc-d" id="mode-continue-desc">Retomar de onde você parou.</div>
+      <div class="mc-tag">CARREIRA SALVA ENCONTRADA</div>
+    </div>
   </div>
 </div></section>
 
@@ -396,7 +401,7 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 <!-- CAREER: MAIN DASHBOARD -->
 <section id="scr-career-dash" class="screen"><div class="cdash">
   <div class="brandbar"><div class="brand"><div class="goat">🐐</div><h1>THEFENOMENO<span class="dot">.COM</span></h1></div>
-    <div style="display:flex;gap:10px;align-items:center"><span class="socials" id="cdash-season">TEMPORADA</span><button class="ctl-btn" id="btn-c-restart" style="padding:8px 12px;font-size:11px">REINICIAR</button></div></div>
+    <div style="display:flex;gap:10px;align-items:center"><span class="socials" id="cdash-season">TEMPORADA</span><button class="ctl-btn" id="btn-c-save" style="padding:8px 12px;font-size:11px;border-color:var(--gold-dim);color:var(--gold)">💾 SALVAR</button><button class="ctl-btn" id="btn-c-restart" style="padding:8px 12px;font-size:11px">REINICIAR</button></div></div>
 
   <div id="cdash-home">
     <div class="cnext-bar">
@@ -1178,12 +1183,49 @@ function getLeague(cid,div){const L=LEAGUES[cid];if(!L)return null;if(L[div])ret
    1) CREATION
    ============================================================ */
 let GAME_MODE="quick";
+const SAVE_KEY="ofenomeno_career_save_v1";
+function saveCareer(){
+ try{
+   localStorage.setItem(SAVE_KEY,JSON.stringify(CS));
+   toast("Carreira salva! Pode fechar e continuar depois.");
+ }catch(e){
+   toast("Não deu pra salvar — o navegador bloqueou o armazenamento aqui.");
+ }
+}
+function hasSavedCareer(){
+ try{return !!localStorage.getItem(SAVE_KEY);}catch(e){return false;}
+}
+function loadSavedCareer(){
+ try{
+   const raw=localStorage.getItem(SAVE_KEY);
+   if(!raw)return false;
+   const data=JSON.parse(raw);
+   Object.assign(CS,data);
+   GAME_MODE="career";
+   showScreen("scr-career-dash");
+   renderCareerDash();
+   return true;
+ }catch(e){
+   toast("Não deu pra carregar a carreira salva.");
+   return false;
+ }
+}
 function initCreate(){
+ if(hasSavedCareer()){
+   $("mode-continue").style.display="block";
+   try{
+     const raw=localStorage.getItem(SAVE_KEY);
+     const data=JSON.parse(raw);
+     $("mode-continue-desc").textContent=`${data.name||"Técnico"} · ${data.club||"—"} · Temporada ${seasonStr(data.season||2026)}`;
+   }catch(e){}
+   $("mode-continue").onclick=()=>{loadSavedCareer();};
+ }
  $("mode-quick").onclick=()=>{GAME_MODE="quick";showScreen("scr-create");$("in-age").min=30;$("in-age").max=55;$("in-age").value=38;};
  $("mode-career").onclick=()=>{GAME_MODE="career";showScreen("scr-create");$("in-age").min=24;$("in-age").max=45;$("in-age").value=32;};
  $("in-country").innerHTML=COUNTRIES.map(c=>`<option value="${c.id}">${c.flag}  ${c.name}</option>`).join("");
- $("btn-ret-new").onclick=()=>location.reload();
- $("btn-c-restart").onclick=()=>{if(confirm("Reiniciar a carreira do zero?"))location.reload();};
+ $("btn-ret-new").onclick=()=>{try{localStorage.removeItem(SAVE_KEY);}catch(e){}location.reload();};
+ $("btn-c-save").onclick=saveCareer;
+ $("btn-c-restart").onclick=()=>{if(confirm("Reiniciar a carreira do zero? Isso apaga o jogo salvo também.")){try{localStorage.removeItem(SAVE_KEY);}catch(e){}location.reload();}};
  $("btn-start").onclick=()=>{
    const nm=$("in-name").value.trim();
    if(!nm){toast("Digite seu nome");$("in-name").focus();return;}
@@ -2154,7 +2196,7 @@ const FORMATION_SLOTS={
 };
 function uid(){return Math.random().toString(36).slice(2,10);}
 function genCareerPlayer(pos,ovLo,ovHi,young){
- const ov=clamp(rint(ovLo,ovHi),38,90);
+ const ov=clamp(rint(ovLo,ovHi)+rint(2,3),38,93);
  const age=young?rint(16,19):rint(18,35);
  const potGap=age<=21?rint(6,22):(age<=25?rint(2,10):rint(0,3));
  return{id:uid(),n:genName(),pos,role:pick(ROLE_TAGS[pos]),ov,potential:clamp(ov+potGap,ov,94),age,
@@ -2475,8 +2517,17 @@ function squadAvgMorale(){if(!CS.squad.length)return 65;return CS.squad.reduce((
 function nextFixture(){return CS.calendar[CS.fixtureIdx]||null;}
 function renderNextFixtureCards(){
  const fx=nextFixture();
- if(!fx){$("cnb-title").textContent="Temporada concluída";$("cnc-comp").textContent="—";$("btn-c-advance").disabled=true;$("btn-c-prepare").disabled=true;return;}
+ if(!fx){
+   $("cnb-title").textContent="Temporada concluída!";
+   $("cnc-comp").textContent="—";
+   $("btn-c-prepare").disabled=true;
+   $("btn-c-advance").disabled=false;
+   $("btn-c-advance").textContent="Ir para a próxima temporada »";
+   $("btn-c-advance").onclick=()=>endCareerSeason(false);
+   return;
+ }
  $("btn-c-advance").disabled=false;$("btn-c-prepare").disabled=false;
+ $("btn-c-advance").textContent="Avançar até o jogo »";
  $("cnb-title").textContent=`${fx.opponent} · ${fx.dateLabel}`;
  $("cnc-comp").innerHTML=compLogoHTML(fx.comp)+fx.comp+(fx.round?" · "+fx.round:"");
  const home=fx.home;
@@ -2768,7 +2819,16 @@ function renderSubMensagens(){
 }
 
 /* ---------- SUBVIEW: FINANÇAS ---------- */
-function clubMonthlyRevenue(){return Math.round((CS.clubRating*1100)+(CS.boardConfidence*70));}
+function clubMonthlyRevenue(){
+ const r=CS.clubRating;
+ let base;
+ if(r<=50)base=lerp(r,35,50,25000,90000);
+ else if(r<=58)base=lerp(r,50,58,90000,180000);
+ else if(r<=69)base=lerp(r,58,69,180000,400000);
+ else if(r<=85)base=lerp(r,69,85,400000,1400000);
+ else base=lerp(r,85,99,1400000,5000000);
+ return Math.round(base+CS.boardConfidence*500);
+}
 function staffMonthlyCost(){return Object.keys(CS.staff).reduce((s,id)=>{const role=STAFF_ROLES.find(r=>r.id===id);return s+(role?role.cost:0);},0);}
 function squadWageBill(){return CS.squad.reduce((s,p)=>s+p.wage*(p.loanSplit??1),0)+staffMonthlyCost();}
 function logTransaction(desc,amount){
@@ -3175,6 +3235,13 @@ function cupOpponentForRound(roundIdx){
  const eliteN=clamp(Math.ceil(oppPool.length*(0.16-roundIdx*0.02)),3,10);
  return pick(oppPool.slice(0,eliteN));
 }
+const ESTADUAL_ROUND_NAMES=["Primeira Fase","Semifinal","Final"];
+function estadualOpponentForRound(stateName,roundIdx){
+ const rivals=ALL_CLUBS.filter(c=>c.cid==="BRA"&&c.name!==CS.club&&STATE_LEAGUE[c.name]===stateName).sort((a,b)=>b.rating-a.rating);
+ if(!rivals.length)return null;
+ const eliteN=clamp(Math.ceil(rivals.length*(0.7-roundIdx*0.2)),1,rivals.length);
+ return pick(rivals.slice(0,eliteN));
+}
 function buildCareerCalendar(){
  if(CS.isNationalTeam){
    let rivals=NATIONAL_TEAMS.filter(t=>t.name!==CS.club&&t.confed===CS.ntConfed);
@@ -3201,31 +3268,25 @@ function buildCareerCalendar(){
    {name:CS.club,rating:CS.clubRating,pts:0,gf:0,ga:0,games:0},
    ...rivals.map(t=>({name:t[0],rating:t[1],pts:0,gf:0,ga:0,games:0}))
  ];
- // o calendário jogável do técnico continua sendo contra um grupo de adversários, mas a TABELA agora tem a liga inteira
- const opponents=[...rivals].sort(()=>Math.random()-.5).slice(0,7);
 
  const fixtures=[];
  let cur=new Date(CS.season,1,rint(3,10));
 
- // Estadual — times do mesmo estado, no comecinho da temporada
+ // Estadual — mata-mata de verdade (igual à Copa do Brasil): só a 1ª fase entra na agenda
  const stateName=STATE_LEAGUE[CS.club];
  if(stateName){
-   const stateRivals=ALL_CLUBS.filter(c=>c.cid==="BRA"&&c.name!==CS.club&&STATE_LEAGUE[c.name]===stateName);
-   const stOpponents=[...stateRivals].sort(()=>Math.random()-.5).slice(0,5);
-   if(stOpponents.length){
-     CS.standingsByComp["Campeonato "+stateName]=[{name:CS.club,rating:CS.clubRating,pts:0,gf:0,ga:0,games:0},...stOpponents.map(o=>({name:o.name,rating:o.rating,pts:0,gf:0,ga:0,games:0}))];
-     stOpponents.forEach(o=>{
-       const info=fmtCareerDate(cur);
-       fixtures.push({opponent:o.name,oppRating:o.rating,home:Math.random()<0.5,comp:"Campeonato "+stateName,round:null,
-         date:new Date(cur),time:pick(["16:00","19:00"]),played:false,result:null,...info});
-       cur=new Date(cur.getTime()+7*86400000);
-     });
+   const firstOpp=estadualOpponentForRound(stateName,0);
+   if(firstOpp){
+     const info=fmtCareerDate(cur);
+     fixtures.push({opponent:firstOpp.name,oppRating:firstOpp.rating,home:Math.random()<0.5,comp:"Campeonato "+stateName,round:ESTADUAL_ROUND_NAMES[0],
+       date:new Date(cur),time:pick(["16:00","19:00"]),played:false,result:null,...info,_estadualRoundIdx:0,_estadualState:stateName});
+     cur=new Date(cur.getTime()+7*86400000);
    }
  }
 
- // Liga nacional (Série C/D ou onde o clube estiver)
+ // Liga nacional — TODOS contra TODOS, casa e fora (20 times = 38 rodadas; 10 times = 18 rodadas)
  const rounds=[];
- opponents.forEach(o=>{rounds.push({opp:o,home:true});rounds.push({opp:o,home:false});});
+ rivals.forEach(o=>{rounds.push({opp:o,home:true});rounds.push({opp:o,home:false});});
  rounds.sort(()=>Math.random()-.5);
  rounds.forEach(r=>{
    const info=fmtCareerDate(cur);
@@ -3448,6 +3509,35 @@ function applyCareerMatchOutcome(fx,myGoals,oppGoals){
      renderCareerMessage(`❌ ${CS.club} foi eliminado${how} da Copa Do Brasil na fase ${fx.round}.`,"red");
    }
  }
+ // Estadual — mesma lógica de mata-mata: perdeu tá fora, ganhou avança na hora
+ if(fx.comp&&fx.comp.indexOf("Campeonato ")===0&&typeof fx._estadualRoundIdx==="number"){
+   let advanced=won,how="";
+   if(draw){
+     advanced=Math.random()<clamp(0.5+(CS.clubRating-fx.oppRating)/200,0.15,0.85);
+     how=" (decidido nos pênaltis)";
+   }
+   if(advanced){
+     const nextIdx=fx._estadualRoundIdx+1;
+     if(nextIdx>=ESTADUAL_ROUND_NAMES.length){
+       CS.careerTitles++;
+       CS.titlesThisSeason=CS.titlesThisSeason||[];CS.titlesThisSeason.push(fx.comp);
+       renderCareerMessage(`🏆 <b>CAMPEÃO!</b> ${CS.club} conquistou o ${fx.comp}${how}!`,"gold");
+       CS.boardConfidence=clamp(CS.boardConfidence+10,5,98);
+     }else{
+       const nextOpp=estadualOpponentForRound(fx._estadualState,nextIdx);
+       if(nextOpp){
+         const nextDate=new Date(fx.date.getTime()+10*86400000);
+         const nextInfo=fmtCareerDate(nextDate);
+         const nextFx={opponent:nextOpp.name,oppRating:nextOpp.rating,home:Math.random()<0.5,comp:fx.comp,round:ESTADUAL_ROUND_NAMES[nextIdx],
+           date:nextDate,time:pick(["16:00","19:00"]),played:false,result:null,...nextInfo,_estadualRoundIdx:nextIdx,_estadualState:fx._estadualState};
+         CS.calendar.splice(CS.fixtureIdx,0,nextFx);
+         renderCareerMessage(`✅ ${CS.club} avançou${how} no ${fx.comp}! Próxima fase: ${ESTADUAL_ROUND_NAMES[nextIdx]}.`,"green");
+       }
+     }
+   }else{
+     renderCareerMessage(`❌ ${CS.club} foi eliminado${how} do ${fx.comp} na fase ${fx.round}.`,"red");
+   }
+ }
  // padrão de tabela
  const st=CS.standingsByComp[fx.comp];
  if(st){
@@ -3545,6 +3635,7 @@ function checkEstadualTitle(){
 function showSeasonSummary(summary,onContinue){
  $("ssum-title").textContent=`Temporada ${seasonStr(summary.season)}`;
  let subTxt=`${summary.club} · ${summary.wins+summary.draws+summary.losses} jogos disputados`;
+ if(summary.bonus)subTxt+=` · 💰 Verba da temporada: ${fmtCareerMoney(summary.bonus)}`;
  if(summary.pyramidMove)subTxt+=summary.pyramidMove.type==="promoted"?` · ⬆️ Acesso para a ${summary.pyramidMove.to}!`:` · ⬇️ Rebaixado para a ${summary.pyramidMove.to}`;
  $("ssum-sub").textContent=subTxt;
  $("ssum-wins").textContent=summary.wins;
@@ -3569,6 +3660,11 @@ function showSeasonSummary(summary,onContinue){
    onContinue();
  };
  $("ov-season-summary").classList.add("show");
+}
+function seasonBonusForDivision(div){
+ const bands={d4:[800000,1500000],d3:[2000000,6000000],d2:[8000000,18000000],d1:[20000000,40000000]};
+ const b=bands[div]||bands.d4;
+ return rint(b[0],b[1]);
 }
 const PROMO_COUNT={d4:3,d3:3,d2:4};
 const RELEG_COUNT={d3:3,d2:3,d1:4};
@@ -3605,15 +3701,20 @@ function endCareerSeason(silent){
    renderCareerMessage(`🏆 <b>CAMPEÃO!</b> ${CS.club} conquistou a ${CS.leagueName} na temporada ${seasonStr(CS.season)}!`,"gold");
    CS.boardConfidence=clamp(CS.boardConfidence+15,5,98);
  }
- checkEstadualTitle();
+ // (título do estadual agora é registrado na hora, dentro da progressão do mata-mata)
  const summary=!silent?computeSeasonSummary():null;
  const pyramidMove=handleCareerPyramidMove();
  if(summary)summary.pyramidMove=pyramidMove;
+ const bonus=seasonBonusForDivision(CS.division);
+ CS.budget+=bonus;
+ logTransaction("Verba da nova temporada ("+LEAGUES.BRA[CS.division].name+")",bonus);
+ if(summary)summary.bonus=bonus;
  CS.titlesThisSeason=[];
  CS.seasonsPlayed++;CS.season++;
  CS.squad.forEach(p=>{p.ovStart=p.ov;p.fitness=clamp(p.fitness+20,0,100);});
  CS.youth.forEach(p=>{if(p.age<23)p.age++;});
  if(!silent)renderCareerMessage(`📅 Fim da temporada ${CS.season-1}. Preparando ${seasonStr(CS.season)}.`,"gold");
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify(CS));}catch(e){}
  const retiring=CS.seasonsPlayed>=CS.retireAt;
  if(!CS._nextProposalIn)CS._nextProposalIn=rint(2,3);
  CS.seasonsSinceProposal=(CS.seasonsSinceProposal||0)+1;
